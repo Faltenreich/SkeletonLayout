@@ -39,6 +39,8 @@ dokka {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
     implementation "com.android.support:design:$support_version"
 
     testImplementation 'junit:junit:4.12'
@@ -49,3 +51,6 @@ dependencies {
 }
 
 apply from: 'deploy.gradle'
+repositories {
+    mavenCentral()
+}

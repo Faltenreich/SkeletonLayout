@@ -6,7 +6,7 @@ import android.view.ViewGroup
 
 class ListAdapter(private val context: Context) : RecyclerView.Adapter<ListViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = ListViewHolder(context, parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ListViewHolder(parent)
 
     override fun onBindViewHolder(holder: ListViewHolder?, position: Int) = Unit
 
