@@ -8,8 +8,7 @@ class SkeletonView(private val recyclerView: RecyclerView, @LayoutRes layoutResI
     private val originalAdapter = recyclerView.adapter
     private val skeletonAdapter = SkeletonAdapter(layoutResId, itemCount)
 
-    val isShown: Boolean
-        get() = recyclerView.adapter == skeletonAdapter
+    val isShown = recyclerView.adapter == skeletonAdapter
 
     override fun show() {
         recyclerView.adapter = skeletonAdapter

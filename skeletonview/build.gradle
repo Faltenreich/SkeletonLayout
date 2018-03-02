@@ -6,13 +6,13 @@ apply plugin: 'org.jetbrains.dokka-android'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion compileSdk
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 27
-        versionCode project_version_code
-        versionName project_version
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+        versionCode projectVersionCode
+        versionName projectVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -39,12 +39,12 @@ dokka {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 
-    implementation "com.android.support:design:$support_version"
+    implementation "com.android.support:design:$supportVersion"
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation "com.android.support:support-annotations:$support_version"
+    androidTestImplementation "com.android.support:support-annotations:$supportVersion"
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation "com.android.support.test:rules:1.0.1"
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
