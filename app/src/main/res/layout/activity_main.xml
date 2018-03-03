@@ -13,13 +13,28 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/list_item"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_toggle"
-        app:fabSize="normal"/>
+        android:layout_gravity="bottom|end">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/ic_add"
+            app:fabSize="normal"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/ic_toggle"
+            app:fabSize="normal"/>
+
+    </LinearLayout>
 
 </FrameLayout>
