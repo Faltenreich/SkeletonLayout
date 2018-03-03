@@ -10,12 +10,16 @@ class SkeletonView(private val recyclerView: RecyclerView, @LayoutRes layoutResI
     private val originalAdapter = recyclerView.adapter
     private val skeletonAdapter = SkeletonAdapter(layoutResId, itemCount, ContextCompat.getColor(recyclerView.context, maskColorResId))
 
+    var stateChangeListener: SkeletonStateChangeListener? = null
+
     override fun show() {
         recyclerView.adapter = skeletonAdapter
+        stateChangeListener?.onShow()
     }
 
     override fun hide() {
         recyclerView.adapter = originalAdapter
+        stateChangeListener?.onHide()
     }
 
     override fun isShown() = recyclerView.adapter === skeletonAdapter
