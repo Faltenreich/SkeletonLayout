@@ -21,6 +21,6 @@ class MainActivity : AppCompatActivity() {
         skeletonView = SkeletonView(list, R.layout.list_item)
         skeletonView.show()
 
-        fab.setOnClickListener { if (skeletonView.isShown) skeletonView.hide() else skeletonView.show() }
+        fab.setOnClickListener { if (skeletonView.isShown()) skeletonView.hide() else skeletonView.show() }
     }
 }
