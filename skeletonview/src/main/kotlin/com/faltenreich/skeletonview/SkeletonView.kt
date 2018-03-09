@@ -11,11 +11,21 @@ class SkeletonView(
         itemCount: Int = 5,
         @ColorRes maskColorResId: Int = R.color.greyLight,
         cornerRadius: Float = 0f,
+        showShimmer: Boolean = true,
         @ColorRes shimmerColor: Int = R.color.grey
 ) : Skeleton {
 
+    private val context by lazy { recyclerView.context }
+
     private val originalAdapter = recyclerView.adapter
-    private val skeletonAdapter = SkeletonAdapter(layoutResId, itemCount, ContextCompat.getColor(recyclerView.context, maskColorResId), cornerRadius, ContextCompat.getColor(recyclerView.context, shimmerColor))
+
+    private val skeletonAdapter = SkeletonAdapter(
+            layoutResId,
+            itemCount,
+            ContextCompat.getColor(context, maskColorResId),
+            cornerRadius,
+            showShimmer,
+            ContextCompat.getColor(context, shimmerColor))
 
     var stateChangeListener: SkeletonStateChangeListener? = null
 
