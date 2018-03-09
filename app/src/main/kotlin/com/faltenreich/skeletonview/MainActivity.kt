@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         list.layoutManager = LinearLayoutManager(this)
         list.adapter = listAdapter
 
-        skeletonView = SkeletonView(list, R.layout.list_item, ITEM_COUNT)
+        skeletonView = SkeletonView(list, R.layout.list_item, ITEM_COUNT, cornerRadius = 25f)
         skeletonView.show()
 
         toggleButton.setOnClickListener { if (skeletonView.isShown()) skeletonView.hide() else skeletonView.show() }

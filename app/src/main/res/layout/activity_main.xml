@@ -11,6 +11,8 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="8dp"
+        android:clipToPadding="false"
         tools:listitem="@layout/list_item"/>
 
     <LinearLayout
