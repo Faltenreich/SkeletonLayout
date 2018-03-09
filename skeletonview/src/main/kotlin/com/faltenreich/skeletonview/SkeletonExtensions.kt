@@ -1,5 +1,6 @@
 package com.faltenreich.skeletonview
 
+import android.support.v4.view.ViewCompat
 import android.view.View
 import android.view.ViewGroup
 
@@ -15,3 +16,5 @@ internal fun View.setOnLayoutChangeListener(action: () -> Unit) {
         }
     })
 }
+
+internal fun View.isAttachedToWindowCompat() = ViewCompat.isAttachedToWindow(this)

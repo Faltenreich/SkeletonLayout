@@ -12,12 +12,15 @@ internal class SkeletonAdapter(
         @ColorInt private val maskColor: Int,
         private val cornerRadius: Float,
         private val showShimmer: Boolean,
-        @ColorInt private val shimmerColor: Int
+        @ColorInt private val shimmerColor: Int,
+        private val shimmerDuration: Long = 0,
+        private val shimmerAngle: Float = 0f,
+        private val shimmerWidth: Float = 0f
 ) : RecyclerView.Adapter<SkeletonViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkeletonViewHolder {
         val originView = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
-        val maskView = MaskLayout(originView, maskColor, cornerRadius, showShimmer, shimmerColor)
+        val maskView = MaskLayout(originView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration, shimmerAngle, shimmerWidth)
         return SkeletonViewHolder(maskView)
     }
 

@@ -10,9 +10,12 @@ class SkeletonView(
         @LayoutRes layoutResId: Int,
         itemCount: Int = 5,
         @ColorRes maskColorResId: Int = R.color.greyLight,
-        cornerRadius: Float = 0f,
+        cornerRadius: Float = 25f,
         showShimmer: Boolean = true,
-        @ColorRes shimmerColor: Int = R.color.grey
+        @ColorRes shimmerColor: Int = R.color.grey,
+        shimmerDuration: Long = 1500,
+        shimmerAngle: Float = 15f,
+        shimmerWidth: Float = 300f
 ) : Skeleton {
 
     private val context by lazy { recyclerView.context }
@@ -25,7 +28,10 @@ class SkeletonView(
             ContextCompat.getColor(context, maskColorResId),
             cornerRadius,
             showShimmer,
-            ContextCompat.getColor(context, shimmerColor))
+            ContextCompat.getColor(context, shimmerColor),
+            shimmerDuration,
+            shimmerAngle,
+            shimmerWidth)
 
     var stateChangeListener: SkeletonStateChangeListener? = null
 
