@@ -52,6 +52,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val ITEM_COUNT = 3
+        private const val ITEM_COUNT = 30
     }
 }
