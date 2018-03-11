@@ -1,6 +1,5 @@
 package com.faltenreich.skeletonview
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.support.annotation.ColorInt
@@ -8,8 +7,11 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.LinearInterpolator
 import android.widget.FrameLayout
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.launch
 import java.util.*
 
 internal class MaskLayout @JvmOverloads constructor(
@@ -42,15 +44,11 @@ internal class MaskLayout @JvmOverloads constructor(
     private var shimmerPaint: Paint? = null
 
     private val shimmerWidth: Float
-        get() = width.toFloat()
+        get() = width.toFloat() / 2
 
-    private val shimmerAnimation by lazy {
-        ValueAnimator.ofFloat(-1f, 1f).apply {
-            interpolator = LinearInterpolator()
-            repeatCount = ValueAnimator.INFINITE
-            addUpdateListener { if (isAttachedToWindowCompat()) updateShimmer() else cancel() }
-        }
-    }
+    private val shimmerRefreshInterval by lazy { (1000f / context.refreshRateInSeconds()).toInt() }
+
+    private var shimmerAnimation: Job? = null
 
     init {
         originView?.let {
@@ -61,10 +59,6 @@ internal class MaskLayout @JvmOverloads constructor(
         } ?: Log.e(tag(), "Missing view to mask")
     }
 
-    fun bind() {
-        setOnLayoutChangeListener { mask() }
-    }
-
     override fun onVisibilityChanged(changedView: View?, visibility: Int) {
         super.onVisibilityChanged(changedView, visibility)
         invalidateShimmer()
@@ -73,6 +67,14 @@ internal class MaskLayout @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         canvas.drawBitmap(maskBitmap, 0f, 0f, maskPaint)
         shimmerBitmap?.let { canvas.drawBitmap(it, 0f, 0f, shimmerPaint) }
+    }
+
+    fun bind() {
+        setOnLayoutChangeListener { mask() }
+    }
+
+    fun unbind() {
+        stopShimmer()
     }
 
     private fun mask() {
@@ -123,29 +125,47 @@ internal class MaskLayout @JvmOverloads constructor(
 
     private fun invalidateShimmer() {
         when (visibility) {
-            View.VISIBLE -> shimmerAnimation.start()
-            else -> shimmerAnimation.cancel()
+            View.VISIBLE -> startShimmer()
+            else -> stopShimmer()
         }
     }
 
     // Offset is time-dependent to support synchronization between uncoupled views
     private fun shimmerOffset(): Float {
         val now = Calendar.getInstance()
-        val millis = (now.timeInMillis - now.withTimeAtStartOfDay().timeInMillis).toFloat()
+        val millis = (now.timeInMillis - now.withTimeAtStartOfDay().timeInMillis)
+
+        val current = millis.toDouble()
         val interval = shimmerDurationInMillis
-        val divisor = millis / interval
-        val divisorAbs = Math.round(divisor)
-        val start = divisorAbs * interval
+        val divisor = Math.floor(current / interval)
+        val start = interval * divisor
         val end = start + interval
-        val percentage = (millis - start) / (end - start)
-        return shimmerWidth * percentage
+        val percentage = (current - start) / (end - start)
+
+        Log.d(tag(), "Updating shimmer: $percentage")
+
+        return (shimmerWidth * percentage).toFloat()
     }
 
     private fun updateShimmer() {
         shimmerPaint?.let {
             val offset = shimmerOffset()
-            it.shader = LinearGradient(offset, 0f, offset + shimmerWidth, shimmerAngle, Color.TRANSPARENT, shimmerColor, Shader.TileMode.MIRROR)
+            it.shader = LinearGradient(offset, 0f, offset + shimmerWidth, shimmerAngle, shimmerColor, Color.TRANSPARENT, Shader.TileMode.REPEAT)
             invalidate()
         }
+    }
+
+    private fun startShimmer() {
+        shimmerAnimation = launch(UI) {
+            while (isActive) {
+                updateShimmer()
+                delay(shimmerRefreshInterval)
+            }
+        }
+    }
+
+    private fun stopShimmer() {
+        shimmerAnimation?.cancel()
+        shimmerAnimation = null
     }
 }

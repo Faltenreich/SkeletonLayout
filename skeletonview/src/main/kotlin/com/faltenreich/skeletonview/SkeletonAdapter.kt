@@ -25,5 +25,15 @@ internal class SkeletonAdapter(
 
     override fun onBindViewHolder(holder: SkeletonViewHolder, position: Int) = holder.maskLayout.bind()
 
+    override fun onViewDetachedFromWindow(holder: SkeletonViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        holder.maskLayout.unbind()
+    }
+
+    override fun onViewRecycled(holder: SkeletonViewHolder) {
+        super.onViewRecycled(holder)
+        holder.maskLayout.unbind()
+    }
+
     override fun getItemCount() = itemCount
 }

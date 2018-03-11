@@ -32,6 +32,12 @@ android {
     }
 }
 
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
 dokka {
     outputFormat = 'html'
     outputDirectory = "$buildDir/javadoc"
@@ -40,6 +46,7 @@ dokka {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5'
 
     implementation "com.android.support:design:$supportVersion"
 
