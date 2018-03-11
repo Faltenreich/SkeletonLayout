@@ -80,7 +80,7 @@ internal class MaskLayout @JvmOverloads constructor(
     private fun mask() {
         maskBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8)
 
-        val canvas = Canvas(maskBitmap)
+        val maskCanvas = Canvas(maskBitmap)
 
         maskPaint = Paint().apply {
             color = maskColor
@@ -91,8 +91,6 @@ internal class MaskLayout @JvmOverloads constructor(
             isAntiAlias = cornerRadius > 0
         }
 
-        maskViews(canvas, xferPaint, this, this)
-
         if (showShimmer) {
             shimmerBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8)
             val shimmerCanvas = Canvas(shimmerBitmap)
@@ -100,26 +98,28 @@ internal class MaskLayout @JvmOverloads constructor(
                 shader = LinearGradient(0f, 0f, shimmerWidth, shimmerAngle, Color.argb(255, 255, 255, 255), shimmerColor, Shader.TileMode.MIRROR)
                 isAntiAlias = true
             }
-
-            // TODO: Improve double loop
-            maskViews(shimmerCanvas, xferPaint, this, this)
+            maskViews(maskCanvas, shimmerCanvas, xferPaint, this, this)
+        } else {
+            maskViews(maskCanvas, null, xferPaint, this, this)
         }
     }
 
-    private fun maskViews(canvas: Canvas, paint: Paint, view: View, root: ViewGroup) {
-        (view as? ViewGroup)?.let { it.views().forEach { maskViews(canvas, paint, it, root) } } ?: maskView(canvas, paint, view, root)
+    private fun maskViews(maskCanvas: Canvas, shimmerCanvas: Canvas?, paint: Paint, view: View, root: ViewGroup) {
+        (view as? ViewGroup)?.let { it.views().forEach { maskViews(maskCanvas, shimmerCanvas, paint, it, root) } } ?: maskView(maskCanvas, shimmerCanvas, paint, view, root)
     }
 
-    private fun maskView(canvas: Canvas, paint: Paint, view: View, root: ViewGroup) {
+    private fun maskView(maskCanvas: Canvas, shimmerCanvas: Canvas?, paint: Paint, view: View, root: ViewGroup) {
         val rect = Rect()
         view.getDrawingRect(rect)
         root.offsetDescendantRectToMyCoords(view, rect)
 
         if (cornerRadius > 0) {
             val rectF = RectF(rect.left.toFloat(), rect.top.toFloat(), rect.right.toFloat(), rect.bottom.toFloat())
-            canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paint)
+            maskCanvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paint)
+            shimmerCanvas?.drawRoundRect(rectF, cornerRadius, cornerRadius, paint)
         } else {
-            canvas.drawRect(rect, paint)
+            maskCanvas.drawRect(rect, paint)
+            shimmerCanvas?.drawRect(rect, paint)
         }
     }
 
