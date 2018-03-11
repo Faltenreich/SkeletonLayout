@@ -11,21 +11,27 @@ import java.util.*
 
 class SkeletonShimmer(
         private val view: View,
-        @ColorInt private val shimmerColor: Int,
-        private val shimmerDurationInMillis: Long,
-        private val shimmerAngle: Float,
-        private val shimmerWidth: Float
+        @ColorInt private val color: Int,
+        private val durationInMillis: Long,
+        private val angle: Float,
+        private val width: Float
 ) {
-
     var bitmap: Bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ALPHA_8)
     var canvas: Canvas = Canvas(bitmap)
     var paint: Paint = Paint().apply {
-        shader = LinearGradient(0f, 0f, shimmerWidth, shimmerAngle, Color.argb(255, 255, 255, 255), shimmerColor, Shader.TileMode.MIRROR)
+        shader = LinearGradient(0f, 0f, width, angle, Color.argb(255, 255, 255, 255), color, Shader.TileMode.MIRROR)
         isAntiAlias = true
     }
 
     private var coroutine: Job? = null
     private val shimmerRefreshInterval by lazy { (1000f / view.context.refreshRateInSeconds()).toInt() }
+
+    fun invalidate() {
+        when {
+            view.isAttachedToWindowCompat() && view.visibility == View.VISIBLE -> start()
+            else -> stop()
+        }
+    }
 
     fun start() {
         if (!isShimmering()) {
@@ -53,18 +59,18 @@ class SkeletonShimmer(
         val millis = (now.timeInMillis - now.withTimeAtStartOfDay().timeInMillis)
 
         val current = millis.toDouble()
-        val interval = shimmerDurationInMillis
+        val interval = durationInMillis
         val divisor = Math.floor(current / interval)
         val start = interval * divisor
         val end = start + interval
         val percentage = (current - start) / (end - start)
 
-        return (shimmerWidth * percentage).toFloat()
+        return (width * percentage).toFloat()
     }
 
     private fun updateShimmer() {
         val offset = shimmerOffset()
-        paint.shader = LinearGradient(offset, 0f, offset + shimmerWidth, shimmerAngle, shimmerColor, Color.TRANSPARENT, Shader.TileMode.REPEAT)
+        paint.shader = LinearGradient(offset, 0f, offset + width, angle, color, Color.TRANSPARENT, Shader.TileMode.REPEAT)
         view.invalidate()
     }
 }

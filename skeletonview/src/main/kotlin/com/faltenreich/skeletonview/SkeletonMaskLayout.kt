@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 
-internal class MaskLayout @JvmOverloads constructor(
+internal class SkeletonMaskLayout @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0,
@@ -32,9 +32,7 @@ internal class MaskLayout @JvmOverloads constructor(
             shimmerAngle: Float = 0f
     ) : this(originalView.context, null, 0, originalView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration, shimmerAngle)
 
-    private lateinit var maskBitmap: Bitmap
-    private lateinit var maskPaint: Paint
-
+    private lateinit var mask: SkeletonMask
     private var shimmer: SkeletonShimmer? = null
 
     init {
@@ -48,33 +46,27 @@ internal class MaskLayout @JvmOverloads constructor(
 
     override fun onVisibilityChanged(changedView: View?, visibility: Int) {
         super.onVisibilityChanged(changedView, visibility)
-        invalidateShimmer()
+        shimmer?.invalidate()
     }
 
     override fun onDraw(canvas: Canvas) {
-        canvas.drawBitmap(maskBitmap, 0f, 0f, maskPaint)
+        canvas.drawBitmap(mask.bitmap, 0f, 0f, mask.paint)
         shimmer?.let { canvas.drawBitmap(it.bitmap, 0f, 0f, it.paint) }
     }
 
     fun bind() {
         setOnLayoutChangeListener {
             mask()
-            invalidateShimmer()
+            shimmer?.invalidate()
         }
     }
 
     fun unbind() {
-        stopShimmer()
+        shimmer?.stop()
     }
 
     private fun mask() {
-        maskBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8)
-
-        val maskCanvas = Canvas(maskBitmap)
-
-        maskPaint = Paint().apply {
-            color = maskColor
-        }
+        mask = SkeletonMask(this, maskColor)
 
         val xferPaint = Paint().apply {
             xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC)
@@ -85,7 +77,7 @@ internal class MaskLayout @JvmOverloads constructor(
             shimmer = SkeletonShimmer(this, shimmerColor, shimmerDurationInMillis, shimmerAngle, width.toFloat() / 2)
         }
 
-        maskViews(maskCanvas, shimmer?.canvas, xferPaint, this, this)
+        maskViews(mask.canvas, shimmer?.canvas, xferPaint, this, this)
     }
 
     private fun maskViews(maskCanvas: Canvas, shimmerCanvas: Canvas?, paint: Paint, view: View, root: ViewGroup) {
@@ -105,22 +97,5 @@ internal class MaskLayout @JvmOverloads constructor(
             maskCanvas.drawRect(rect, paint)
             shimmerCanvas?.drawRect(rect, paint)
         }
-    }
-
-    private fun invalidateShimmer() {
-        shimmer?.let {
-            when {
-                isAttachedToWindowCompat() && visibility == View.VISIBLE -> startShimmer()
-                else -> stopShimmer()
-            }
-        }
-    }
-
-    private fun startShimmer() {
-        shimmer?.start()
-    }
-
-    private fun stopShimmer() {
-        shimmer?.stop()
     }
 }

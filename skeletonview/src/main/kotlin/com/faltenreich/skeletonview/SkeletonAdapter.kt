@@ -19,7 +19,7 @@ internal class SkeletonAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkeletonViewHolder {
         val originView = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
-        val maskView = MaskLayout(originView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerAngle)
+        val maskView = SkeletonMaskLayout(originView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerAngle)
         return SkeletonViewHolder(maskView)
     }
 
