@@ -8,11 +8,6 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
-import java.util.*
 
 internal class MaskLayout @JvmOverloads constructor(
         context: Context,
@@ -40,15 +35,7 @@ internal class MaskLayout @JvmOverloads constructor(
     private lateinit var maskBitmap: Bitmap
     private lateinit var maskPaint: Paint
 
-    private var shimmerBitmap: Bitmap? = null
-    private var shimmerPaint: Paint? = null
-
-    private val shimmerWidth: Float
-        get() = width.toFloat() / 2
-
-    private val shimmerRefreshInterval by lazy { (1000f / context.refreshRateInSeconds()).toInt() }
-
-    private var shimmerAnimation: Job? = null
+    private var shimmer: SkeletonShimmer? = null
 
     init {
         originView?.let {
@@ -66,11 +53,14 @@ internal class MaskLayout @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         canvas.drawBitmap(maskBitmap, 0f, 0f, maskPaint)
-        shimmerBitmap?.let { canvas.drawBitmap(it, 0f, 0f, shimmerPaint) }
+        shimmer?.let { canvas.drawBitmap(it.bitmap, 0f, 0f, it.paint) }
     }
 
     fun bind() {
-        setOnLayoutChangeListener { mask() }
+        setOnLayoutChangeListener {
+            mask()
+            invalidateShimmer()
+        }
     }
 
     fun unbind() {
@@ -92,16 +82,10 @@ internal class MaskLayout @JvmOverloads constructor(
         }
 
         if (showShimmer) {
-            shimmerBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8)
-            val shimmerCanvas = Canvas(shimmerBitmap)
-            shimmerPaint = Paint().apply {
-                shader = LinearGradient(0f, 0f, shimmerWidth, shimmerAngle, Color.argb(255, 255, 255, 255), shimmerColor, Shader.TileMode.MIRROR)
-                isAntiAlias = true
-            }
-            maskViews(maskCanvas, shimmerCanvas, xferPaint, this, this)
-        } else {
-            maskViews(maskCanvas, null, xferPaint, this, this)
+            shimmer = SkeletonShimmer(this, shimmerColor, shimmerDurationInMillis, shimmerAngle, width.toFloat() / 2)
         }
+
+        maskViews(maskCanvas, shimmer?.canvas, xferPaint, this, this)
     }
 
     private fun maskViews(maskCanvas: Canvas, shimmerCanvas: Canvas?, paint: Paint, view: View, root: ViewGroup) {
@@ -124,48 +108,19 @@ internal class MaskLayout @JvmOverloads constructor(
     }
 
     private fun invalidateShimmer() {
-        when (visibility) {
-            View.VISIBLE -> startShimmer()
-            else -> stopShimmer()
-        }
-    }
-
-    // Offset is time-dependent to support synchronization between uncoupled views
-    private fun shimmerOffset(): Float {
-        val now = Calendar.getInstance()
-        val millis = (now.timeInMillis - now.withTimeAtStartOfDay().timeInMillis)
-
-        val current = millis.toDouble()
-        val interval = shimmerDurationInMillis
-        val divisor = Math.floor(current / interval)
-        val start = interval * divisor
-        val end = start + interval
-        val percentage = (current - start) / (end - start)
-
-        Log.d(tag(), "Updating shimmer: $percentage")
-
-        return (shimmerWidth * percentage).toFloat()
-    }
-
-    private fun updateShimmer() {
-        shimmerPaint?.let {
-            val offset = shimmerOffset()
-            it.shader = LinearGradient(offset, 0f, offset + shimmerWidth, shimmerAngle, shimmerColor, Color.TRANSPARENT, Shader.TileMode.REPEAT)
-            invalidate()
-        }
-    }
-
-    private fun startShimmer() {
-        shimmerAnimation = launch(UI) {
-            while (isActive) {
-                updateShimmer()
-                delay(shimmerRefreshInterval)
+        shimmer?.let {
+            when {
+                isAttachedToWindowCompat() && visibility == View.VISIBLE -> startShimmer()
+                else -> stopShimmer()
             }
         }
     }
 
+    private fun startShimmer() {
+        shimmer?.start()
+    }
+
     private fun stopShimmer() {
-        shimmerAnimation?.cancel()
-        shimmerAnimation = null
+        shimmer?.stop()
     }
 }
