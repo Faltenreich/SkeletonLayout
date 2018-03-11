@@ -74,7 +74,7 @@ internal class SkeletonMaskLayout @JvmOverloads constructor(
         }
 
         if (showShimmer) {
-            shimmer = SkeletonShimmer(this, shimmerColor, shimmerDurationInMillis, shimmerAngle, width.toFloat() / 2)
+            shimmer = SkeletonShimmer(this, shimmerColor, shimmerDurationInMillis, shimmerAngle, width.toFloat() * 2)
         }
 
         maskViews(mask.canvas, shimmer?.canvas, xferPaint, this, this)

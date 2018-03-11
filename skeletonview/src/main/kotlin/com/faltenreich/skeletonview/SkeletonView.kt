@@ -8,13 +8,13 @@ import android.support.v7.widget.RecyclerView
 class SkeletonView(
         private val recyclerView: RecyclerView,
         @LayoutRes layoutResId: Int,
-        itemCount: Int = 5,
-        @ColorRes maskColorResId: Int = R.color.grey,
-        cornerRadius: Float = 25f,
-        showShimmer: Boolean = true,
-        @ColorRes shimmerColor: Int =  maskColorResId,
-        shimmerDurationInMillis: Long = 2000,
-        shimmerAngle: Float = 100f
+        itemCount: Int = DEFAULT_ITEM_COUNT,
+        @ColorRes maskColorResId: Int = DEFAULT_MASK_COLOR,
+        cornerRadius: Float = DEFAULT_CORNER_RADIUS,
+        showShimmer: Boolean = DEFAULT_SHIMMER_SHOW,
+        @ColorRes shimmerColor: Int =  DEFAULT_SHIMMER_COLOR,
+        shimmerDurationInMillis: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS,
+        shimmerAngle: Float = DEFAULT_SHIMMER_ANGLE
 ) : Skeleton {
 
     private val context by lazy { recyclerView.context }
@@ -44,4 +44,14 @@ class SkeletonView(
     }
 
     override fun isShown() = recyclerView.adapter === skeletonAdapter
+
+    companion object {
+        private const val DEFAULT_ITEM_COUNT = 5
+        private val DEFAULT_MASK_COLOR = R.color.grey
+        private const val DEFAULT_CORNER_RADIUS = 25f
+        private const val DEFAULT_SHIMMER_SHOW = true
+        private val DEFAULT_SHIMMER_COLOR = R.color.greyLight
+        private const val DEFAULT_SHIMMER_DURATION_IN_MILLIS = 4000L
+        private const val DEFAULT_SHIMMER_ANGLE = 100f
+    }
 }
