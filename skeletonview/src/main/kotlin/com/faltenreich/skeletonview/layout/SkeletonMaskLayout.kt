@@ -1,4 +1,4 @@
-package com.faltenreich.skeletonview
+package com.faltenreich.skeletonview.layout
 
 import android.content.Context
 import android.graphics.*
@@ -8,6 +8,9 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import com.faltenreich.skeletonview.setOnLayoutChangeListener
+import com.faltenreich.skeletonview.tag
+import com.faltenreich.skeletonview.views
 
 internal class SkeletonMaskLayout @JvmOverloads constructor(
         context: Context,

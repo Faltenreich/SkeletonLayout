@@ -1,6 +1,6 @@
 package com.faltenreich.skeletonview
 
-internal interface Skeleton {
+interface Skeleton {
     fun show()
     fun hide()
     fun isShown(): Boolean

@@ -25,14 +25,6 @@ internal fun View.setOnLayoutChangeListener(action: () -> Unit) {
 
 internal fun View.isAttachedToWindowCompat() = ViewCompat.isAttachedToWindow(this)
 
-internal fun Int.brighten(factor: Float): Int {
-    val a = Color.alpha(this)
-    val r = Math.round(Color.red(this) * factor)
-    val g = Math.round(Color.green(this) * factor)
-    val b = Math.round(Color.blue(this) * factor)
-    return Color.argb(a, Math.min(r, 255), Math.min(g, 255), Math.min(b, 255))
-}
-
 internal fun Int.alpha(factor: Float): Int {
     val alpha = (Color.alpha(this) * factor).toInt()
     return Color.argb(alpha, Color.red(this), Color.green(this), Color.blue(this))

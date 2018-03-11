@@ -2,7 +2,7 @@
 
 <resources>
 
-    <color name="grey">#E0E0E0</color>
-    <color name="greyLight">#55EEEEEE</color>
+    <color name="skeleton_mask">#E0E0E0</color>
+    <color name="skeleton_shimmer">#55EEEEEE</color>
     
 </resources>

@@ -1,15 +1,18 @@
-package com.faltenreich.skeletonview
+package com.faltenreich.skeletonview.layout
 
 import android.graphics.*
 import android.support.annotation.ColorInt
 import android.view.View
+import com.faltenreich.skeletonview.isAttachedToWindowCompat
+import com.faltenreich.skeletonview.refreshRateInSeconds
+import com.faltenreich.skeletonview.withTimeAtStartOfDay
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
 import java.util.*
 
-class SkeletonShimmer(
+internal data class SkeletonShimmer(
         private val view: View,
         @ColorInt private val color: Int,
         private val durationInMillis: Long,
