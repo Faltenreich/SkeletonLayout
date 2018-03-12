@@ -35,7 +35,7 @@ internal class SkeletonMaskShimmer(
     }
 
     override fun start() {
-        if (!isShimmering()) {
+        if (coroutine == null) {
             coroutine = launch(UI) {
                 while (isActive) {
                     updateShimmer()
@@ -46,18 +46,14 @@ internal class SkeletonMaskShimmer(
     }
 
     override fun stop() {
-        if (isShimmering()) {
-            coroutine?.cancel()
-            coroutine = null
-        }
+        coroutine?.cancel()
+        coroutine = null
     }
 
     override fun createPaint() = Paint().apply {
         shader = LinearGradient(0f, 0f, width, angle, colors, null, Shader.TileMode.CLAMP)
         isAntiAlias = true
     }
-
-    private fun isShimmering() = coroutine != null
 
     // Progress is time-dependent to support synchronization between uncoupled views
     private fun currentProgress(): Float {
