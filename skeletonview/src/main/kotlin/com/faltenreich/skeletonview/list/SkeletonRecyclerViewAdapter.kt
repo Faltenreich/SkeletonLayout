@@ -5,9 +5,9 @@ import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.faltenreich.skeletonview.layout.SkeletonMaskLayout
+import com.faltenreich.skeletonview.mask.SkeletonMaskLayout
 
-internal class SkeletonAdapter(
+internal class SkeletonRecyclerViewAdapter(
         @LayoutRes private val layoutResId: Int,
         private val itemCount: Int,
         @ColorInt private val maskColor: Int,

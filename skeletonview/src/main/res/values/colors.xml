@@ -3,6 +3,6 @@
 <resources>
 
     <color name="skeleton_mask">#E0E0E0</color>
-    <color name="skeleton_shimmer">#55EEEEEE</color>
+    <color name="skeleton_shimmer">#d5d5d5</color>
     
 </resources>

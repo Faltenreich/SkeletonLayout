@@ -4,7 +4,7 @@ import android.support.annotation.ColorRes
 import android.support.annotation.LayoutRes
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
-import com.faltenreich.skeletonview.list.SkeletonAdapter
+import com.faltenreich.skeletonview.list.SkeletonRecyclerViewAdapter
 
 class SkeletonView(
         private val recyclerView: RecyclerView,
@@ -22,7 +22,7 @@ class SkeletonView(
 
     private val originalAdapter = recyclerView.adapter
 
-    private val skeletonAdapter = SkeletonAdapter(
+    private val skeletonAdapter = SkeletonRecyclerViewAdapter(
             layoutResId,
             itemCount,
             ContextCompat.getColor(context, maskColorResId),
@@ -52,7 +52,7 @@ class SkeletonView(
         private const val DEFAULT_CORNER_RADIUS = 25f
         private const val DEFAULT_SHIMMER_SHOW = true
         private val DEFAULT_SHIMMER_COLOR = R.color.skeleton_shimmer
-        private const val DEFAULT_SHIMMER_DURATION_IN_MILLIS = 4000L
-        private const val DEFAULT_SHIMMER_ANGLE = 100f
+        private const val DEFAULT_SHIMMER_DURATION_IN_MILLIS = 2000L
+        private const val DEFAULT_SHIMMER_ANGLE = 0f
     }
 }

@@ -1,4 +1,4 @@
-package com.faltenreich.skeletonview.layout
+package com.faltenreich.skeletonview.mask
 
 import android.content.Context
 import android.graphics.*
@@ -35,8 +35,7 @@ internal class SkeletonMaskLayout @JvmOverloads constructor(
             shimmerAngle: Float = 0f
     ) : this(originalView.context, null, 0, originalView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration, shimmerAngle)
 
-    private lateinit var mask: SkeletonMask
-    private var shimmer: SkeletonShimmer? = null
+    private var mask: SkeletonMask? = null
 
     init {
         originView?.let {
@@ -49,56 +48,50 @@ internal class SkeletonMaskLayout @JvmOverloads constructor(
 
     override fun onVisibilityChanged(changedView: View?, visibility: Int) {
         super.onVisibilityChanged(changedView, visibility)
-        shimmer?.invalidate()
+        mask?.invalidate()
     }
 
     override fun onDraw(canvas: Canvas) {
-        canvas.drawBitmap(mask.bitmap, 0f, 0f, mask.paint)
-        shimmer?.let { canvas.drawBitmap(it.bitmap, 0f, 0f, it.paint) }
+        mask?.let { canvas.drawBitmap(it.bitmap, 0f, 0f, it.paint) }
+
     }
 
     fun bind() {
         setOnLayoutChangeListener {
             mask()
-            shimmer?.invalidate()
+            mask?.invalidate()
         }
     }
 
     fun unbind() {
-        shimmer?.stop()
+        mask?.stop()
     }
 
     private fun mask() {
-        mask = SkeletonMask(this, maskColor)
-
-        val xferPaint = Paint().apply {
-            xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC)
-            isAntiAlias = cornerRadius > 0
+        mask = if (showShimmer) SkeletonMaskShimmer(this, maskColor, shimmerColor, shimmerDurationInMillis, shimmerAngle) else SkeletonMaskSolid(this, maskColor)
+        mask?.let {
+            val xferPaint = Paint().apply {
+                xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC)
+                isAntiAlias = cornerRadius > 0
+            }
+            maskViews(it.canvas, xferPaint, this, this)
         }
-
-        if (showShimmer) {
-            shimmer = SkeletonShimmer(this, shimmerColor, shimmerDurationInMillis, shimmerAngle, width.toFloat() * 2)
-        }
-
-        maskViews(mask.canvas, shimmer?.canvas, xferPaint, this, this)
     }
 
-    private fun maskViews(maskCanvas: Canvas, shimmerCanvas: Canvas?, paint: Paint, view: View, root: ViewGroup) {
-        (view as? ViewGroup)?.let { it.views().forEach { maskViews(maskCanvas, shimmerCanvas, paint, it, root) } } ?: maskView(maskCanvas, shimmerCanvas, paint, view, root)
+    private fun maskViews(canvas: Canvas, paint: Paint, view: View, root: ViewGroup) {
+        (view as? ViewGroup)?.let { it.views().forEach { maskViews(canvas, paint, it, root) } } ?: maskView(canvas, paint, view, root)
     }
 
-    private fun maskView(maskCanvas: Canvas, shimmerCanvas: Canvas?, paint: Paint, view: View, root: ViewGroup) {
+    private fun maskView(canvas: Canvas, paint: Paint, view: View, root: ViewGroup) {
         val rect = Rect()
         view.getDrawingRect(rect)
         root.offsetDescendantRectToMyCoords(view, rect)
 
         if (cornerRadius > 0) {
             val rectF = RectF(rect.left.toFloat(), rect.top.toFloat(), rect.right.toFloat(), rect.bottom.toFloat())
-            maskCanvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paint)
-            shimmerCanvas?.drawRoundRect(rectF, cornerRadius, cornerRadius, paint)
+            canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paint)
         } else {
-            maskCanvas.drawRect(rect, paint)
-            shimmerCanvas?.drawRect(rect, paint)
+            canvas.drawRect(rect, paint)
         }
     }
 }
