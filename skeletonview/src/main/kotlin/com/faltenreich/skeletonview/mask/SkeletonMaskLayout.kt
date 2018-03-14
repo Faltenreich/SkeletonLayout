@@ -21,8 +21,7 @@ internal class SkeletonMaskLayout @JvmOverloads constructor(
         private val cornerRadius: Float = 0f,
         private val showShimmer: Boolean = true,
         @ColorInt private val shimmerColor: Int = 0,
-        private val shimmerDurationInMillis: Long = 0,
-        private val shimmerAngle: Float = 0f
+        private val shimmerDurationInMillis: Long = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     constructor(
@@ -31,9 +30,8 @@ internal class SkeletonMaskLayout @JvmOverloads constructor(
             cornerRadius: Float,
             showShimmer: Boolean,
             @ColorInt shimmerColor: Int,
-            shimmerDuration: Long = 0,
-            shimmerAngle: Float = 0f
-    ) : this(originalView.context, null, 0, originalView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration, shimmerAngle)
+            shimmerDuration: Long = 0
+    ) : this(originalView.context, null, 0, originalView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration)
 
     private var mask: SkeletonMask? = null
 
@@ -68,7 +66,7 @@ internal class SkeletonMaskLayout @JvmOverloads constructor(
     }
 
     private fun mask() {
-        mask = if (showShimmer) SkeletonMaskShimmer(this, maskColor, shimmerColor, shimmerDurationInMillis, shimmerAngle) else SkeletonMaskSolid(this, maskColor)
+        mask = if (showShimmer) SkeletonMaskShimmer(this, maskColor, shimmerColor, shimmerDurationInMillis) else SkeletonMaskSolid(this, maskColor)
         mask?.let {
             val xferPaint = Paint().apply {
                 xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC)

@@ -14,8 +14,7 @@ class SkeletonView(
         cornerRadius: Float = DEFAULT_CORNER_RADIUS,
         showShimmer: Boolean = DEFAULT_SHIMMER_SHOW,
         @ColorRes shimmerColor: Int =  DEFAULT_SHIMMER_COLOR,
-        shimmerDurationInMillis: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS,
-        shimmerAngle: Float = DEFAULT_SHIMMER_ANGLE
+        shimmerDurationInMillis: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS
 ) : Skeleton {
 
     private val context by lazy { recyclerView.context }
@@ -29,8 +28,7 @@ class SkeletonView(
             cornerRadius,
             showShimmer,
             ContextCompat.getColor(context, shimmerColor),
-            shimmerDurationInMillis,
-            shimmerAngle)
+            shimmerDurationInMillis)
 
     var stateChangeListener: SkeletonStateChangeListener? = null
 
@@ -47,12 +45,11 @@ class SkeletonView(
     override fun isShown() = recyclerView.adapter === skeletonAdapter
 
     companion object {
-        private const val DEFAULT_ITEM_COUNT = 5
+        private const val DEFAULT_ITEM_COUNT = 3
         private val DEFAULT_MASK_COLOR = R.color.skeleton_mask
         private const val DEFAULT_CORNER_RADIUS = 25f
         private const val DEFAULT_SHIMMER_SHOW = true
         private val DEFAULT_SHIMMER_COLOR = R.color.skeleton_shimmer
         private const val DEFAULT_SHIMMER_DURATION_IN_MILLIS = 2000L
-        private const val DEFAULT_SHIMMER_ANGLE = 0f
     }
 }

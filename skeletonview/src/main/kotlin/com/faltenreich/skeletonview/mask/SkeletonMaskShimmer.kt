@@ -18,14 +18,14 @@ internal class SkeletonMaskShimmer(
         parent: View,
         @ColorInt maskColor: Int,
         @ColorInt shimmerColor: Int,
-        private val durationInMillis: Long,
-        private val angle: Float
+        private val durationInMillis: Long
 ) : SkeletonMask(parent, maskColor) {
 
-    private var coroutine: Job? = null
     private val refreshIntervalInMillis by lazy { ((1000f / parent.context.refreshRateInSeconds()) * .9f).toInt() }
     private val colors by lazy { intArrayOf(color, shimmerColor, color) }
     private val width = parent.width.toFloat()
+
+    private var animation: Job? = null
 
     override fun invalidate() {
         when {
@@ -35,8 +35,8 @@ internal class SkeletonMaskShimmer(
     }
 
     override fun start() {
-        if (coroutine == null) {
-            coroutine = launch(UI) {
+        if (animation == null) {
+            animation = launch(UI) {
                 while (isActive) {
                     updateShimmer()
                     delay(refreshIntervalInMillis)
@@ -46,14 +46,16 @@ internal class SkeletonMaskShimmer(
     }
 
     override fun stop() {
-        coroutine?.cancel()
-        coroutine = null
+        animation?.cancel()
+        animation = null
     }
 
     override fun createPaint() = Paint().apply {
-        shader = LinearGradient(0f, 0f, width, angle, colors, null, Shader.TileMode.CLAMP)
+        shader = gradientForOffset(0f)
         isAntiAlias = true
     }
+
+    private fun gradientForOffset(offset: Float) = LinearGradient(offset, 0f, offset + width, 0f, colors, null, Shader.TileMode.CLAMP)
 
     // Progress is time-dependent to support synchronization between uncoupled views
     private fun currentProgress(): Float {
@@ -78,9 +80,7 @@ internal class SkeletonMaskShimmer(
     }
 
     private fun updateShimmer() {
-        val left = currentOffset()
-        // FIXME: angle != 0f leads to jump on offset == 0
-        paint.shader = LinearGradient(left, 0f, left + width, angle, colors, null, Shader.TileMode.CLAMP)
+        paint.shader = gradientForOffset(currentOffset())
         parent.invalidate()
     }
 }
