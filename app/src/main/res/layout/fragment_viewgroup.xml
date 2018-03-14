@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.faltenreich.skeletonview.SkeletonLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/app_name"/>
+
+</com.faltenreich.skeletonview.SkeletonLayout>

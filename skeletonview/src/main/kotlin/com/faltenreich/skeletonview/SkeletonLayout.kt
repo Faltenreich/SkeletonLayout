@@ -1,4 +1,4 @@
-package com.faltenreich.skeletonview.mask
+package com.faltenreich.skeletonview
 
 import android.content.Context
 import android.graphics.*
@@ -8,11 +8,11 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.faltenreich.skeletonview.setOnLayoutChangeListener
-import com.faltenreich.skeletonview.tag
-import com.faltenreich.skeletonview.views
+import com.faltenreich.skeletonview.mask.SkeletonMask
+import com.faltenreich.skeletonview.mask.SkeletonMaskShimmer
+import com.faltenreich.skeletonview.mask.SkeletonMaskSolid
 
-internal class SkeletonMaskLayout @JvmOverloads constructor(
+class SkeletonLayout @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0,
@@ -36,6 +36,7 @@ internal class SkeletonMaskLayout @JvmOverloads constructor(
     private var mask: SkeletonMask? = null
 
     init {
+        // TODO: Support ViewGroup
         originView?.let {
             layoutParams = it.layoutParams
             it.visibility = View.INVISIBLE

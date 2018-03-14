@@ -2,7 +2,9 @@ package com.faltenreich.skeletonview
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import com.faltenreich.skeletonview.fragment.RecyclerViewFragment
+import com.faltenreich.skeletonview.fragment.ViewGroupFragment
+import com.faltenreich.skeletonview.logic.MainPagerFragmentAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -10,15 +12,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initLayout()
-    }
 
-    private fun initLayout() {
-        val listAdapter = ListAdapter()
-        list.layoutManager = LinearLayoutManager(this)
-        list.adapter = listAdapter
-
-        val skeletonView = SkeletonView(list, R.layout.list_item)
-        skeletonView.show()
+        viewPager.adapter = MainPagerFragmentAdapter(supportFragmentManager, arrayOf(RecyclerViewFragment(), ViewGroupFragment()))
+        tabLayout.setupWithViewPager(viewPager)
     }
 }

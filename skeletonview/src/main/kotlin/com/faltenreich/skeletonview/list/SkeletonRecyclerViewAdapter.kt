@@ -5,7 +5,7 @@ import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.faltenreich.skeletonview.mask.SkeletonMaskLayout
+import com.faltenreich.skeletonview.SkeletonLayout
 
 internal class SkeletonRecyclerViewAdapter(
         @LayoutRes private val layoutResId: Int,
@@ -19,20 +19,20 @@ internal class SkeletonRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkeletonViewHolder {
         val originView = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
-        val maskView = SkeletonMaskLayout(originView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)
+        val maskView = SkeletonLayout(originView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)
         return SkeletonViewHolder(maskView)
     }
 
-    override fun onBindViewHolder(holder: SkeletonViewHolder, position: Int) = holder.maskLayout.bind()
+    override fun onBindViewHolder(holder: SkeletonViewHolder, position: Int) = holder.layout.bind()
 
     override fun onViewDetachedFromWindow(holder: SkeletonViewHolder) {
         super.onViewDetachedFromWindow(holder)
-        holder.maskLayout.unbind()
+        holder.layout.unbind()
     }
 
     override fun onViewRecycled(holder: SkeletonViewHolder) {
         super.onViewRecycled(holder)
-        holder.maskLayout.unbind()
+        holder.layout.unbind()
     }
 
     override fun getItemCount() = itemCount
