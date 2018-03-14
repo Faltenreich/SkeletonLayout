@@ -1,7 +1,7 @@
 package com.faltenreich.skeletonview.mask
 
 internal interface SkeletonMaskable {
-    fun invalidate()
-    fun start()
-    fun stop()
+    fun invalidate() = Unit
+    fun start() = Unit
+    fun stop() = Unit
 }

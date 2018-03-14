@@ -49,6 +49,24 @@ internal class SkeletonMaskLayout @JvmOverloads constructor(
         mask?.invalidate()
     }
 
+    override fun onWindowFocusChanged(hasWindowFocus: Boolean) {
+        super.onWindowFocusChanged(hasWindowFocus)
+        when (hasWindowFocus) {
+            true -> mask?.start()
+            false -> mask?.stop()
+        }
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        mask?.start()
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        mask?.stop()
+    }
+
     override fun onDraw(canvas: Canvas) {
         mask?.let { canvas.drawBitmap(it.bitmap, 0f, 0f, it.paint) }
 

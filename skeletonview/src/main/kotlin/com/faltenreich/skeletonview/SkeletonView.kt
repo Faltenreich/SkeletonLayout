@@ -30,16 +30,12 @@ class SkeletonView(
             ContextCompat.getColor(context, shimmerColor),
             shimmerDurationInMillis)
 
-    var stateChangeListener: SkeletonStateChangeListener? = null
-
     override fun show() {
         recyclerView.adapter = skeletonAdapter
-        stateChangeListener?.onShow()
     }
 
     override fun hide() {
         recyclerView.adapter = originalAdapter
-        stateChangeListener?.onHide()
     }
 
     override fun isShown() = recyclerView.adapter === skeletonAdapter
