@@ -26,13 +26,13 @@ class SkeletonLayout @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr), Skeleton {
 
     constructor(
-            originalView: View,
+            originView: View,
             @ColorRes maskColorResId: Int,
             cornerRadius: Float,
             showShimmer: Boolean,
             @ColorRes shimmerColorResId: Int,
             shimmerDuration: Long = 0
-    ) : this(originalView.context, null, 0, originalView, maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDuration)
+    ) : this(originView.context, null, 0, originView, maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDuration)
 
     private var maskColor = ContextCompat.getColor(context, maskColorResId)
     private var shimmerColor = ContextCompat.getColor(context, shimmerColorResId)

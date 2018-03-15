@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.faltenreich.skeletonview.R
-import com.faltenreich.skeletonview.SkeletonView
+import com.faltenreich.skeletonview.SkeletonRecyclerView
 import com.faltenreich.skeletonview.logic.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
@@ -17,7 +17,7 @@ class RecyclerViewFragment : BaseFragment(R.layout.fragment_recyclerview, "Recyc
         list.layoutManager = LinearLayoutManager(context)
         list.adapter = listAdapter
 
-        val skeletonView = SkeletonView(list, R.layout.list_item, itemCount = 30)
+        val skeletonView = SkeletonRecyclerView(list, R.layout.list_item, itemCount = 30)
         skeletonView.show()
     }
 }

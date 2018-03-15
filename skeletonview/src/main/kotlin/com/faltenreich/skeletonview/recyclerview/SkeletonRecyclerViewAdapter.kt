@@ -1,4 +1,4 @@
-package com.faltenreich.skeletonview.list
+package com.faltenreich.skeletonview.recyclerview
 
 import android.support.annotation.ColorRes
 import android.support.annotation.LayoutRes
@@ -15,15 +15,15 @@ internal class SkeletonRecyclerViewAdapter(
         private val showShimmer: Boolean,
         @ColorRes private val shimmerColorResId: Int,
         private val shimmerDurationInMillis: Long
-) : RecyclerView.Adapter<SkeletonViewHolder>() {
+) : RecyclerView.Adapter<SkeletonRecyclerViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkeletonViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkeletonRecyclerViewHolder {
         val originView = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
         val maskView = SkeletonLayout(originView, maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDurationInMillis)
-        return SkeletonViewHolder(maskView)
+        return SkeletonRecyclerViewHolder(maskView)
     }
 
-    override fun onBindViewHolder(holder: SkeletonViewHolder, position: Int) = Unit
+    override fun onBindViewHolder(holder: SkeletonRecyclerViewHolder, position: Int) = Unit
 
     override fun getItemCount() = itemCount
 }

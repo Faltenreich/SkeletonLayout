@@ -3,9 +3,9 @@ package com.faltenreich.skeletonview
 import android.support.annotation.ColorRes
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
-import com.faltenreich.skeletonview.list.SkeletonRecyclerViewAdapter
+import com.faltenreich.skeletonview.recyclerview.SkeletonRecyclerViewAdapter
 
-class SkeletonView(
+class SkeletonRecyclerView(
         private val recyclerView: RecyclerView,
         @LayoutRes layoutResId: Int,
         itemCount: Int = DEFAULT_ITEM_COUNT,
