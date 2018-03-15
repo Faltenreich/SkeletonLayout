@@ -36,13 +36,20 @@ class SkeletonLayout @JvmOverloads constructor(
     private var mask: SkeletonMask? = null
 
     init {
-        // TODO: Support ViewGroup
-        originView?.let {
-            layoutParams = it.layoutParams
-            it.visibility = View.INVISIBLE
-            addView(it)
+        originView?.let { addView(it) }
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+
+        if (childCount > 0) {
+            views().forEach { it.visibility = View.INVISIBLE }
             setWillNotDraw(false)
-        } ?: Log.e(tag(), "Missing view to mask")
+            mask()
+            mask?.invalidate()
+        } else {
+            Log.e(tag(), "Missing view to mask")
+        }
     }
 
     override fun onVisibilityChanged(changedView: View?, visibility: Int) {
@@ -70,18 +77,6 @@ class SkeletonLayout @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         mask?.let { canvas.drawBitmap(it.bitmap, 0f, 0f, it.paint) }
-
-    }
-
-    fun bind() {
-        setOnLayoutChangeListener {
-            mask()
-            mask?.invalidate()
-        }
-    }
-
-    fun unbind() {
-        mask?.stop()
     }
 
     private fun mask() {
