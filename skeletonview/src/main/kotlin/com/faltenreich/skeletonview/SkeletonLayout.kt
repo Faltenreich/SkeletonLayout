@@ -2,7 +2,8 @@ package com.faltenreich.skeletonview
 
 import android.content.Context
 import android.graphics.*
-import android.support.annotation.ColorInt
+import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -17,38 +18,64 @@ class SkeletonLayout @JvmOverloads constructor(
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0,
         originView: View? = null,
-        @ColorInt private val maskColor: Int = 0,
-        private val cornerRadius: Float = 0f,
-        private val showShimmer: Boolean = true,
-        @ColorInt private val shimmerColor: Int = 0,
-        private val shimmerDurationInMillis: Long = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+        @ColorRes private var maskColorResId: Int = DEFAULT_MASK_COLOR,
+        private var cornerRadius: Float = DEFAULT_CORNER_RADIUS,
+        private var showShimmer: Boolean = DEFAULT_SHIMMER_SHOW,
+        @ColorRes private var shimmerColorResId: Int =  DEFAULT_SHIMMER_COLOR,
+        private var shimmerDurationInMillis: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS
+) : FrameLayout(context, attrs, defStyleAttr), Skeleton {
 
     constructor(
             originalView: View,
-            @ColorInt maskColor: Int,
+            @ColorRes maskColorResId: Int,
             cornerRadius: Float,
             showShimmer: Boolean,
-            @ColorInt shimmerColor: Int,
+            @ColorRes shimmerColorResId: Int,
             shimmerDuration: Long = 0
-    ) : this(originalView.context, null, 0, originalView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration)
+    ) : this(originalView.context, null, 0, originalView, maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDuration)
+
+    private var maskColor = ContextCompat.getColor(context, maskColorResId)
+    private var shimmerColor = ContextCompat.getColor(context, shimmerColorResId)
 
     private var mask: SkeletonMask? = null
 
     init {
+        attrs?.let {
+            val typedArray = context.obtainStyledAttributes(it, R.styleable.SkeletonView, 0, 0)
+            maskColor = typedArray.getColor(R.styleable.SkeletonView_maskColor, maskColor)
+            cornerRadius = typedArray.getFloat(R.styleable.SkeletonView_cornerRadius, cornerRadius)
+            showShimmer = typedArray.getBoolean(R.styleable.SkeletonView_showShimmer, showShimmer)
+            shimmerColor = typedArray.getColor(R.styleable.SkeletonView_shimmerColor, shimmerColor)
+            shimmerDurationInMillis = typedArray.getInt(R.styleable.SkeletonView_shimmerDurationInMillis, shimmerDurationInMillis.toInt()).toLong()
+            typedArray.recycle()
+        }
         originView?.let { addView(it) }
+    }
+
+    override fun show() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hide() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun isSkeleton(): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
 
-        if (childCount > 0) {
-            views().forEach { it.visibility = View.INVISIBLE }
-            setWillNotDraw(false)
-            mask()
-            mask?.invalidate()
-        } else {
-            Log.e(tag(), "Missing view to mask")
+        if (!isInEditMode) {
+            if (childCount > 0) {
+                views().forEach { it.visibility = View.INVISIBLE }
+                setWillNotDraw(false)
+                mask()
+                mask?.invalidate()
+            } else {
+                Log.e(tag(), "Missing view to mask")
+            }
         }
     }
 
@@ -105,5 +132,13 @@ class SkeletonLayout @JvmOverloads constructor(
         } else {
             canvas.drawRect(rect, paint)
         }
+    }
+
+    companion object {
+        val DEFAULT_MASK_COLOR = R.color.skeleton_mask
+        const val DEFAULT_CORNER_RADIUS = 25f
+        const val DEFAULT_SHIMMER_SHOW = true
+        val DEFAULT_SHIMMER_COLOR = R.color.skeleton_shimmer
+        const val DEFAULT_SHIMMER_DURATION_IN_MILLIS = 2000L
     }
 }

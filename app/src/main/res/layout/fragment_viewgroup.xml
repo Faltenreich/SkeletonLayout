@@ -2,14 +2,13 @@
 
 <com.faltenreich.skeletonview.SkeletonLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    app:maskColor="@color/skeleton_mask"
+    app:shimmerColor="@color/skeleton_shimmer">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="@string/app_name"/>
+    <include layout="@layout/list_item"/>
 
 </com.faltenreich.skeletonview.SkeletonLayout>

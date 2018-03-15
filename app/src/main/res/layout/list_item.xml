@@ -2,7 +2,6 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -11,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:contentDescription="@null"
-        tools:src="@android:color/darker_gray"/>
+        android:src="@color/colorAccent"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,7 +23,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:contentDescription="@null"
-            tools:src="@android:color/darker_gray"/>
+            android:src="@color/colorPrimary"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,13 +39,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                tools:text="Title"/>
+                android:text="@string/app_name"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:text="Description"/>
+                android:text="@string/app_name"/>
 
         </LinearLayout>
 

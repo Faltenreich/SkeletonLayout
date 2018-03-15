@@ -2,7 +2,6 @@ package com.faltenreich.skeletonview
 
 import android.support.annotation.ColorRes
 import android.support.annotation.LayoutRes
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import com.faltenreich.skeletonview.list.SkeletonRecyclerViewAdapter
 
@@ -10,24 +9,22 @@ class SkeletonView(
         private val recyclerView: RecyclerView,
         @LayoutRes layoutResId: Int,
         itemCount: Int = DEFAULT_ITEM_COUNT,
-        @ColorRes maskColorResId: Int = DEFAULT_MASK_COLOR,
-        cornerRadius: Float = DEFAULT_CORNER_RADIUS,
-        showShimmer: Boolean = DEFAULT_SHIMMER_SHOW,
-        @ColorRes shimmerColor: Int =  DEFAULT_SHIMMER_COLOR,
-        shimmerDurationInMillis: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS
+        @ColorRes maskColorResId: Int = SkeletonLayout.DEFAULT_MASK_COLOR,
+        cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
+        showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
+        @ColorRes shimmerColorResId: Int = SkeletonLayout.DEFAULT_SHIMMER_COLOR,
+        shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
 ) : Skeleton {
-
-    private val context by lazy { recyclerView.context }
 
     private val originalAdapter = recyclerView.adapter
 
     private val skeletonAdapter = SkeletonRecyclerViewAdapter(
             layoutResId,
             itemCount,
-            ContextCompat.getColor(context, maskColorResId),
+            maskColorResId,
             cornerRadius,
             showShimmer,
-            ContextCompat.getColor(context, shimmerColor),
+            shimmerColorResId,
             shimmerDurationInMillis)
 
     override fun show() {
@@ -38,14 +35,9 @@ class SkeletonView(
         recyclerView.adapter = originalAdapter
     }
 
-    override fun isShown() = recyclerView.adapter === skeletonAdapter
+    override fun isSkeleton() = recyclerView.adapter === skeletonAdapter
 
     companion object {
         private const val DEFAULT_ITEM_COUNT = 3
-        private val DEFAULT_MASK_COLOR = R.color.skeleton_mask
-        private const val DEFAULT_CORNER_RADIUS = 25f
-        private const val DEFAULT_SHIMMER_SHOW = true
-        private val DEFAULT_SHIMMER_COLOR = R.color.skeleton_shimmer
-        private const val DEFAULT_SHIMMER_DURATION_IN_MILLIS = 2000L
     }
 }
