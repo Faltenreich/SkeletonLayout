@@ -1,1 +1,1 @@
-# SkeletonView
+# SkeletonLayout

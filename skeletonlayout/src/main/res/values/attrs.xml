@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <declare-styleable name="SkeletonLayout">
+        <attr name="maskColor" format="color"/>
+        <attr name="cornerRadius" format="dimension"/>
+        <attr name="showShimmer" format="boolean"/>
+        <attr name="shimmerColor" format="color"/>
+        <attr name="shimmerDurationInMillis" format="integer"/>
+    </declare-styleable>
+    
+</resources>

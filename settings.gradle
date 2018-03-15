@@ -1,1 +1,1 @@
-include ':app', ':skeletonview'
+include ':app', ':skeletonlayout'
