@@ -25,7 +25,7 @@ class SkeletonLayout @JvmOverloads constructor(
         private var shimmerDurationInMillis: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS
 ) : FrameLayout(context, attrs, defStyleAttr), Skeleton {
 
-    constructor(
+    internal constructor(
             originView: View,
             @ColorRes maskColorResId: Int,
             cornerRadius: Float,
@@ -52,11 +52,11 @@ class SkeletonLayout @JvmOverloads constructor(
         originView?.let { addView(it) }
     }
 
-    override fun show() {
+    override fun showOriginal() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun hide() {
+    override fun showSkeleton() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

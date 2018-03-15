@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.faltenreich.skeletonlayout.SkeletonLayout
+import com.faltenreich.skeletonlayout.applySkeleton
 
 internal class SkeletonRecyclerViewAdapter(
         @LayoutRes private val layoutResId: Int,
@@ -19,8 +20,8 @@ internal class SkeletonRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkeletonRecyclerViewHolder {
         val originView = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
-        val maskView = SkeletonLayout(originView, maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDurationInMillis)
-        return SkeletonRecyclerViewHolder(maskView)
+        val skeleton = originView.applySkeleton(maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDurationInMillis) as SkeletonLayout
+        return SkeletonRecyclerViewHolder(skeleton)
     }
 
     override fun onBindViewHolder(holder: SkeletonRecyclerViewHolder, position: Int) = Unit
