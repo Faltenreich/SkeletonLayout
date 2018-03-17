@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.faltenreich.skeletonlayout"
-        minSdkVersion minSdk
+        minSdkVersion 15
         targetSdkVersion targetSdk
         versionCode projectVersionCode
         versionName projectVersion
@@ -35,6 +35,10 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
@@ -43,6 +47,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    implementation 'com.github.naz013:ColorSlider:1.0.3'
 
     implementation project(':skeletonlayout')
 }

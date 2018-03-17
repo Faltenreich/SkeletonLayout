@@ -1,3 +1,11 @@
 <resources>
+
     <string name="app_name">SkeletonLayout</string>
+    <string name="editor">Value editor</string>
+    <string name="mask_color">Mask color</string>
+    <string name="mask_corner_radius">Mask corner radius (%d)</string>
+    <string name="shimmer_color">Shimmer color</string>
+    <string name="shimmer_duration">Shimmer duration (%d ms)</string>
+    <string name="shimmer_show">Show shimmer</string>
+
 </resources>

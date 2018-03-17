@@ -17,12 +17,11 @@ import java.util.*
 internal class SkeletonMaskShimmer(
         parent: View,
         @ColorInt maskColor: Int,
-        @ColorInt shimmerColor: Int,
-        private val durationInMillis: Long
+        @ColorInt var shimmerColor: Int,
+        var durationInMillis: Long
 ) : SkeletonMask(parent, maskColor) {
 
     private val refreshIntervalInMillis by lazy { ((1000f / parent.context.refreshRateInSeconds()) * .9f).toInt() }
-    private val colors by lazy { intArrayOf(color, shimmerColor, color) }
     private val width = parent.width.toFloat()
 
     private var animation: Job? = null
@@ -55,7 +54,7 @@ internal class SkeletonMaskShimmer(
         isAntiAlias = true
     }
 
-    private fun gradientForOffset(offset: Float) = LinearGradient(offset, 0f, offset + width, 0f, colors, null, Shader.TileMode.CLAMP)
+    private fun gradientForOffset(offset: Float) = LinearGradient(offset, 0f, offset + width, 0f, intArrayOf(color, shimmerColor, color), null, Shader.TileMode.CLAMP)
 
     // Progress is time-dependent to support synchronization between uncoupled views
     private fun currentProgress(): Float {

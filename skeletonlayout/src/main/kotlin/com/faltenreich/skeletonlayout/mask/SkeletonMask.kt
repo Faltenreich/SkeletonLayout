@@ -4,7 +4,13 @@ import android.graphics.*
 import android.support.annotation.ColorInt
 import android.view.View
 
-internal abstract class SkeletonMask(protected val parent: View, @ColorInt protected val color: Int) : SkeletonMaskable {
+internal abstract class SkeletonMask(protected val parent: View, @ColorInt color: Int) : SkeletonMaskable {
+
+    var color: Int = color
+        set(value) {
+            paint.color = value
+            field = value
+        }
 
     private val bitmap: Bitmap by lazy { createBitmap() }
     private val canvas: Canvas by lazy { createCanvas() }

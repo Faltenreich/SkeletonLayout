@@ -9,7 +9,7 @@ android {
     compileSdkVersion compileSdk
 
     defaultConfig {
-        minSdkVersion minSdk
+        minSdkVersion 14
         targetSdkVersion targetSdk
         versionCode projectVersionCode
         versionName projectVersion

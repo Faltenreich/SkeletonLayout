@@ -18,11 +18,11 @@ class SkeletonLayout @JvmOverloads constructor(
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0,
         originView: View? = null,
-        @ColorRes private var maskColorResId: Int = DEFAULT_MASK_COLOR,
-        private var cornerRadius: Float = DEFAULT_CORNER_RADIUS,
-        private var showShimmer: Boolean = DEFAULT_SHIMMER_SHOW,
-        @ColorRes private var shimmerColorResId: Int =  DEFAULT_SHIMMER_COLOR,
-        private var shimmerDurationInMillis: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS
+        @ColorRes maskColorResId: Int = DEFAULT_MASK_COLOR,
+        cornerRadius: Float = DEFAULT_CORNER_RADIUS,
+        showShimmer: Boolean = DEFAULT_SHIMMER_SHOW,
+        @ColorRes shimmerColorResId: Int =  DEFAULT_SHIMMER_COLOR,
+        shimmerDurationInMillis: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS
 ) : FrameLayout(context, attrs, defStyleAttr), Skeleton {
 
     internal constructor(
@@ -34,19 +34,58 @@ class SkeletonLayout @JvmOverloads constructor(
             shimmerDuration: Long = 0
     ) : this(originView.context, null, 0, originView, maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDuration)
 
-    private var maskColor = ContextCompat.getColor(context, maskColorResId)
-    private var shimmerColor = ContextCompat.getColor(context, shimmerColorResId)
+    var maskColorResId: Int = maskColorResId
+        set(value) {
+            field = value
+            maskColor = ContextCompat.getColor(context, value)
+        }
+
+    var maskColor = ContextCompat.getColor(context, maskColorResId)
+        set(value) {
+            field = value
+            mask()
+        }
+
+    var cornerRadius: Float = cornerRadius
+        set(value) {
+            field = value
+            mask()
+        }
+
+    var showShimmer: Boolean = showShimmer
+        set(value) {
+            field = value
+            mask()
+        }
+
+    var shimmerColorResId: Int = shimmerColorResId
+        set(value) {
+            field = value
+            shimmerColor = ContextCompat.getColor(context, value)
+        }
+
+    var shimmerColor = ContextCompat.getColor(context, shimmerColorResId)
+        set(value) {
+            field = value
+            mask()
+        }
+
+    var shimmerDurationInMillis: Long = shimmerDurationInMillis
+        set(value) {
+            field = value
+            mask()
+        }
 
     private var mask: SkeletonMask? = null
 
     init {
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.SkeletonLayout, 0, 0)
-            maskColor = typedArray.getColor(R.styleable.SkeletonLayout_maskColor, maskColor)
-            cornerRadius = typedArray.getFloat(R.styleable.SkeletonLayout_cornerRadius, cornerRadius)
-            showShimmer = typedArray.getBoolean(R.styleable.SkeletonLayout_showShimmer, showShimmer)
-            shimmerColor = typedArray.getColor(R.styleable.SkeletonLayout_shimmerColor, shimmerColor)
-            shimmerDurationInMillis = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillis.toInt()).toLong()
+            this.maskColor = typedArray.getColor(R.styleable.SkeletonLayout_maskColor, maskColor)
+            this.cornerRadius = typedArray.getFloat(R.styleable.SkeletonLayout_cornerRadius, cornerRadius)
+            this.showShimmer = typedArray.getBoolean(R.styleable.SkeletonLayout_showShimmer, showShimmer)
+            this.shimmerColor = typedArray.getColor(R.styleable.SkeletonLayout_shimmerColor, shimmerColor)
+            this.shimmerDurationInMillis = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillis.toInt()).toLong()
             typedArray.recycle()
         }
         originView?.let { addView(it) }
@@ -107,6 +146,7 @@ class SkeletonLayout @JvmOverloads constructor(
     }
 
     private fun mask() {
+        mask?.stop()
         mask = if (showShimmer) SkeletonMaskShimmer(this, maskColor, shimmerColor, shimmerDurationInMillis) else SkeletonMaskSolid(this, maskColor)
 
         val xferPaint = Paint().apply {

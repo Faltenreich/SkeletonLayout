@@ -17,6 +17,6 @@ class RecyclerViewFragment : BaseFragment(R.layout.fragment_recyclerview, "Recyc
         list.layoutManager = LinearLayoutManager(context)
         list.adapter = listAdapter
 
-        list.applySkeletonAdapter(R.layout.list_item, itemCount = 1).apply { showSkeleton() }
+        list.applySkeletonAdapter(R.layout.list_item, itemCount = 30).apply { showSkeleton() }
     }
 }
