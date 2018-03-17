@@ -103,34 +103,34 @@ class SkeletonLayout @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        mask?.let { canvas.drawBitmap(it.bitmap, 0f, 0f, it.paint) }
+        mask?.draw(canvas)
     }
 
     private fun mask() {
         mask = if (showShimmer) SkeletonMaskShimmer(this, maskColor, shimmerColor, shimmerDurationInMillis) else SkeletonMaskSolid(this, maskColor)
-        mask?.let {
-            val xferPaint = Paint().apply {
-                xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC)
-                isAntiAlias = cornerRadius > 0
-            }
-            maskViews(it.canvas, xferPaint, this, this)
+
+        val xferPaint = Paint().apply {
+            xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC)
+            isAntiAlias = cornerRadius > 0
         }
+
+        maskViews(xferPaint, this, this)
     }
 
-    private fun maskViews(canvas: Canvas, paint: Paint, view: View, root: ViewGroup) {
-        (view as? ViewGroup)?.let { it.views().forEach { maskViews(canvas, paint, it, root) } } ?: maskView(canvas, paint, view, root)
+    private fun maskViews(paint: Paint, view: View, root: ViewGroup) {
+        (view as? ViewGroup)?.let { it.views().forEach { maskViews(paint, it, root) } } ?: maskView(paint, view, root)
     }
 
-    private fun maskView(canvas: Canvas, paint: Paint, view: View, root: ViewGroup) {
+    private fun maskView(paint: Paint, view: View, root: ViewGroup) {
         val rect = Rect()
         view.getDrawingRect(rect)
         root.offsetDescendantRectToMyCoords(view, rect)
 
         if (cornerRadius > 0) {
             val rectF = RectF(rect.left.toFloat(), rect.top.toFloat(), rect.right.toFloat(), rect.bottom.toFloat())
-            canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paint)
+            mask?.draw(rectF, cornerRadius, paint)
         } else {
-            canvas.drawRect(rect, paint)
+            mask?.draw(rect, paint)
         }
     }
 

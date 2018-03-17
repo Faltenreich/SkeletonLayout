@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SkeletonLayout.iml" filepath="$PROJECT_DIR$/SkeletonLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/skeletonlayout/skeletonview.iml" filepath="$PROJECT_DIR$/skeletonlayout/skeletonview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/skeletonlayout/skeletonlayout.iml" filepath="$PROJECT_DIR$/skeletonlayout/skeletonlayout.iml" />
     </modules>
   </component>
 </project>
