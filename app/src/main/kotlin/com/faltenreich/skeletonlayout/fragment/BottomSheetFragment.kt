@@ -2,12 +2,15 @@ package com.faltenreich.skeletonlayout.fragment
 
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import com.faltenreich.skeletonlayout.R
+import com.faltenreich.skeletonlayout.SkeletonLayout
 import com.faltenreich.skeletonlayout.logic.ValueChangedListener
+import com.faltenreich.skeletonlayout.logic.defaultColors
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.*
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
@@ -24,11 +27,22 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun initLayout() {
+        // FIXME
+        context?.let {
+            val defaultColors = it.defaultColors()
+            val maskColors = defaultColors.plus(ContextCompat.getColor(it, SkeletonLayout.DEFAULT_MASK_COLOR))
+            val shimmerColors = defaultColors.plus(ContextCompat.getColor(it, SkeletonLayout.DEFAULT_SHIMMER_COLOR))
+            // maskColorView.setColors(maskColors)
+            // shimmerColorView.setColors(shimmerColors)
+        }
+
+        maskColorView.setListener { _, color -> valueChangedListener?.onMaskColorChanged(color) }
+
         maskCornerRadiusView.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val cornerRadius = (progress.toFloat() / MAX_MASK_CORNER_RADIUS) * 100
+                val cornerRadius = (progress.toFloat() / 100) * MAX_MASK_CORNER_RADIUS
                 maskCornerRadiusLabel.text = String.format(getString(R.string.mask_corner_radius), cornerRadius.toInt())
-                valueChangedListener?.onCornerRadiusChanged(cornerRadius)
+                valueChangedListener?.onMaskCornerRadiusChanged(cornerRadius)
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
@@ -36,9 +50,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
         shimmerShowView.setOnCheckedChangeListener { _, isChecked -> valueChangedListener?.onShowShimmerChanged(isChecked) }
 
+        shimmerColorView.setListener { _, color -> valueChangedListener?.onShimmerColorChanged(color) }
+
         shimmerDurationView.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val durationInMillis = ((progress.toFloat() / 100f) * MAX_SHIMMER_DURATION_IN_MILLIS).toLong()
+                val durationInMillis = ((progress.toFloat() / 100) * MAX_SHIMMER_DURATION_IN_MILLIS).toLong()
                 shimmerDurationLabel.text = String.format(getString(R.string.shimmer_duration), durationInMillis)
                 valueChangedListener?.onShimmerDurationChanged(durationInMillis)
             }
@@ -49,19 +65,21 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun initValues() {
         arguments?.apply {
-            // TODO: Mask color
+            maskColorView.selectColor(getInt(ARGUMENT_MASK_COLOR))
 
-            val maskCornerRadiusProgress = ((getFloat(ARGUMENT_MASK_CORNER_RADIUS) / MAX_MASK_CORNER_RADIUS) * 100).toInt()
+            val maskCornerRadius = getFloat(ARGUMENT_MASK_CORNER_RADIUS)
+            val maskCornerRadiusProgress = ((maskCornerRadius / MAX_MASK_CORNER_RADIUS) * 100).toInt()
             maskCornerRadiusView.progress = maskCornerRadiusProgress
-            maskCornerRadiusLabel.text = String.format(getString(R.string.mask_corner_radius), maskCornerRadiusProgress)
+            maskCornerRadiusLabel.text = String.format(getString(R.string.mask_corner_radius), maskCornerRadius.toInt())
 
             shimmerShowView.isChecked = getBoolean(ARGUMENT_SHOW_SHIMMER)
 
-            // TODO: Shimmer color
+            shimmerColorView.selectColor(getInt(ARGUMENT_SHIMMER_COLOR))
 
-            val shimmerDurationProgress = ((getLong(ARGUMENT_SHIMMER_DURATION_IN_MILLIS).toFloat() / MAX_SHIMMER_DURATION_IN_MILLIS) * 100).toInt()
+            val shimmerDuration = getLong(ARGUMENT_SHIMMER_DURATION_IN_MILLIS)
+            val shimmerDurationProgress = ((shimmerDuration.toFloat() / MAX_SHIMMER_DURATION_IN_MILLIS) * 100).toInt()
             shimmerDurationView.progress = shimmerDurationProgress
-            shimmerDurationLabel.text = String.format(getString(R.string.shimmer_duration), shimmerDurationProgress)
+            shimmerDurationLabel.text = String.format(getString(R.string.shimmer_duration), shimmerDuration)
         }
     }
 
