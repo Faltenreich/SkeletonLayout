@@ -12,6 +12,6 @@ class RecyclerViewTest {
     @Test
     fun useAppContext() {
         val recyclerView = RecyclerView(InstrumentationRegistry.getTargetContext())
-        recyclerView.applySkeleton()
+        recyclerView.applySkeletonAdapter(R.layout.list_item)
     }
 }
