@@ -2,6 +2,8 @@
 
     <string name="app_name">SkeletonLayout</string>
     <string name="editor">Value editor</string>
+    <string name="lorem_ipsum_0">Lorem ipsum dolor sit amet</string>
+    <string name="lorem_ipsum_1">consetetur sadipscing elitr</string>
     <string name="mask_color">Mask color</string>
     <string name="mask_corner_radius">Mask corner radius (%d)</string>
     <string name="shimmer_color">Shimmer color</string>

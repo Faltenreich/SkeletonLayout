@@ -9,5 +9,9 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) = Unit
 
-    override fun getItemCount() = 0
+    override fun getItemCount() = ITEM_COUNT
+
+    companion object {
+        const val ITEM_COUNT = 30
+    }
 }

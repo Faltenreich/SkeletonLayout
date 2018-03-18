@@ -6,5 +6,5 @@ import kotlinx.android.synthetic.main.fragment_viewgroup.*
 
 class ViewGroupFragment : BaseSkeletonFragment(R.layout.fragment_viewgroup, "ViewGroup") {
 
-    override fun getSkeletonLayout(): SkeletonLayout = skeletonLayout
+    override fun getSkeleton(): SkeletonLayout = skeletonLayout
 }

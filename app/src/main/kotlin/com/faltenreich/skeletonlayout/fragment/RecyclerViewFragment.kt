@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.faltenreich.skeletonlayout.R
+import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeletonAdapter
 import com.faltenreich.skeletonlayout.logic.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
-class RecyclerViewFragment : BaseFragment(R.layout.fragment_recyclerview, "RecyclerView") {
+class RecyclerViewFragment : BaseSkeletonFragment(R.layout.fragment_recyclerview, "RecyclerView") {
+
+    private lateinit var skeleton: Skeleton
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -17,6 +20,8 @@ class RecyclerViewFragment : BaseFragment(R.layout.fragment_recyclerview, "Recyc
         list.layoutManager = LinearLayoutManager(context)
         list.adapter = listAdapter
 
-        list.applySkeletonAdapter(R.layout.list_item, itemCount = 30).apply { showSkeleton() }
+        skeleton = list.applySkeletonAdapter(R.layout.list_item, itemCount = RecyclerViewAdapter.ITEM_COUNT).apply { showSkeleton() }
     }
+
+    override fun getSkeleton(): Skeleton = skeleton
 }

@@ -34,43 +34,43 @@ class SkeletonLayout @JvmOverloads constructor(
             shimmerDuration: Long = 0
     ) : this(originView.context, null, 0, originView, maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDuration)
 
-    var maskColorResId: Int = maskColorResId
+    override var maskColorResId: Int = maskColorResId
         set(value) {
             field = value
             maskColor = ContextCompat.getColor(context, value)
         }
 
-    var maskColor = ContextCompat.getColor(context, maskColorResId)
+    override var maskColor: Int = ContextCompat.getColor(context, maskColorResId)
         set(value) {
             field = value
             mask()
         }
 
-    var cornerRadius: Float = cornerRadius
+    override var maskCornerRadius: Float = cornerRadius
         set(value) {
             field = value
             mask()
         }
 
-    var showShimmer: Boolean = showShimmer
+    override var showShimmer: Boolean = showShimmer
         set(value) {
             field = value
             mask()
         }
 
-    var shimmerColorResId: Int = shimmerColorResId
+    override var shimmerColorResId: Int = shimmerColorResId
         set(value) {
             field = value
             shimmerColor = ContextCompat.getColor(context, value)
         }
 
-    var shimmerColor = ContextCompat.getColor(context, shimmerColorResId)
+    override var shimmerColor: Int = ContextCompat.getColor(context, shimmerColorResId)
         set(value) {
             field = value
             mask()
         }
 
-    var shimmerDurationInMillis: Long = shimmerDurationInMillis
+    override var shimmerDurationInMillis: Long = shimmerDurationInMillis
         set(value) {
             field = value
             mask()
@@ -82,7 +82,7 @@ class SkeletonLayout @JvmOverloads constructor(
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.SkeletonLayout, 0, 0)
             this.maskColor = typedArray.getColor(R.styleable.SkeletonLayout_maskColor, maskColor)
-            this.cornerRadius = typedArray.getFloat(R.styleable.SkeletonLayout_cornerRadius, cornerRadius)
+            this.maskCornerRadius = typedArray.getFloat(R.styleable.SkeletonLayout_cornerRadius, cornerRadius)
             this.showShimmer = typedArray.getBoolean(R.styleable.SkeletonLayout_showShimmer, showShimmer)
             this.shimmerColor = typedArray.getColor(R.styleable.SkeletonLayout_shimmerColor, shimmerColor)
             this.shimmerDurationInMillis = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillis.toInt()).toLong()
@@ -151,7 +151,7 @@ class SkeletonLayout @JvmOverloads constructor(
 
         val xferPaint = Paint().apply {
             xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC)
-            isAntiAlias = cornerRadius > 0
+            isAntiAlias = maskCornerRadius > 0
         }
 
         maskViews(xferPaint, this, this)
@@ -166,9 +166,9 @@ class SkeletonLayout @JvmOverloads constructor(
         view.getDrawingRect(rect)
         root.offsetDescendantRectToMyCoords(view, rect)
 
-        if (cornerRadius > 0) {
+        if (maskCornerRadius > 0) {
             val rectF = RectF(rect.left.toFloat(), rect.top.toFloat(), rect.right.toFloat(), rect.bottom.toFloat())
-            mask?.draw(rectF, cornerRadius, paint)
+            mask?.draw(rectF, maskCornerRadius, paint)
         } else {
             mask?.draw(rect, paint)
         }

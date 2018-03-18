@@ -2,15 +2,12 @@ package com.faltenreich.skeletonlayout.fragment
 
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import com.faltenreich.skeletonlayout.R
-import com.faltenreich.skeletonlayout.SkeletonLayout
 import com.faltenreich.skeletonlayout.logic.ValueChangedListener
-import com.faltenreich.skeletonlayout.logic.defaultColors
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.*
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
@@ -27,15 +24,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun initLayout() {
-        // FIXME
-        context?.let {
-            val defaultColors = it.defaultColors()
-            val maskColors = defaultColors.plus(ContextCompat.getColor(it, SkeletonLayout.DEFAULT_MASK_COLOR))
-            val shimmerColors = defaultColors.plus(ContextCompat.getColor(it, SkeletonLayout.DEFAULT_SHIMMER_COLOR))
-            // maskColorView.setColors(maskColors)
-            // shimmerColorView.setColors(shimmerColors)
-        }
-
         maskColorView.setListener { _, color -> valueChangedListener?.onMaskColorChanged(color) }
 
         maskCornerRadiusView.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
@@ -99,9 +87,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
             fragment.valueChangedListener = skeletonFragment
 
-            val skeletonLayout = skeletonFragment.getSkeletonLayout()
+            val skeletonLayout = skeletonFragment.getSkeleton()
             val arguments = Bundle()
-            arguments.putFloat(ARGUMENT_MASK_CORNER_RADIUS, skeletonLayout.cornerRadius)
+            arguments.putFloat(ARGUMENT_MASK_CORNER_RADIUS, skeletonLayout.maskCornerRadius)
             arguments.putInt(ARGUMENT_MASK_COLOR, skeletonLayout.maskColor)
             arguments.putBoolean(ARGUMENT_SHOW_SHIMMER, skeletonLayout.showShimmer)
             arguments.putInt(ARGUMENT_SHIMMER_COLOR, skeletonLayout.shimmerColor)

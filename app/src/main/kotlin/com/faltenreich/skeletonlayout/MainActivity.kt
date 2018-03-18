@@ -25,7 +25,12 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = viewPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
 
-        fab.setOnClickListener {
+        toggleButton.setOnClickListener {
+            val skeleton = (viewPagerAdapter.getItem(viewPager.currentItem) as? BaseSkeletonFragment)?.getSkeleton()
+            skeleton?.let { if (it.isSkeleton()) it.showOriginal() else it.showSkeleton() }
+        }
+
+        editButton.setOnClickListener {
             val visibleFragment = viewPagerAdapter.getItem(viewPager.currentItem)
             when (visibleFragment) {
                 is BaseSkeletonFragment -> BottomSheetFragment.newInstance(visibleFragment).show(supportFragmentManager, "bottomSheet")
