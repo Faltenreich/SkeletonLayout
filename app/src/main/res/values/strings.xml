@@ -2,13 +2,18 @@
 
     <string name="app_name">SkeletonLayout</string>
     <string name="editor">Value editor</string>
-    <string name="lorem_ipsum_0">Lorem ipsum dolor sit amet</string>
-    <string name="lorem_ipsum_1">consetetur sadipscing elitr</string>
     <string name="mask_color">Mask color</string>
     <string name="mask_corner_radius">Mask corner radius (%d)</string>
     <string name="shimmer_color">Shimmer color</string>
     <string name="shimmer_duration">Shimmer duration (%d ms)</string>
     <string name="shimmer_show">Show shimmer</string>
     <string name="toggle">Toggle skeleton</string>
+
+    <string name="schwarzenegger">Arnold Schwarzenegger</string>
+    <string name="schwarzenegger_desc">If it fails, we can fix it</string>
+    <string name="stallone">Sylvester Stallone</string>
+    <string name="stallone_desc">When you\'re pushed, build breaking\'s as easy as fixing</string>
+    <string name="willis">Bruce Willis</string>
+    <string name="willis_desc">Wrong guy in the wrong program at the wrong line</string>
 
 </resources>
