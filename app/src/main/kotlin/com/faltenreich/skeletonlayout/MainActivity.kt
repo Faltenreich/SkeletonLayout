@@ -1,6 +1,7 @@
 package com.faltenreich.skeletonlayout
 
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -43,12 +44,31 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = viewPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
 
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageSelected(position: Int) {
+                invalidateSkeleton()
+            }
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+        })
+
         fab.setOnClickListener { openEditor() }
     }
 
+    private fun getSkeleton(): Skeleton? = (viewPagerAdapter.getItem(viewPager.currentItem) as? BaseSkeletonFragment)?.getSkeleton()
+
+    private fun invalidateSkeleton() {
+        getSkeleton()?.let {
+            val shouldShow = fab.visibility == View.VISIBLE
+            val isShown = it.isSkeleton()
+            if (shouldShow != isShown) {
+                if (shouldShow) showSkeleton(it) else hideSkeleton(it)
+            }
+        }
+    }
+
     private fun toggleSkeleton() {
-        val skeleton = (viewPagerAdapter.getItem(viewPager.currentItem) as? BaseSkeletonFragment)?.getSkeleton()
-        skeleton?.let { if (it.isSkeleton()) hideSkeleton(it) else showSkeleton(it) }
+        getSkeleton()?.let { if (it.isSkeleton()) hideSkeleton(it) else showSkeleton(it) }
     }
 
     private fun showSkeleton(skeleton: Skeleton) {
