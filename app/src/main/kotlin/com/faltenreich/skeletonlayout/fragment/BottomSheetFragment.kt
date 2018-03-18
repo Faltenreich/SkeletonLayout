@@ -88,6 +88,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             fragment.valueChangedListener = skeletonFragment
 
             val skeletonLayout = skeletonFragment.getSkeleton()
+
             val arguments = Bundle()
             arguments.putFloat(ARGUMENT_MASK_CORNER_RADIUS, skeletonLayout.maskCornerRadius)
             arguments.putInt(ARGUMENT_MASK_COLOR, skeletonLayout.maskColor)

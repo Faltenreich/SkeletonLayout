@@ -21,6 +21,7 @@ internal class SkeletonRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkeletonRecyclerViewHolder {
         val originView = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
         val skeleton = originView.applySkeleton(maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis) as SkeletonLayout
+        skeleton.showSkeleton()
         return SkeletonRecyclerViewHolder(skeleton)
     }
 

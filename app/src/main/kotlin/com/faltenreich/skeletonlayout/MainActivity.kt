@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.faltenreich.skeletonlayout.fragment.BaseSkeletonFragment
 import com.faltenreich.skeletonlayout.fragment.BottomSheetFragment
@@ -47,7 +48,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun toggleSkeleton() {
         val skeleton = (viewPagerAdapter.getItem(viewPager.currentItem) as? BaseSkeletonFragment)?.getSkeleton()
-        skeleton?.let { if (it.isSkeleton()) it.showOriginal() else it.showSkeleton() }
+        skeleton?.let { if (it.isSkeleton()) hideSkeleton(it) else showSkeleton(it) }
+    }
+
+    private fun showSkeleton(skeleton: Skeleton) {
+        skeleton.showSkeleton()
+        fab.visibility = View.VISIBLE
+    }
+
+    private fun hideSkeleton(skeleton: Skeleton) {
+        skeleton.showOriginal()
+        fab.visibility = View.GONE
     }
 
     private fun openEditor() {

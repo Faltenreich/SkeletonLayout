@@ -65,6 +65,8 @@ class SkeletonLayout @JvmOverloads constructor(
         }
 
     private var mask: SkeletonMask? = null
+    private var isSkeleton: Boolean = false
+    private var isRendered: Boolean = false
 
     init {
         attrs?.let {
@@ -80,29 +82,39 @@ class SkeletonLayout @JvmOverloads constructor(
     }
 
     override fun showOriginal() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        isSkeleton = false
+
+        if (childCount > 0) {
+            views().forEach { it.visibility = View.VISIBLE }
+            mask?.stop()
+            mask = null
+        }
     }
 
     override fun showSkeleton() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        isSkeleton = true
 
-    override fun isSkeleton(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        super.onLayout(changed, left, top, right, bottom)
-
-        if (!isInEditMode) {
+        if (isRendered) {
             if (childCount > 0) {
                 views().forEach { it.visibility = View.INVISIBLE }
                 setWillNotDraw(false)
                 mask()
                 mask?.invalidate()
+
             } else {
                 Log.e(tag(), "Missing view to mask")
             }
+        }
+    }
+
+    override fun isSkeleton(): Boolean = isSkeleton
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        isRendered = true
+
+        if (isSkeleton) {
+            showSkeleton()
         }
     }
 
