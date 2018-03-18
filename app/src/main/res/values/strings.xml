@@ -9,5 +9,6 @@
     <string name="shimmer_color">Shimmer color</string>
     <string name="shimmer_duration">Shimmer duration (%d ms)</string>
     <string name="shimmer_show">Show shimmer</string>
+    <string name="toggle">Toggle skeleton</string>
 
 </resources>

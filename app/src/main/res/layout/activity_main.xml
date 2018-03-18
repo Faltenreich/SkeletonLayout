@@ -24,30 +24,13 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:orientation="horizontal">
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/toggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/margin"
-            app:srcCompat="@drawable/ic_toggle"
-            app:fabSize="normal"/>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/editButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/margin"
-            app:srcCompat="@drawable/ic_edit"
-            app:fabSize="normal"/>
-
-    </LinearLayout>
+        android:layout_margin="@dimen/margin"
+        app:srcCompat="@drawable/ic_edit"
+        app:fabSize="normal"/>
 
 </FrameLayout>
