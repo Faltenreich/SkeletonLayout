@@ -70,14 +70,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun runDemo() {
+        val duration = 3000L
         Handler().apply {
             val runnable = object : Runnable {
                 override fun run() {
                     toggleSkeleton()
-                    postDelayed(this, SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS)
+                    postDelayed(this, duration)
                 }
             }
-            postDelayed(runnable, SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS)
+            postDelayed(runnable, duration)
         }
     }
 
@@ -99,12 +100,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun showSkeleton(skeleton: Skeleton) {
         skeleton.showSkeleton()
-        fab.visibility = View.VISIBLE
     }
 
     private fun hideSkeleton(skeleton: Skeleton) {
         skeleton.showOriginal()
-        fab.visibility = View.GONE
     }
 
     private fun openEditor() {
