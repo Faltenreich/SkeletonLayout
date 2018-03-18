@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.findItem(R.id.action_toggle)?.isVisible = !BuildConfig.isDemoMode
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.action_toggle -> {
@@ -53,6 +58,10 @@ class MainActivity : AppCompatActivity() {
         })
 
         fab.setOnClickListener { openEditor() }
+
+        val uiVisibility = if (BuildConfig.isDemoMode) View.GONE else View.VISIBLE
+        tabLayout.visibility = uiVisibility
+        fab.visibility = uiVisibility
     }
 
     private fun getSkeleton(): Skeleton? = (viewPagerAdapter.getItem(viewPager.currentItem) as? BaseSkeletonFragment)?.getSkeleton()

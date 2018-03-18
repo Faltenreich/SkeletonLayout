@@ -23,6 +23,19 @@ android {
         }
     }
 
+    flavorDimensions "mode"
+
+    productFlavors {
+        demo {
+            dimension "mode"
+            buildConfigField 'boolean', 'isDemoMode', 'true'
+        }
+        full {
+            dimension "mode"
+            buildConfigField 'boolean', 'isDemoMode', 'false'
+        }
+    }
+
     androidExtensions {
         experimental = true
     }
