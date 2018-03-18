@@ -16,7 +16,7 @@ This library implements the Skeleton View pattern and provides an easy way for o
 
 ## Preview
 
-<img src="./images/preview.gif" width="250">
+
 
 ## Features
 

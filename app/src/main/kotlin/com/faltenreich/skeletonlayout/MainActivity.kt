@@ -1,6 +1,7 @@
 package com.faltenreich.skeletonlayout
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -22,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
+
+        if (BuildConfig.isDemoMode) {
+            runDemo()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -62,6 +67,18 @@ class MainActivity : AppCompatActivity() {
         val uiVisibility = if (BuildConfig.isDemoMode) View.GONE else View.VISIBLE
         tabLayout.visibility = uiVisibility
         fab.visibility = uiVisibility
+    }
+
+    private fun runDemo() {
+        Handler().apply {
+            val runnable = object : Runnable {
+                override fun run() {
+                    toggleSkeleton()
+                    postDelayed(this, SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS)
+                }
+            }
+            postDelayed(runnable, SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS)
+        }
     }
 
     private fun getSkeleton(): Skeleton? = (viewPagerAdapter.getItem(viewPager.currentItem) as? BaseSkeletonFragment)?.getSkeleton()
