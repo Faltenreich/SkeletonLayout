@@ -1,8 +1,7 @@
 package com.faltenreich.skeletonlayout.recyclerview
 
-import android.support.annotation.ColorRes
+import android.support.annotation.ColorInt
 import android.support.annotation.LayoutRes
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import com.faltenreich.skeletonlayout.Skeleton
 
@@ -10,10 +9,10 @@ internal class SkeletonRecyclerView(
         private val recyclerView: RecyclerView,
         @LayoutRes layoutResId: Int,
         itemCount: Int,
-        @ColorRes maskColorResId: Int,
+        @ColorInt maskColor: Int,
         cornerRadius: Float,
         showShimmer: Boolean,
-        @ColorRes shimmerColorResId: Int,
+        @ColorInt shimmerColor: Int,
         shimmerDurationInMillis: Long
 ) : Skeleton {
 
@@ -29,13 +28,7 @@ internal class SkeletonRecyclerView(
             invalidate()
         }
 
-    override var maskColorResId: Int = maskColorResId
-        set(value) {
-            field = value
-            maskColor = ContextCompat.getColor(recyclerView.context, value)
-        }
-
-    override var maskColor: Int = ContextCompat.getColor(recyclerView.context, maskColorResId)
+    override var maskColor: Int = maskColor
         set(value) {
             field = value
             invalidate()
@@ -53,13 +46,7 @@ internal class SkeletonRecyclerView(
             invalidate()
         }
 
-    override var shimmerColorResId: Int = shimmerColorResId
-        set(value) {
-            field = value
-            shimmerColor = ContextCompat.getColor(recyclerView.context, value)
-        }
-
-    override var shimmerColor: Int = ContextCompat.getColor(recyclerView.context, shimmerColorResId)
+    override var shimmerColor: Int = shimmerColor
         set(value) {
             field = value
             invalidate()
@@ -94,10 +81,10 @@ internal class SkeletonRecyclerView(
         skeletonAdapter = SkeletonRecyclerViewAdapter(
                 layoutResId,
                 itemCount,
-                maskColorResId,
+                maskColor,
                 maskCornerRadius,
                 showShimmer,
-                shimmerColorResId,
+                shimmerColor,
                 shimmerDurationInMillis)
         if (showSkeleton) {
             showSkeleton()

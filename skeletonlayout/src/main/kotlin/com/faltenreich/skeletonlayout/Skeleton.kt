@@ -3,11 +3,6 @@ package com.faltenreich.skeletonlayout
 interface Skeleton {
 
     /**
-     * Convenience property for maskColor
-     */
-    var maskColorResId: Int
-
-    /**
      * Color of the mask that fills the original view bounds
      */
     var maskColor: Int
@@ -21,11 +16,6 @@ interface Skeleton {
      * Animate left-to-right shimmer, if set to true
      */
     var showShimmer: Boolean
-
-    /**
-     * Convenience property for shimmerColor
-     */
-    var shimmerColorResId: Int
 
     /**
      * Color of the animated shimmer

@@ -2,7 +2,7 @@ package com.faltenreich.skeletonlayout
 
 import android.content.Context
 import android.graphics.*
-import android.support.annotation.ColorRes
+import android.support.annotation.ColorInt
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
@@ -18,29 +18,23 @@ class SkeletonLayout @JvmOverloads constructor(
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0,
         originView: View? = null,
-        @ColorRes maskColorResId: Int = DEFAULT_MASK_COLOR,
+        @ColorInt maskColor: Int = ContextCompat.getColor(context, DEFAULT_MASK_COLOR),
         cornerRadius: Float = DEFAULT_CORNER_RADIUS,
         showShimmer: Boolean = DEFAULT_SHIMMER_SHOW,
-        @ColorRes shimmerColorResId: Int =  DEFAULT_SHIMMER_COLOR,
+        @ColorInt shimmerColor: Int =  ContextCompat.getColor(context, DEFAULT_SHIMMER_COLOR),
         shimmerDurationInMillis: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS
 ) : FrameLayout(context, attrs, defStyleAttr), Skeleton {
 
     internal constructor(
             originView: View,
-            @ColorRes maskColorResId: Int,
+            @ColorInt maskColor: Int,
             cornerRadius: Float,
             showShimmer: Boolean,
-            @ColorRes shimmerColorResId: Int,
+            @ColorInt shimmerColor: Int,
             shimmerDuration: Long = 0
-    ) : this(originView.context, null, 0, originView, maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDuration)
+    ) : this(originView.context, null, 0, originView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration)
 
-    override var maskColorResId: Int = maskColorResId
-        set(value) {
-            field = value
-            maskColor = ContextCompat.getColor(context, value)
-        }
-
-    override var maskColor: Int = ContextCompat.getColor(context, maskColorResId)
+    override var maskColor: Int = maskColor
         set(value) {
             field = value
             mask()
@@ -58,13 +52,7 @@ class SkeletonLayout @JvmOverloads constructor(
             mask()
         }
 
-    override var shimmerColorResId: Int = shimmerColorResId
-        set(value) {
-            field = value
-            shimmerColor = ContextCompat.getColor(context, value)
-        }
-
-    override var shimmerColor: Int = ContextCompat.getColor(context, shimmerColorResId)
+    override var shimmerColor: Int = shimmerColor
         set(value) {
             field = value
             mask()

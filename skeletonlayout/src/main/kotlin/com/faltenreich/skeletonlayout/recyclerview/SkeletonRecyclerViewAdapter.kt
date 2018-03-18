@@ -1,6 +1,6 @@
 package com.faltenreich.skeletonlayout.recyclerview
 
-import android.support.annotation.ColorRes
+import android.support.annotation.ColorInt
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,16 +11,16 @@ import com.faltenreich.skeletonlayout.applySkeleton
 internal class SkeletonRecyclerViewAdapter(
         @LayoutRes private val layoutResId: Int,
         private val itemCount: Int,
-        @ColorRes private val maskColorResId: Int,
+        @ColorInt private val maskColor: Int,
         private val cornerRadius: Float,
         private val showShimmer: Boolean,
-        @ColorRes private val shimmerColorResId: Int,
+        @ColorInt private val shimmerColor: Int,
         private val shimmerDurationInMillis: Long
 ) : RecyclerView.Adapter<SkeletonRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkeletonRecyclerViewHolder {
         val originView = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
-        val skeleton = originView.applySkeleton(maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDurationInMillis) as SkeletonLayout
+        val skeleton = originView.applySkeleton(maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis) as SkeletonLayout
         return SkeletonRecyclerViewHolder(skeleton)
     }
 

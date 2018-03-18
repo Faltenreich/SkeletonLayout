@@ -3,8 +3,9 @@
 package com.faltenreich.skeletonlayout
 
 import android.content.Context
-import android.support.annotation.ColorRes
+import android.support.annotation.ColorInt
 import android.support.annotation.LayoutRes
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -32,18 +33,18 @@ internal fun Calendar.withTimeAtStartOfDay() = apply {
 fun RecyclerView.applySkeletonAdapter(
         @LayoutRes layoutResId: Int,
         itemCount: Int = SkeletonRecyclerView.DEFAULT_ITEM_COUNT,
-        @ColorRes maskColorResId: Int = SkeletonLayout.DEFAULT_MASK_COLOR,
+        @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
         cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
         showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
-        @ColorRes shimmerColorResId: Int = SkeletonLayout.DEFAULT_SHIMMER_COLOR,
+        @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
         shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
-): Skeleton = SkeletonRecyclerView(this, layoutResId, itemCount, maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDurationInMillis)
+): Skeleton = SkeletonRecyclerView(this, layoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)
 
 @JvmOverloads
 fun View.applySkeleton(
-        @ColorRes maskColorResId: Int = SkeletonLayout.DEFAULT_MASK_COLOR,
+        @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
         cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
         showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
-        @ColorRes shimmerColorResId: Int = SkeletonLayout.DEFAULT_SHIMMER_COLOR,
+        @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
         shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
-): Skeleton = SkeletonLayout(this, maskColorResId, cornerRadius, showShimmer, shimmerColorResId, shimmerDurationInMillis)
+): Skeleton = SkeletonLayout(this, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)
