@@ -12,6 +12,6 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewHolder>() {
     override fun getItemCount() = ITEM_COUNT
 
     companion object {
-        const val ITEM_COUNT = 30
+        const val ITEM_COUNT = 10
     }
 }

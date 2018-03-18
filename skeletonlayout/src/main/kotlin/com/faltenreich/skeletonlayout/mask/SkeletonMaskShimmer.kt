@@ -3,15 +3,12 @@ package com.faltenreich.skeletonlayout.mask
 import android.graphics.LinearGradient
 import android.graphics.Paint
 import android.graphics.Shader
+import android.os.Handler
 import android.support.annotation.ColorInt
 import android.view.View
 import com.faltenreich.skeletonlayout.isAttachedToWindowCompat
 import com.faltenreich.skeletonlayout.refreshRateInSeconds
 import com.faltenreich.skeletonlayout.withTimeAtStartOfDay
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
 import java.util.*
 
 internal class SkeletonMaskShimmer(
@@ -21,10 +18,11 @@ internal class SkeletonMaskShimmer(
         var durationInMillis: Long
 ) : SkeletonMask(parent, maskColor) {
 
-    private val refreshIntervalInMillis by lazy { ((1000f / parent.context.refreshRateInSeconds()) * .9f).toInt() }
+    private val refreshIntervalInMillis by lazy { ((1000f / parent.context.refreshRateInSeconds()) * .9f).toLong() }
     private val width = parent.width.toFloat()
 
-    private var animation: Job? = null
+    private var animation: Handler? = null
+    private var animationTask: Runnable? = null
 
     override fun invalidate() {
         when {
@@ -35,17 +33,19 @@ internal class SkeletonMaskShimmer(
 
     override fun start() {
         if (animation == null) {
-            animation = launch(UI) {
-                while (isActive) {
+            animation = Handler()
+            animationTask = object : Runnable {
+                override fun run() {
                     updateShimmer()
-                    delay(refreshIntervalInMillis)
+                    animation?.postDelayed(this, refreshIntervalInMillis)
                 }
             }
+            animation?.post(animationTask)
         }
     }
 
     override fun stop() {
-        animation?.cancel()
+        animation?.removeCallbacks(animationTask)
         animation = null
     }
 
