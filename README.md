@@ -1,4 +1,4 @@
-# SkeletonLayout <img src="./images/android.png" width="50"> 
+# SkeletonLayout
 
 [ ![Download](https://api.bintray.com/packages/faltenreich/maven/SkeletonLayout/images/download.svg) ](https://bintray.com/faltenreich/maven/SkeletonLayout/_latestVersion) 
 [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
@@ -33,6 +33,8 @@ Create your own skeleton view with custom shapes, colors and shimmers.
 - **Minimum footprint:** org.jetbrains.kotlin:kotlin-stdlib-jre7 and com.android.support:design as the only dependencies
 
 ### Getting Started
+
+ <img src="./images/android.png" width="100"> 
 
 ##### Gradle
 ```gradle
