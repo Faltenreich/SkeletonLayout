@@ -1,4 +1,4 @@
-<img src="./images/android.gif" width="80">
+<img src="./images/android.png" width="80">
 
 # SkeletonLayout
 
