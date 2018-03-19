@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getSkeleton(): Skeleton? = (viewPagerAdapter.getItem(viewPager.currentItem) as? BaseSkeletonFragment)?.getSkeleton()
+    private fun getSkeleton(): Skeleton? = (viewPagerAdapter.getItem(viewPager.currentItem) as? BaseSkeletonFragment)?.skeleton
 
     private fun invalidateSkeleton() {
         getSkeleton()?.let {

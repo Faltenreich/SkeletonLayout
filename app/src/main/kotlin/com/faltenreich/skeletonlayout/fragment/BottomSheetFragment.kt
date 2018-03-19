@@ -84,17 +84,15 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
         fun newInstance(skeletonFragment: BaseSkeletonFragment): BottomSheetFragment {
             val fragment = BottomSheetFragment()
-
             fragment.valueChangedListener = skeletonFragment
-
-            val skeletonLayout = skeletonFragment.getSkeleton()
+            val skeleton = skeletonFragment.skeleton
 
             val arguments = Bundle()
-            arguments.putFloat(ARGUMENT_MASK_CORNER_RADIUS, skeletonLayout.maskCornerRadius)
-            arguments.putInt(ARGUMENT_MASK_COLOR, skeletonLayout.maskColor)
-            arguments.putBoolean(ARGUMENT_SHOW_SHIMMER, skeletonLayout.showShimmer)
-            arguments.putInt(ARGUMENT_SHIMMER_COLOR, skeletonLayout.shimmerColor)
-            arguments.putLong(ARGUMENT_SHIMMER_DURATION_IN_MILLIS, skeletonLayout.shimmerDurationInMillis)
+            arguments.putFloat(ARGUMENT_MASK_CORNER_RADIUS, skeleton.maskCornerRadius)
+            arguments.putInt(ARGUMENT_MASK_COLOR, skeleton.maskColor)
+            arguments.putBoolean(ARGUMENT_SHOW_SHIMMER, skeleton.showShimmer)
+            arguments.putInt(ARGUMENT_SHIMMER_COLOR, skeleton.shimmerColor)
+            arguments.putLong(ARGUMENT_SHIMMER_DURATION_IN_MILLIS, skeleton.shimmerDurationInMillis)
             fragment.arguments = arguments
 
             return fragment

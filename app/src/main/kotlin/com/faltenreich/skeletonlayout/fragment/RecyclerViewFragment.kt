@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
 class RecyclerViewFragment : BaseSkeletonFragment(R.layout.fragment_recyclerview, "RecyclerView") {
 
-    private lateinit var skeleton: Skeleton
+    override lateinit var skeleton: Skeleton
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,6 +29,4 @@ class RecyclerViewFragment : BaseSkeletonFragment(R.layout.fragment_recyclerview
 
         skeleton = list.applySkeletonAdapter(R.layout.list_item, itemCount = items.size).apply { showSkeleton() }
     }
-
-    override fun getSkeleton(): Skeleton = skeleton
 }

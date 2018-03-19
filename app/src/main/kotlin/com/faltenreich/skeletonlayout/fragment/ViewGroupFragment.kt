@@ -8,10 +8,11 @@ import kotlinx.android.synthetic.main.fragment_viewgroup.*
 
 class ViewGroupFragment : BaseSkeletonFragment(R.layout.fragment_viewgroup, "ViewGroup") {
 
+    override lateinit var skeleton: Skeleton
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        skeleton = skeletonLayout
         skeletonLayout.showSkeleton()
     }
-
-    override fun getSkeleton(): Skeleton = skeletonLayout
 }
