@@ -12,7 +12,7 @@
         android:layout_height="100dp"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
-        android:src="@mipmap/terminator"/>
+        android:src="@mipmap/list_image_0"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:contentDescription="@null"
-            android:src="@mipmap/schwarzenegger"/>
+            android:src="@mipmap/list_avatar_0"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:text="@string/schwarzenegger"/>
+                android:text="@string/user_0_name"/>
 
             <TextView
                 android:id="@+id/descriptionView"
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textColor="@android:color/black"
-                android:text="@string/schwarzenegger_desc"/>
+                android:text="@string/user_0_statement"/>
 
         </LinearLayout>
 

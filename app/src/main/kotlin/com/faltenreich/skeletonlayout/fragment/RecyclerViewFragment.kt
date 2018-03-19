@@ -18,9 +18,9 @@ class RecyclerViewFragment : BaseSkeletonFragment(R.layout.fragment_recyclerview
         super.onViewCreated(view, savedInstanceState)
 
         val items = listOf<RecyclerViewListItem>(
-                RecyclerViewListItem(R.string.schwarzenegger, R.string.schwarzenegger_desc, R.mipmap.schwarzenegger, R.mipmap.terminator),
-                RecyclerViewListItem(R.string.stallone, R.string.stallone_desc, R.mipmap.stallone, R.mipmap.rambo),
-                RecyclerViewListItem(R.string.willis, R.string.willis_desc, R.mipmap.willis, R.mipmap.diehard)
+                RecyclerViewListItem(R.string.user_0_name, R.string.user_0_statement, R.mipmap.list_avatar_0, R.mipmap.list_image_0),
+                RecyclerViewListItem(R.string.user_1_name, R.string.user_1_statement, R.mipmap.list_avatar_1, R.mipmap.list_image_1),
+                RecyclerViewListItem(R.string.user_2_name, R.string.user_2_statement, R.mipmap.list_avatar_2, R.mipmap.list_image_2)
         )
 
         val listAdapter = RecyclerViewAdapter(items)
