@@ -16,7 +16,7 @@ This library implements the Skeleton View pattern and provides an easy way for o
 
 ## Preview
 
-<img src="./images/preview.png" width="500">
+<img src="./images/preview.png" width="600">
 
 The SkeletonLayout mimics the design of established implementations per default, but you are free to get creative. 
 Create your own skeleton view with custom shapes, colors and shimmers.
