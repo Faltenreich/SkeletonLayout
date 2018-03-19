@@ -17,8 +17,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp">
+        android:layout_marginTop="@dimen/padding"
+        android:layout_marginBottom="@dimen/margin">
 
         <ImageView
             android:id="@+id/avatarView"
@@ -30,8 +30,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginLeft="@dimen/padding"
+            android:layout_marginStart="@dimen/padding"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/avatarView"
             android:layout_toEndOf="@+id/avatarView"
