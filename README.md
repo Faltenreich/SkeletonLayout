@@ -12,9 +12,11 @@ Instagram, Facebook, Google and other services tackled this problem with the so-
 This view is being displayed during the process of fetching or requesting data asynchronously which leads to a perceivedly
 more responsive app.
 
-<img src="./images/preview.png" width="1080">
-
 This library implements the Skeleton View pattern and provides an easy way for other developers to support it in their apps. 
+
+## Preview
+
+<img src="./images/preview.png" width="750">
 
 The SkeletonLayout mimics the design of established implementations per default, but you are free to get creative. 
 Create your own skeleton view with custom shapes, colors and shimmers.
