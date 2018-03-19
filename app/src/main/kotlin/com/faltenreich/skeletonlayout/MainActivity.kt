@@ -100,10 +100,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun showSkeleton(skeleton: Skeleton) {
         skeleton.showSkeleton()
+        fab.visibility = if (!BuildConfig.isDemoMode) View.VISIBLE else View.GONE
     }
 
     private fun hideSkeleton(skeleton: Skeleton) {
         skeleton.showOriginal()
+        fab.visibility = View.GONE
     }
 
     private fun openEditor() {
