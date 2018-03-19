@@ -1,3 +1,5 @@
+<img src="./images/android.gif" width="80">
+
 # SkeletonLayout
 
 [ ![Download](https://api.bintray.com/packages/faltenreich/maven/SkeletonLayout/images/download.svg) ](https://bintray.com/faltenreich/maven/SkeletonLayout/_latestVersion) 
