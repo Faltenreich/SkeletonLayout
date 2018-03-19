@@ -1,6 +1,7 @@
 package com.faltenreich.skeletonlayout.mask
 
 import android.graphics.LinearGradient
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Shader
 import android.os.Handler
@@ -8,8 +9,6 @@ import android.support.annotation.ColorInt
 import android.view.View
 import com.faltenreich.skeletonlayout.isAttachedToWindowCompat
 import com.faltenreich.skeletonlayout.refreshRateInSeconds
-import com.faltenreich.skeletonlayout.withTimeAtStartOfDay
-import java.util.*
 
 internal class SkeletonMaskShimmer(
         parent: View,
@@ -18,8 +17,9 @@ internal class SkeletonMaskShimmer(
         var durationInMillis: Long
 ) : SkeletonMask(parent, maskColor) {
 
-    private val refreshIntervalInMillis by lazy { ((1000f / parent.context.refreshRateInSeconds()) * .9f).toLong() }
-    private val width = parent.width.toFloat()
+    private val refreshIntervalInMillis: Long by lazy { ((1000f / parent.context.refreshRateInSeconds()) * .9f).toLong() }
+    private val width: Float = parent.width.toFloat()
+    private val matrix: Matrix = Matrix()
 
     private var animation: Handler? = null
     private var animationTask: Runnable? = null
@@ -49,18 +49,14 @@ internal class SkeletonMaskShimmer(
         animation = null
     }
 
-    override fun createPaint() = Paint().apply {
-        shader = gradientForOffset(0f)
-        isAntiAlias = true
+    override fun createPaint() = Paint().also {
+        it.shader = LinearGradient(0f, 0f, width, 0f, intArrayOf(color, shimmerColor, color), null, Shader.TileMode.CLAMP)
+        it.isAntiAlias = true
     }
-
-    private fun gradientForOffset(offset: Float) = LinearGradient(offset, 0f, offset + width, 0f, intArrayOf(color, shimmerColor, color), null, Shader.TileMode.CLAMP)
 
     // Progress is time-dependent to support synchronization between uncoupled views
     private fun currentProgress(): Float {
-        val now = Calendar.getInstance()
-        val millis = (now.timeInMillis - now.withTimeAtStartOfDay().timeInMillis)
-
+        val millis = System.currentTimeMillis()
         val current = millis.toDouble()
         val interval = durationInMillis
         val divisor = Math.floor(current / interval)
@@ -72,14 +68,15 @@ internal class SkeletonMaskShimmer(
 
     private fun currentOffset(): Float {
         val progress = currentProgress()
-        val offset = parent.width * 2
+        val offset = width * 2
         val min = -offset
-        val max = parent.width + offset
+        val max = width + offset
         return progress * (max - min) + min
     }
 
     private fun updateShimmer() {
-        paint.shader = gradientForOffset(currentOffset())
+        matrix.setTranslate(currentOffset(), 0f)
+        paint.shader.setLocalMatrix(matrix)
         parent.invalidate()
     }
 }
