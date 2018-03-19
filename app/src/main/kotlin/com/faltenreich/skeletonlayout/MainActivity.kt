@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun runDemo() {
-        val duration = 3000L
+        val duration = 4000L
         Handler().apply {
             val runnable = object : Runnable {
                 override fun run() {
