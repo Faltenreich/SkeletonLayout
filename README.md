@@ -16,7 +16,7 @@ This library implements the Skeleton View pattern and provides an easy way for o
 
 ## Preview
 
-<img src="./images/square.png" width="200"> <img src="./images/round.png" width="200"> <img src="./images/ugly.gif" width="200">
+<img src="./images/mask_square.png" width="200"> <img src="./images/mask_round.png" width="200"> <img src="./images/mask_color.png" width="200">
 
 ## Features
 
