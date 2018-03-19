@@ -34,8 +34,6 @@ Create your own skeleton view with custom shapes, colors and shimmers.
 
 ### Getting Started
 
- <img src="./images/android.png" width="100"> 
-
 ##### Gradle
 ```gradle
 dependencies {
@@ -135,6 +133,8 @@ The shimmer is a lightweight bitmap that is animated according to the framerate 
 <TODO>
 
 ### License
+
+<img src="./images/android.png" width="100"> 
 
 Copyright 2018 Philipp Fahlteich
 
