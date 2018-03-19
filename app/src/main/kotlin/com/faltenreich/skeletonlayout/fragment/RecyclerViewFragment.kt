@@ -3,6 +3,7 @@ package com.faltenreich.skeletonlayout.fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import com.faltenreich.skeletonlayout.BuildConfig
 import com.faltenreich.skeletonlayout.R
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeletonAdapter
@@ -27,6 +28,11 @@ class RecyclerViewFragment : BaseSkeletonFragment(R.layout.fragment_recyclerview
         list.layoutManager = LinearLayoutManager(context)
         list.adapter = listAdapter
 
-        skeleton = list.applySkeletonAdapter(R.layout.list_item, itemCount = items.size).apply { showSkeleton() }
+        val skeletonItemSize = if (BuildConfig.isDemoMode) items.size else SKELETON_ITEM_COUNT
+        skeleton = list.applySkeletonAdapter(R.layout.list_item, skeletonItemSize).apply { showSkeleton() }
+    }
+
+    companion object {
+        private const val SKELETON_ITEM_COUNT = 30
     }
 }
