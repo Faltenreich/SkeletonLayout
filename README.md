@@ -1,9 +1,7 @@
-# SkeletonLayout
+# SkeletonLayout <img src="./images/android.png" width="50"> 
 
 [ ![Download](https://api.bintray.com/packages/faltenreich/maven/SkeletonLayout/images/download.svg) ](https://bintray.com/faltenreich/maven/SkeletonLayout/_latestVersion) 
 [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
-
-<img src="./images/android.png" width="80"> 
 
 *Make your app feel faster*
 
