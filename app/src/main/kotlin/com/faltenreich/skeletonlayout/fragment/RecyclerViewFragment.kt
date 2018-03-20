@@ -6,7 +6,7 @@ import android.view.View
 import com.faltenreich.skeletonlayout.BuildConfig
 import com.faltenreich.skeletonlayout.R
 import com.faltenreich.skeletonlayout.Skeleton
-import com.faltenreich.skeletonlayout.applySkeletonAdapter
+import com.faltenreich.skeletonlayout.SkeletonFactory
 import com.faltenreich.skeletonlayout.logic.RecyclerViewAdapter
 import com.faltenreich.skeletonlayout.logic.RecyclerViewListItem
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
@@ -29,7 +29,7 @@ class RecyclerViewFragment : BaseSkeletonFragment(R.layout.fragment_recyclerview
         list.adapter = listAdapter
 
         val skeletonItemSize = if (BuildConfig.isDemoMode) items.size else SKELETON_ITEM_COUNT
-        skeleton = list.applySkeletonAdapter(R.layout.list_item, skeletonItemSize).apply { showSkeleton() }
+        skeleton = SkeletonFactory.skeletonForView(list, R.layout.list_item, skeletonItemSize).apply { showSkeleton() }
     }
 
     companion object {

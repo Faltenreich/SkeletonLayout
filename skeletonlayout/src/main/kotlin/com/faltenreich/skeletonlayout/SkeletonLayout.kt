@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.support.annotation.ColorInt
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -145,6 +146,12 @@ class SkeletonLayout @JvmOverloads constructor(
         mask?.draw(canvas)
     }
 
+    private fun validate(view: View) {
+        when(view) {
+            is RecyclerView -> Log.w(tag(), "Passing ViewGroup with reusable children to SkeletonLayout - consider using SkeletonFactory.skeletonForView(recyclerView: RecyclerView, layoutResId: Int)")
+        }
+    }
+
     private fun mask() {
         mask?.stop()
         mask = if (showShimmer) SkeletonMaskShimmer(this, maskColor, shimmerColor, shimmerDurationInMillis) else SkeletonMaskSolid(this, maskColor)
@@ -162,6 +169,8 @@ class SkeletonLayout @JvmOverloads constructor(
     }
 
     private fun maskView(paint: Paint, view: View, root: ViewGroup) {
+        validate(view)
+
         val rect = Rect()
         view.getDrawingRect(rect)
         root.offsetDescendantRectToMyCoords(view, rect)

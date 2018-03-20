@@ -74,7 +74,7 @@ internal class SkeletonRecyclerView(
         recyclerView.adapter = skeletonAdapter
     }
 
-    override fun isSkeleton() = recyclerView.adapter === skeletonAdapter
+    override fun isSkeleton() = skeletonAdapter != null && recyclerView.adapter == skeletonAdapter
 
     private fun invalidate() {
         val showSkeleton = isSkeleton()
@@ -89,9 +89,5 @@ internal class SkeletonRecyclerView(
         if (showSkeleton) {
             showSkeleton()
         }
-    }
-
-    companion object {
-        const val DEFAULT_ITEM_COUNT = 3
     }
 }
