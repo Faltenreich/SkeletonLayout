@@ -3,9 +3,8 @@ package skeletonlayout;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
-import com.faltenreich.skeletonlayout.R;
 import com.faltenreich.skeletonlayout.Skeleton;
 import com.faltenreich.skeletonlayout.SkeletonFactory;
 
@@ -20,8 +19,8 @@ public class SkeletonJavaInstrumentedTest {
 
     @Test
     public void testSkeleton() {
-        RecyclerView recyclerView = new RecyclerView(InstrumentationRegistry.getTargetContext());
-        Skeleton skeleton = SkeletonFactory.skeletonForView(recyclerView, R.layout.list_item);
+        View view = new View(InstrumentationRegistry.getTargetContext());
+        Skeleton skeleton = SkeletonFactory.skeletonForView(view);
         Assert.assertEquals(skeleton.isSkeleton(), false);
         skeleton.showSkeleton();
         Assert.assertEquals(skeleton.isSkeleton(), true);
