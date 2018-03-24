@@ -12,7 +12,7 @@ Instagram, Facebook, Google and other services tackled this problem with the so-
 This view is being displayed during the process of fetching or requesting data asynchronously which leads to a perceivedly
 more responsive app.
 
-This library implements the Skeleton View pattern and provides an easy way for other developers to support it in their apps. 
+This library implements the Skeleton View pattern and provides an easy way for other developers to enable it in their apps. 
 
 ## Preview
 
@@ -29,8 +29,8 @@ Create your own skeleton view with custom shapes, colors and shimmers.
 - **Support any View:** Apply to any type of View or ViewGroup
 - **RecyclerView on speed:** Convenience adapter for the RecyclerView, since it is the main use case
 - **Customization:** Adjust shimmer, color and shape of the skeleton to set you apart from other apps
-- **Minimum effort:** A fistful lines of codes to use the SkeletonLayout
-- **Minimum footprint:** org.jetbrains.kotlin:kotlin-stdlib-jre7 and com.android.support:design as the only dependencies
+- **Minimum effort:** A fistful lines of code to use the SkeletonLayout
+- **Minimum footprint:** Nothing more than org.jetbrains.kotlin:kotlin-stdlib-jre7 and com.android.support:recyclerview-v7
 
 ### Getting Started
 
