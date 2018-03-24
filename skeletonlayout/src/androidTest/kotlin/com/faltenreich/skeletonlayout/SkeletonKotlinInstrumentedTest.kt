@@ -13,7 +13,7 @@ class SkeletonKotlinInstrumentedTest {
     @Test
     fun testSkeleton() {
         val view = View(InstrumentationRegistry.getTargetContext())
-        val skeleton = SkeletonFactory.skeletonForView(view)
+        val skeleton = view.createSkeleton()
         Assert.assertEquals(skeleton.isSkeleton(), false)
         skeleton.showSkeleton()
         Assert.assertEquals(skeleton.isSkeleton(), true)

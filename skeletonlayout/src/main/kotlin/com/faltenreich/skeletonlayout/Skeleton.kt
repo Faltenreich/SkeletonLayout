@@ -1,5 +1,8 @@
 package com.faltenreich.skeletonlayout
 
+/**
+ * Toggle state and change properties through this interface after a Skeleton has been applied to a View
+ */
 interface Skeleton {
 
     /**
@@ -8,7 +11,7 @@ interface Skeleton {
     var maskColor: Int
 
     /**
-     * The x- and y-radius of the oval used to round the mask corners
+     * x- and y-radius of the oval used to round the mask corners
      */
     var maskCornerRadius: Float
 

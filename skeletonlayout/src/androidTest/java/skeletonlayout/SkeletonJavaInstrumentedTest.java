@@ -6,7 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 
 import com.faltenreich.skeletonlayout.Skeleton;
-import com.faltenreich.skeletonlayout.SkeletonFactory;
+import com.faltenreich.skeletonlayout.SkeletonLayoutUtils;
 
 import junit.framework.Assert;
 
@@ -20,7 +20,7 @@ public class SkeletonJavaInstrumentedTest {
     @Test
     public void testSkeleton() {
         View view = new View(InstrumentationRegistry.getTargetContext());
-        Skeleton skeleton = SkeletonFactory.skeletonForView(view);
+        Skeleton skeleton = SkeletonLayoutUtils.createSkeleton(view);
         Assert.assertEquals(skeleton.isSkeleton(), false);
         skeleton.showSkeleton();
         Assert.assertEquals(skeleton.isSkeleton(), true);

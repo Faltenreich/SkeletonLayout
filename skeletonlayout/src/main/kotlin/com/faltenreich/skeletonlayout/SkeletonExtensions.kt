@@ -2,16 +2,52 @@
 
 package com.faltenreich.skeletonlayout
 
-import android.content.Context
-import android.support.v4.view.ViewCompat
+import android.support.annotation.ColorInt
+import android.support.annotation.LayoutRes
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import com.faltenreich.skeletonlayout.recyclerview.SkeletonRecyclerView
 
-internal fun Any.tag(): String = javaClass.simpleName
+private const val LIST_ITEM_COUNT_DEFAULT = 3
 
-internal fun Context.refreshRateInSeconds(): Float = (getSystemService(Context.WINDOW_SERVICE) as? WindowManager)?.defaultDisplay?.refreshRate ?: 60f
+/**
+ * Create a new Skeleton that wraps the given View in a SkeletonLayout
+ *
+ * @receiver View that shall be wrapped in a SkeletonLayout
+ * @param maskColor Color of the mask that fills the original view bounds
+ * @param cornerRadius x- and y-radius of the oval used to round the mask corners
+ * @param showShimmer Animate left-to-right shimmer, if set to true
+ * @param shimmerColor Color of the animated shimmer
+ * @param shimmerDurationInMillis Duration in milliseconds for one shimmer animation interval
+ */
+@JvmOverloads
+fun View.createSkeleton(
+        @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
+        cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
+        showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
+        @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
+        shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
+): Skeleton = SkeletonLayout(this, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)
 
-internal fun ViewGroup.views(): List<View> = (0 until childCount).map { getChildAt(it) }
-
-internal fun View.isAttachedToWindowCompat() = ViewCompat.isAttachedToWindow(this)
+/**
+ * Create a new Skeleton that wraps every ViewHolder's itemView in SkeletonLayouts
+ *
+ * @receiver RecyclerView whose itemViews shall be wrapped in SkeletonLayouts
+ * @param listItemLayoutResId Layout resource of the itemView that gets masked
+ * @param maskColor Color of the mask that fills the original view bounds
+ * @param cornerRadius x- and y-radius of the oval used to round the mask corners
+ * @param showShimmer Animate left-to-right shimmer, if set to true
+ * @param shimmerColor Color of the animated shimmer
+ * @param shimmerDurationInMillis Duration in milliseconds for one shimmer animation interval
+ */
+@JvmOverloads
+fun RecyclerView.createSkeleton(
+        @LayoutRes listItemLayoutResId: Int,
+        itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
+        @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
+        cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
+        showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
+        @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
+        shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
+): Skeleton = SkeletonRecyclerView(this, listItemLayoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)
