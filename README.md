@@ -68,13 +68,14 @@ public class MainActivity extends AppCompatActivity {
         skeletonLayout = findViewById(R.id.skeletonLayout);
         skeletonLayout.showSkeleton();
         
-        recyclerViewSkeleton = SkeletonLayoutUtils.applySkeletonAdapter(findViewById(R.id.recyclerView), R.layout.list_item);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerViewSkeleton = SkeletonLayoutUtils.createSkeleton(recyclerView, R.layout.list_item);
     }
     
     // Example for returning back to original views after a certain event
     private fun onDataLoaded() {
-        skeletonLayout.hideSkeleton();
-        recyclerViewSkeleton.hideSkeleton();
+        skeletonLayout.showOriginal();
+        recyclerViewSkeleton.showOriginal();
     }
 }
 ```
@@ -93,14 +94,14 @@ class MainActivity : AppCompatActivity() {
         val skeletonLayout = findViewById(R.id.skeletonLayout)
         skeletonLayout.showSkeleton()
         
-        // We are using an extension function here
-        recyclerViewSkeleton = findViewById(R.id.recyclerView).applySkeletonAdapter(R.layout.list_item)
+        val recyclerView = findViewById(R.id.recyclerView)
+        recyclerViewSkeleton = recyclerView.createSkeleton(R.layout.list_item)
     }
     
     // Example for returning back to original views after a certain event
     private fun onDataLoaded() {
-        skeletonLayout.hideSkeleton()
-        recyclerViewSkeleton.hideSkeleton()
+        skeletonLayout.showOriginal()
+        recyclerViewSkeleton.showOriginal()
     }
 }
 ```
@@ -120,21 +121,18 @@ shimmerDurationInMillis | integer | Duration in milliseconds for one shimmer ani
 **When and how is the skeleton created?**
 The skeleton gets created after the original view's onLayout(), since we rely on it to be fully rendered in order to mask its bounds.
 
-**How does the SkeletonLayout work?**
+**How does the masking work?**
+The mask is drawn onto a single Bitmap by iterating once through the given Views and their bounds.
 
-
-**May properties of the SkeletonLayout be changed on runtime?**
+**May properties of the SkeletonLayout be changed at runtime?**
 Yes. Any change to the skeleton leads to a redraw, since the whole content of the SkeletonLayout gets drawn onto a single bitmap.
 
-**How does the shimmer work?**
-The shimmer is a lightweight bitmap that is animated according to the framerate of the target device.
-
-**What about performance?**
-<TODO>
+**Will the shimmer eat my users' battery?**
+The shimmer is a shader (LinearGradient) whose local matrix is updated according to the framerate of the target device, 
+so no redrawing is required and processing time is kept to an absolute minimum. 
+Additionally the shimmer gets inactive onWindowFocusChanged() and onDetachedFromWindow().
 
 ### License
-
-<img src="./images/android.png" width="100"> 
 
 Copyright 2018 Philipp Fahlteich
 
@@ -149,3 +147,5 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+<img src="./images/android.png" width="100"> 

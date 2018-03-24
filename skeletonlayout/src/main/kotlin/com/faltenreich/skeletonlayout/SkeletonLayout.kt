@@ -9,8 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import com.faltenreich.skeletonlayout.mask.SkeletonMask
-import com.faltenreich.skeletonlayout.mask.SkeletonMaskShimmer
-import com.faltenreich.skeletonlayout.mask.SkeletonMaskSolid
+import com.faltenreich.skeletonlayout.mask.SkeletonMaskFactory
 
 class SkeletonLayout @JvmOverloads constructor(
         context: Context,
@@ -146,8 +145,9 @@ class SkeletonLayout @JvmOverloads constructor(
 
     private fun mask() {
         mask?.stop()
-        mask = if (showShimmer) SkeletonMaskShimmer(this, maskColor, shimmerColor, shimmerDurationInMillis) else SkeletonMaskSolid(this, maskColor)
-        mask?.mask( this, maskCornerRadius)
+        mask = SkeletonMaskFactory
+                .createMask(this, maskColor, showShimmer, shimmerColor, shimmerDurationInMillis)
+                .also { it.mask(this, maskCornerRadius) }
     }
 
     companion object {
