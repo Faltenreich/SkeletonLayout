@@ -1,14 +1,12 @@
 package com.faltenreich.skeletonlayout
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
 import android.support.annotation.ColorInt
 import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.faltenreich.skeletonlayout.mask.SkeletonMask
 import com.faltenreich.skeletonlayout.mask.SkeletonMaskShimmer
@@ -146,41 +144,10 @@ class SkeletonLayout @JvmOverloads constructor(
         mask?.draw(canvas)
     }
 
-    private fun validate(view: View) {
-        when(view) {
-            is RecyclerView -> Log.w(tag(), "Passing ViewGroup with reusable children to SkeletonLayout - consider using SkeletonFactory.skeletonForView(recyclerView: RecyclerView, layoutResId: Int)")
-        }
-    }
-
     private fun mask() {
         mask?.stop()
         mask = if (showShimmer) SkeletonMaskShimmer(this, maskColor, shimmerColor, shimmerDurationInMillis) else SkeletonMaskSolid(this, maskColor)
-
-        val xferPaint = Paint().apply {
-            xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC)
-            isAntiAlias = maskCornerRadius > 0
-        }
-
-        maskViews(xferPaint, this, this)
-    }
-
-    private fun maskViews(paint: Paint, view: View, root: ViewGroup) {
-        (view as? ViewGroup)?.let { it.views().forEach { maskViews(paint, it, root) } } ?: maskView(paint, view, root)
-    }
-
-    private fun maskView(paint: Paint, view: View, root: ViewGroup) {
-        validate(view)
-
-        val rect = Rect()
-        view.getDrawingRect(rect)
-        root.offsetDescendantRectToMyCoords(view, rect)
-
-        if (maskCornerRadius > 0) {
-            val rectF = RectF(rect.left.toFloat(), rect.top.toFloat(), rect.right.toFloat(), rect.bottom.toFloat())
-            mask?.draw(rectF, maskCornerRadius, paint)
-        } else {
-            mask?.draw(rect, paint)
-        }
+        mask?.mask( this, maskCornerRadius)
     }
 
     companion object {
