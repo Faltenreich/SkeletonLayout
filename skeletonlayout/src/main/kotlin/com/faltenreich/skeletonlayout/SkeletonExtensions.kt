@@ -12,7 +12,7 @@ import com.faltenreich.skeletonlayout.recyclerview.SkeletonRecyclerView
 private const val LIST_ITEM_COUNT_DEFAULT = 3
 
 /**
- * Create a new Skeleton that wraps the given View in a SkeletonLayout
+ * Creates a new Skeleton that wraps the given View in a SkeletonLayout
  *
  * @receiver View that shall be wrapped in a SkeletonLayout
  * @param maskColor Color of the mask that fills the original view bounds
@@ -31,7 +31,7 @@ fun View.createSkeleton(
 ): Skeleton = SkeletonLayout(this, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)
 
 /**
- * Create a new Skeleton that wraps every ViewHolder's itemView in SkeletonLayouts
+ * Applies a new Skeleton to the given RecyclerView and wraps its ViewHolders' itemViews in SkeletonLayouts
  *
  * @receiver RecyclerView whose itemViews shall be wrapped in SkeletonLayouts
  * @param listItemLayoutResId Layout resource of the itemView that gets masked
@@ -42,7 +42,7 @@ fun View.createSkeleton(
  * @param shimmerDurationInMillis Duration in milliseconds for one shimmer animation interval
  */
 @JvmOverloads
-fun RecyclerView.createSkeleton(
+fun RecyclerView.applySkeleton(
         @LayoutRes listItemLayoutResId: Int,
         itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
         @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),

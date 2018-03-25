@@ -37,7 +37,7 @@ Create your own skeleton view with custom shapes, colors and shimmers.
 ##### Gradle
 ```gradle
 dependencies {
-    implementation 'com.faltenreich:skeletonlayout:1.0.0'
+    implementation 'com.faltenreich:skeletonlayout:1.0.1'
 }
 ```
 
@@ -57,25 +57,27 @@ dependencies {
 ```java
 public class MainActivity extends AppCompatActivity {
     
-    private SkeletonLayout skeletonLayout;
-    private Skeleton recyclerViewSkeleton;
+    private Skeleton skeleton;
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        skeletonLayout = findViewById(R.id.skeletonLayout);
-        skeletonLayout.showSkeleton();
+        // Either use an existing Skeletonlayout
+        skeleton = findViewById(R.id.skeletonLayout);
         
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerViewSkeleton = SkeletonLayoutUtils.createSkeleton(recyclerView, R.layout.list_item);
+        // or create a new SkeletonLayout from a given View
+        skeleton = SkeletonLayoutUtils.createSkeleton(view);
+        
+        // or apply a new SkeletonLayout to a RecyclerView
+        skeleton = SkeletonLayoutUtils.applySkeleton(recyclerView, R.layout.list_item);
+        
+        skeleton.showSkeleton();
     }
     
-    // Example for returning back to original views after a certain event
     private fun onDataLoaded() {
-        skeletonLayout.showOriginal();
-        recyclerViewSkeleton.showOriginal();
+        skeleton.showOriginal();
     }
 }
 ```
@@ -84,24 +86,26 @@ public class MainActivity extends AppCompatActivity {
 ```kotlin
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var skeletonLayout: SkeletonLayout
-    private lateinit var recyclerViewSkeleton: Skeleton
+    private lateinit var skeleton: Skeleton
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         
-        val skeletonLayout = findViewById(R.id.skeletonLayout)
-        skeletonLayout.showSkeleton()
+        // Either use an existing Skeletonlayout
+        skeleton = findViewById(R.id.skeletonLayout)
         
-        val recyclerView = findViewById(R.id.recyclerView)
-        recyclerViewSkeleton = recyclerView.createSkeleton(R.layout.list_item)
+        // or create a new SkeletonLayout from a given View
+        skeleton = view.createSkeleton()
+        
+        // or apply a new SkeletonLayout to a RecyclerView
+        skeleton = recyclerView.applySkeleton(R.layout.list_item)
+        
+        skeleton.showSkeleton()
     }
     
-    // Example for returning back to original views after a certain event
     private fun onDataLoaded() {
-        skeletonLayout.showOriginal()
-        recyclerViewSkeleton.showOriginal()
+        skeleton.showOriginal()
     }
 }
 ```
