@@ -5,8 +5,8 @@ buildscript {
         targetSdk = 27
         kotlinVersion = '1.2.30'
         supportVersion = '27.1.0'
-        projectVersion = '1.0.1'
-        projectVersionCode = 2
+        projectVersion = '1.0.0'
+        projectVersionCode = 1
     }
 
     repositories {
