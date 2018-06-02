@@ -14,6 +14,8 @@ more responsive app.
 
 This library implements the Skeleton View pattern and provides an easy way for other developers to enable it in their apps. 
 
+<a href='https://play.google.com/store/apps/details?id=com.faltenreich.skeletonlayout&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+
 ## Preview
 
 <img src="./images/preview.png" width="620">
@@ -70,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
         // or create a new SkeletonLayout from a given View
         skeleton = SkeletonLayoutUtils.createSkeleton(view);
         
-        // or apply a new SkeletonLayout to a RecyclerView
-        skeleton = SkeletonLayoutUtils.applySkeleton(recyclerView, R.layout.list_item);
+        // or apply a new SkeletonLayout to a RecyclerView (showing 5 items)
+        skeleton = SkeletonLayoutUtils.applySkeleton(recyclerView, R.layout.list_item, 5);
         
         skeleton.showSkeleton();
     }
@@ -98,8 +100,8 @@ class MainActivity : AppCompatActivity() {
         // or create a new SkeletonLayout from a given View
         skeleton = view.createSkeleton()
         
-        // or apply a new SkeletonLayout to a RecyclerView
-        skeleton = recyclerView.applySkeleton(R.layout.list_item)
+        // or apply a new SkeletonLayout to a RecyclerView (showing 5 items)
+        skeleton = recyclerView.applySkeleton(R.layout.list_item, 5)
         
         skeleton.showSkeleton()
     }
@@ -119,6 +121,7 @@ maskCornerRadius | dimension | The x- and y-radius of the oval used to round the
 showShimmer | boolean | Animate left-to-right shimmer, if set to true (defaults to true)
 shimmerColor | color | Color of the animated shimmer (defaults to #d5d5d5)
 shimmerDurationInMillis | integer | Duration in milliseconds for one shimmer animation interval (defaults to 2000)
+itemCount | integer | Item count for Skeleton adapter (RecyclerView only, defaults to 3)
 
 ### FAQ
 
