@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
         skeleton.showSkeleton();
     }
     
-    private fun onDataLoaded() {
+    // Example callback that hides skeleton
+    private void onDataLoaded() {
         skeleton.showOriginal();
     }
 }
@@ -108,6 +109,7 @@ class MainActivity : AppCompatActivity() {
         skeleton.showSkeleton()
     }
     
+    // Example callback that hides skeleton
     private fun onDataLoaded() {
         skeleton.showOriginal()
     }
