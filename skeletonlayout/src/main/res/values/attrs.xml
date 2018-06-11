@@ -4,7 +4,7 @@
 
     <declare-styleable name="SkeletonLayout">
         <attr name="maskColor" format="color"/>
-        <attr name="cornerRadius" format="dimension"/>
+        <attr name="maskCornerRadius" format="dimension"/>
         <attr name="showShimmer" format="boolean"/>
         <attr name="shimmerColor" format="color"/>
         <attr name="shimmerDurationInMillis" format="integer"/>

@@ -70,7 +70,7 @@ class SkeletonLayout @JvmOverloads constructor(
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.SkeletonLayout, 0, 0)
             this.maskColor = typedArray.getColor(R.styleable.SkeletonLayout_maskColor, maskColor)
-            this.maskCornerRadius = typedArray.getFloat(R.styleable.SkeletonLayout_cornerRadius, cornerRadius)
+            this.maskCornerRadius = typedArray.getDimensionPixelSize(R.styleable.SkeletonLayout_maskCornerRadius, cornerRadius.toInt()).toFloat()
             this.showShimmer = typedArray.getBoolean(R.styleable.SkeletonLayout_showShimmer, showShimmer)
             this.shimmerColor = typedArray.getColor(R.styleable.SkeletonLayout_shimmerColor, shimmerColor)
             this.shimmerDurationInMillis = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillis.toInt()).toLong()
