@@ -41,7 +41,7 @@ Create your own skeleton view with custom shapes, colors and shimmers.
 ##### Gradle
 ```gradle
 dependencies {
-    implementation 'com.faltenreich:skeletonlayout:1.0.0'
+    implementation 'com.faltenreich:skeletonlayout:1.0.1'
 }
 ```
 
