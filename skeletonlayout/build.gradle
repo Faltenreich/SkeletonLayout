@@ -13,7 +13,7 @@ android {
         targetSdkVersion targetSdk
         versionCode projectVersionCode
         versionName projectVersion
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -38,10 +38,10 @@ dokka {
 
 dependencies {
     api  "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-    api "com.android.support:recyclerview-v7:$supportVersion"
+    api "androidx.recyclerview:recyclerview:1.0.0"
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }
 
 apply from: 'deploy.gradle'

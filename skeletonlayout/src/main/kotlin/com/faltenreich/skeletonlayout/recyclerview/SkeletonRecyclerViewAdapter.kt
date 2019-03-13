@@ -1,10 +1,10 @@
 package com.faltenreich.skeletonlayout.recyclerview
 
-import android.support.annotation.ColorInt
-import android.support.annotation.LayoutRes
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
+import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.RecyclerView
 import com.faltenreich.skeletonlayout.SkeletonLayout
 import com.faltenreich.skeletonlayout.createSkeleton
 

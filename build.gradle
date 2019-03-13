@@ -1,8 +1,8 @@
 buildscript {
 
     ext {
-        compileSdk = 27
-        targetSdk = 27
+        compileSdk = 28
+        targetSdk = 28
         kotlinVersion = '1.2.41'
         supportVersion = '27.1.1'
         projectVersion = '1.0.1'

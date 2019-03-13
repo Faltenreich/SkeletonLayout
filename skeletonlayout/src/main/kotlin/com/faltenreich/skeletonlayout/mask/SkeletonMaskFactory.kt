@@ -1,7 +1,7 @@
 package com.faltenreich.skeletonlayout.mask
 
-import android.support.annotation.ColorInt
 import android.view.View
+import androidx.annotation.ColorInt
 
 internal object SkeletonMaskFactory {
 
