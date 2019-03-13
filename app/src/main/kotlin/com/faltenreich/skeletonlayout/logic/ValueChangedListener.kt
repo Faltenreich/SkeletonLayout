@@ -1,6 +1,6 @@
 package com.faltenreich.skeletonlayout.logic
 
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 
 interface ValueChangedListener {
     fun onMaskColorChanged(@ColorInt value: Int)

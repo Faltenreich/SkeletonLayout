@@ -1,7 +1,7 @@
 package com.faltenreich.skeletonlayout.logic
 
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import com.faltenreich.skeletonlayout.fragment.BaseFragment
 
 class MainPagerAdapter(fragmentManager: FragmentManager, private val fragments: Array<BaseFragment>) : FragmentPagerAdapter(fragmentManager) {

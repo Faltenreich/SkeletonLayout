@@ -1,13 +1,13 @@
 package com.faltenreich.skeletonlayout.fragment
 
 import android.os.Bundle
-import android.support.design.widget.BottomSheetDialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import com.faltenreich.skeletonlayout.R
 import com.faltenreich.skeletonlayout.logic.ValueChangedListener
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.*
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
