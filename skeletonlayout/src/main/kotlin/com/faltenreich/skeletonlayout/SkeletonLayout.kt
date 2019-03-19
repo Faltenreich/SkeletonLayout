@@ -2,12 +2,12 @@ package com.faltenreich.skeletonlayout
 
 import android.content.Context
 import android.graphics.Canvas
-import android.support.annotation.ColorInt
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
+import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
 import com.faltenreich.skeletonlayout.mask.SkeletonMask
 import com.faltenreich.skeletonlayout.mask.SkeletonMaskFactory
 
@@ -116,7 +116,7 @@ class SkeletonLayout @JvmOverloads constructor(
         }
     }
 
-    override fun onVisibilityChanged(changedView: View?, visibility: Int) {
+    override fun onVisibilityChanged(changedView: View, visibility: Int) {
         super.onVisibilityChanged(changedView, visibility)
         mask?.invalidate()
     }

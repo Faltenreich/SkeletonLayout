@@ -5,8 +5,8 @@ import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Shader
 import android.os.Handler
-import android.support.annotation.ColorInt
 import android.view.View
+import androidx.annotation.ColorInt
 import com.faltenreich.skeletonlayout.isAttachedToWindowCompat
 import com.faltenreich.skeletonlayout.refreshRateInSeconds
 

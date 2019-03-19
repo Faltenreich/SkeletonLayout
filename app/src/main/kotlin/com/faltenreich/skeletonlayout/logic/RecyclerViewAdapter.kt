@@ -1,7 +1,7 @@
 package com.faltenreich.skeletonlayout.logic
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerViewAdapter(private val items: List<RecyclerViewListItem>) : RecyclerView.Adapter<RecyclerViewHolder>() {
 

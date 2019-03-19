@@ -1,6 +1,6 @@
 package com.faltenreich.skeletonlayout.fragment
 
-import android.support.annotation.LayoutRes
+import androidx.annotation.LayoutRes
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.logic.ValueChangedListener
 

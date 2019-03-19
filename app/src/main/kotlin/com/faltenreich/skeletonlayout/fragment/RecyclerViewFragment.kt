@@ -1,8 +1,8 @@
 package com.faltenreich.skeletonlayout.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.faltenreich.skeletonlayout.BuildConfig
 import com.faltenreich.skeletonlayout.R
 import com.faltenreich.skeletonlayout.Skeleton

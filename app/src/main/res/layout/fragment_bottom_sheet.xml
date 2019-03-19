@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mask_corner_radius"/>
 
-            <android.support.v7.widget.AppCompatSeekBar
+            <androidx.appcompat.widget.AppCompatSeekBar
                 android:id="@+id/maskCornerRadiusView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/shimmer_duration"/>
 
-            <android.support.v7.widget.AppCompatSeekBar
+            <androidx.appcompat.widget.AppCompatSeekBar
                 android:id="@+id/shimmerDurationView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

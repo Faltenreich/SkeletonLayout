@@ -1,10 +1,10 @@
 package com.faltenreich.skeletonlayout
 
 import android.content.Context
-import android.support.v4.view.ViewCompat
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.view.ViewCompat
 
 internal fun Any.tag(): String = javaClass.simpleName
 
