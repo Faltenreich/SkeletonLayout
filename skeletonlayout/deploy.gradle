@@ -1,19 +1,17 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-apply from: 'keystore.gradle'
 
 ext {
     groupId = 'com.faltenreich'
     artifactId = "skeletonlayout"
-    libVersion = projectVersion
 }
 
-version = libVersion
-group = groupId
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 bintray {
-    user = 'faltenreich'
-    key = bintrayKey
+    user = properties.getProperty('bintray.user')
+    key = properties.get('bintray.key')
     configurations = ['archives']
     publish = true
     override = false
@@ -21,7 +19,7 @@ bintray {
         repo = "maven"
         name = "SkeletonLayout"
         version {
-            name = libVersion
+            name = projectVersion
         }
     }
 }
@@ -32,7 +30,7 @@ install {
             packaging 'aar'
             groupId groupId
             artifactId artifactId
-            version libVersion
+            version projectVersion
             name artifactId
         }
     }
