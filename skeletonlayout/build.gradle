@@ -1,9 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.jetbrains.dokka-android'
-apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion compileSdk
@@ -41,7 +39,7 @@ dependencies {
     api "androidx.recyclerview:recyclerview:1.0.0"
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
 
 apply from: 'deploy.gradle'
