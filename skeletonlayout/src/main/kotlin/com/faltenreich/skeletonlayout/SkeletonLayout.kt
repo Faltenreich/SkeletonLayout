@@ -35,31 +35,31 @@ class SkeletonLayout @JvmOverloads constructor(
     override var maskColor: Int = maskColor
         set(value) {
             field = value
-            mask()
+            invalidateMask()
         }
 
     override var maskCornerRadius: Float = cornerRadius
         set(value) {
             field = value
-            mask()
+            invalidateMask()
         }
 
     override var showShimmer: Boolean = showShimmer
         set(value) {
             field = value
-            mask()
+            invalidateMask()
         }
 
     override var shimmerColor: Int = shimmerColor
         set(value) {
             field = value
-            mask()
+            invalidateMask()
         }
 
     override var shimmerDurationInMillis: Long = shimmerDurationInMillis
         set(value) {
             field = value
-            mask()
+            invalidateMask()
         }
 
     private var mask: SkeletonMask? = null
@@ -96,7 +96,7 @@ class SkeletonLayout @JvmOverloads constructor(
             if (childCount > 0) {
                 views().forEach { it.visibility = View.INVISIBLE }
                 setWillNotDraw(false)
-                mask()
+                invalidateMask()
                 mask?.invalidate()
 
             } else {
@@ -131,6 +131,7 @@ class SkeletonLayout @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+        invalidateMask()
         mask?.start()
     }
 
@@ -143,11 +144,26 @@ class SkeletonLayout @JvmOverloads constructor(
         mask?.draw(canvas)
     }
 
-    private fun mask() {
+    private fun invalidateMask() {
         mask?.stop()
+
+        if (width == 0) {
+            Log.e(tag(), "Failed to mask due to width that is zero")
+            return
+        }
+
+        if (height == 0) {
+            Log.e(tag(), "Failed to mask due to height that is zero")
+            return
+        }
+
+        createMask()
+    }
+
+    private fun createMask() {
         mask = SkeletonMaskFactory
                 .createMask(this, maskColor, showShimmer, shimmerColor, shimmerDurationInMillis)
-                .also { it.mask(this, maskCornerRadius) }
+                .also { mask -> mask.mask(this, maskCornerRadius) }
     }
 
     companion object {

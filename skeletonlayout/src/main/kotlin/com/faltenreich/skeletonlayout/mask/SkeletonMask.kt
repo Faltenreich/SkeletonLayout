@@ -21,9 +21,11 @@ internal abstract class SkeletonMask(protected val parent: View, @ColorInt color
     private val canvas: Canvas by lazy { createCanvas() }
     protected val paint: Paint by lazy { createPaint() }
 
-    private fun createBitmap(): Bitmap = Bitmap.createBitmap(parent.width, parent.height, Bitmap.Config.ALPHA_8)
-    private fun createCanvas(): Canvas = Canvas(bitmap)
-    protected open fun createPaint(): Paint = Paint().also { it.color = color }
+    protected open fun createBitmap(): Bitmap = Bitmap.createBitmap(parent.width, parent.height, Bitmap.Config.ALPHA_8)
+
+    protected open fun createCanvas(): Canvas = Canvas(bitmap)
+
+    protected open fun createPaint(): Paint = Paint().also { paint -> paint.color = color }
 
     fun draw(canvas: Canvas) {
         canvas.drawBitmap(bitmap, 0f, 0f, paint)
@@ -46,7 +48,9 @@ internal abstract class SkeletonMask(protected val parent: View, @ColorInt color
     }
 
     private fun mask(view: View, root: ViewGroup, paint: Paint, maskCornerRadius: Float) {
-        (view as? ViewGroup)?.let { it.views().forEach { mask(it, root, paint, maskCornerRadius) } } ?: maskView(view, root, paint, maskCornerRadius)
+        (view as? ViewGroup)?.let { viewGroup ->
+            viewGroup.views().forEach { view -> mask(view, root, paint, maskCornerRadius) }
+        } ?: maskView(view, root, paint, maskCornerRadius)
     }
 
     private fun maskView(view: View, root: ViewGroup, paint: Paint, maskCornerRadius: Float) {
