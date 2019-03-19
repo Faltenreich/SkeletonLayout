@@ -18,11 +18,7 @@ class RecyclerViewFragment : BaseSkeletonFragment(R.layout.fragment_recyclerview
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val items = listOf(
-                RecyclerViewListItem(R.string.user_0_name, R.string.user_0_statement, R.mipmap.list_avatar_0, R.mipmap.list_image_0),
-                RecyclerViewListItem(R.string.user_1_name, R.string.user_1_statement, R.mipmap.list_avatar_1, R.mipmap.list_image_1),
-                RecyclerViewListItem(R.string.user_2_name, R.string.user_2_statement, R.mipmap.list_avatar_2, R.mipmap.list_image_2)
-        )
+        val items = RecyclerViewListItem.DEMO
 
         val listAdapter = RecyclerViewAdapter(items)
         list.layoutManager = LinearLayoutManager(context)

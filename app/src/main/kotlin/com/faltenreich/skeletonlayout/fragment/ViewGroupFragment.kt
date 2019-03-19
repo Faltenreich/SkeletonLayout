@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import com.faltenreich.skeletonlayout.R
 import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.logic.RecyclerViewListItem
 import kotlinx.android.synthetic.main.fragment_viewgroup.*
+import kotlinx.android.synthetic.main.list_item.*
 
 class ViewGroupFragment : BaseSkeletonFragment(R.layout.fragment_viewgroup, "ViewGroup") {
 
@@ -12,6 +14,13 @@ class ViewGroupFragment : BaseSkeletonFragment(R.layout.fragment_viewgroup, "Vie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val item = RecyclerViewListItem.DEMO.first()
+        wallpaperView.setImageResource(item.wallpaperResId)
+        avatarView.setImageResource(item.avatarResId)
+        titleView.setText(item.titleResId)
+        descriptionView.setText(item.descriptionResId)
+
         skeleton = skeletonLayout
         skeletonLayout.showSkeleton()
     }

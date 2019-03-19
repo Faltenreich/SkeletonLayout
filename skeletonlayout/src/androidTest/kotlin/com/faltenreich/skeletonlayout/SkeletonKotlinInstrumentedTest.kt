@@ -1,9 +1,9 @@
 package com.faltenreich.skeletonlayout
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
 import android.view.View
-import junit.framework.Assert
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -12,7 +12,7 @@ class SkeletonKotlinInstrumentedTest {
 
     @Test
     fun testSkeleton() {
-        val view = View(InstrumentationRegistry.getTargetContext())
+        val view = View(InstrumentationRegistry.getInstrumentation().context)
         val skeleton = view.createSkeleton()
         Assert.assertEquals(skeleton.isSkeleton(), false)
         skeleton.showSkeleton()

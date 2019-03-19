@@ -1,60 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:paddingBottom="@dimen/margin">
 
     <ImageView
         android:id="@+id/wallpaperView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="100dp"
         android:contentDescription="@null"
+        android:src="@mipmap/list_image_0"
         android:scaleType="centerCrop"
-        android:src="@mipmap/list_image_0"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/avatarView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="@dimen/padding"
-        android:layout_marginBottom="@dimen/margin">
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginLeft="@dimen/padding"
+        android:contentDescription="@null"
+        app:layout_constraintStart_toStartOf="@id/wallpaperView"
+        app:layout_constraintTop_toBottomOf="@id/wallpaperView"
+        tools:src="@mipmap/list_avatar_0"/>
 
-        <ImageView
-            android:id="@+id/avatarView"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:contentDescription="@null"
-            android:src="@mipmap/list_avatar_0"/>
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginLeft="@dimen/padding"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/avatarView"
+        app:layout_constraintStart_toEndOf="@id/avatarView"
+        app:layout_constraintEnd_toEndOf="@id/wallpaperView"
+        tools:text="@string/user_0_name"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding"
-            android:layout_marginStart="@dimen/padding"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/avatarView"
-            android:layout_toEndOf="@+id/avatarView"
-            android:orientation="vertical">
+    <TextView
+        android:id="@+id/descriptionView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/titleView"
+        app:layout_constraintStart_toStartOf="@id/titleView"
+        app:layout_constraintEnd_toEndOf="@id/titleView"
+        tools:text="@string/user_0_statement"/>
 
-            <TextView
-                android:id="@+id/titleView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:text="@string/user_0_name"/>
-
-            <TextView
-                android:id="@+id/descriptionView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="@android:color/black"
-                android:text="@string/user_0_statement"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

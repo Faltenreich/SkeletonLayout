@@ -1,17 +1,17 @@
 package skeletonlayout;
 
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.LargeTest;
-import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 
 import com.faltenreich.skeletonlayout.Skeleton;
 import com.faltenreich.skeletonlayout.SkeletonLayoutUtils;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.filters.LargeTest;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -19,12 +19,12 @@ public class SkeletonJavaInstrumentedTest {
 
     @Test
     public void testSkeleton() {
-        View view = new View(InstrumentationRegistry.getTargetContext());
+        View view = new View(InstrumentationRegistry.getInstrumentation().getContext());
         Skeleton skeleton = SkeletonLayoutUtils.createSkeleton(view);
-        Assert.assertEquals(skeleton.isSkeleton(), false);
+        Assert.assertFalse(skeleton.isSkeleton());
         skeleton.showSkeleton();
-        Assert.assertEquals(skeleton.isSkeleton(), true);
+        Assert.assertTrue(skeleton.isSkeleton());
         skeleton.showOriginal();
-        Assert.assertEquals(skeleton.isSkeleton(), false);
+        Assert.assertFalse(skeleton.isSkeleton());
     }
 }
