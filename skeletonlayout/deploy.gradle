@@ -7,6 +7,9 @@ ext {
     artifactId = "skeletonlayout"
 }
 
+version = projectVersion
+group = groupId
+
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
