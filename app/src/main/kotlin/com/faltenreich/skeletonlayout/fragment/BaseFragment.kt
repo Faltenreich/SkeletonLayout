@@ -1,11 +1,11 @@
 package com.faltenreich.skeletonlayout.fragment
 
 import android.os.Bundle
-import androidx.annotation.LayoutRes
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 
 abstract class BaseFragment(@LayoutRes private val layoutResId: Int, val title: String) : Fragment() {
 

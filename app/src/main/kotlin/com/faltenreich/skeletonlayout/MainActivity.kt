@@ -2,12 +2,12 @@ package com.faltenreich.skeletonlayout
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.faltenreich.skeletonlayout.fragment.BaseSkeletonFragment
 import com.faltenreich.skeletonlayout.fragment.BottomSheetFragment
 import com.faltenreich.skeletonlayout.fragment.RecyclerViewFragment
