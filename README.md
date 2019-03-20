@@ -34,7 +34,7 @@ Create your own skeleton view with custom shapes, colors and shimmers.
 - **RecyclerView on speed:** Convenience adapter for the RecyclerView, since it is the main use case
 - **Customization:** Adjust shimmer, color and shape of the skeleton to set you apart from other apps
 - **Minimum effort:** A fistful lines of code to use the SkeletonLayout
-- **Minimum footprint:** Nothing more than org.jetbrains.kotlin:kotlin-stdlib-jre7 and com.android.support:recyclerview-v7
+- **Minimum footprint:** org.jetbrains.kotlin:kotlin-stdlib-jdk7 and androidx.recyclerview:recyclerview are the only dependencies
 
 ### Getting Started
 
@@ -145,7 +145,7 @@ Additionally the shimmer gets inactive onWindowFocusChanged() and onDetachedFrom
 
 ### License
 
-Copyright 2018 Philipp Fahlteich
+Copyright 2019 Philipp Fahlteich
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
