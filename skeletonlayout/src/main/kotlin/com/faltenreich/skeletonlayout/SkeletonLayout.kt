@@ -154,9 +154,13 @@ class SkeletonLayout @JvmOverloads constructor(
     private fun invalidateMask() {
         if (isRendered) {
             mask?.stop()
-            mask = SkeletonMaskFactory
-                    .createMask(this, maskColor, showShimmer, shimmerColor, shimmerDurationInMillis)
-                    .also { mask -> mask.mask(this, maskCornerRadius) }
+            if (width > 0 && height > 0) {
+                mask = SkeletonMaskFactory
+                        .createMask(this, maskColor, showShimmer, shimmerColor, shimmerDurationInMillis)
+                        .also { mask -> mask.mask(this, maskCornerRadius) }
+            } else {
+                Log.e(tag(), "Failed to mask view with invalid width and height")
+            }
         } else {
             Log.e(tag(), "Skipping invalidation until view is rendered")
         }
