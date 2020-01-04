@@ -39,7 +39,9 @@ fun View.createSkeleton(
 
     val skeleton = SkeletonLayout(this, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)
 
-    skeleton.layoutParams = params
+    if (params != null) {
+        skeleton.layoutParams = params
+    }
     parent?.addView(skeleton, index)
 
     return skeleton

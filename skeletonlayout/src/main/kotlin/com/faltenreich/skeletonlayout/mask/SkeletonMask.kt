@@ -69,7 +69,7 @@ internal abstract class SkeletonMask(protected val parent: View, @ColorInt color
     }
 
     private fun validate(view: View) {
-        when(view) {
+        when (view) {
             is RecyclerView -> Log.w(tag(), "Passing ViewGroup with reusable children to SkeletonLayout - consider using SkeletonFactory.skeletonForView(recyclerView: RecyclerView, layoutResId: Int)")
         }
     }

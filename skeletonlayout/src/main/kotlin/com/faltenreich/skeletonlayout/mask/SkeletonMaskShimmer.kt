@@ -11,10 +11,10 @@ import com.faltenreich.skeletonlayout.isAttachedToWindowCompat
 import com.faltenreich.skeletonlayout.refreshRateInSeconds
 
 internal class SkeletonMaskShimmer(
-        parent: View,
-        @ColorInt maskColor: Int,
-        @ColorInt var shimmerColor: Int,
-        var durationInMillis: Long
+    parent: View,
+    @ColorInt maskColor: Int,
+    @ColorInt var shimmerColor: Int,
+    var durationInMillis: Long
 ) : SkeletonMask(parent, maskColor) {
 
     private val refreshIntervalInMillis: Long by lazy { ((1000f / parent.context.refreshRateInSeconds()) * .9f).toLong() }

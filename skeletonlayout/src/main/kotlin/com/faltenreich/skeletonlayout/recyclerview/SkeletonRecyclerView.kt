@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.faltenreich.skeletonlayout.Skeleton
 
 internal class SkeletonRecyclerView(
-        private val recyclerView: RecyclerView,
-        @LayoutRes layoutResId: Int,
-        itemCount: Int,
-        @ColorInt maskColor: Int,
-        cornerRadius: Float,
-        showShimmer: Boolean,
-        @ColorInt shimmerColor: Int,
-        shimmerDurationInMillis: Long
+    private val recyclerView: RecyclerView,
+    @LayoutRes layoutResId: Int,
+    itemCount: Int,
+    @ColorInt maskColor: Int,
+    cornerRadius: Float,
+    showShimmer: Boolean,
+    @ColorInt shimmerColor: Int,
+    shimmerDurationInMillis: Long
 ) : Skeleton {
 
     var layoutResId: Int = layoutResId
@@ -79,13 +79,13 @@ internal class SkeletonRecyclerView(
     private fun invalidate() {
         val showSkeleton = isSkeleton()
         skeletonAdapter = SkeletonRecyclerViewAdapter(
-                layoutResId,
-                itemCount,
-                maskColor,
-                maskCornerRadius,
-                showShimmer,
-                shimmerColor,
-                shimmerDurationInMillis)
+            layoutResId,
+            itemCount,
+            maskColor,
+            maskCornerRadius,
+            showShimmer,
+            shimmerColor,
+            shimmerDurationInMillis)
         if (showSkeleton) {
             showSkeleton()
         }

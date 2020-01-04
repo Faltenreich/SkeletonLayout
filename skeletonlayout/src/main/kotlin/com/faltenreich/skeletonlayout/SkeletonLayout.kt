@@ -12,24 +12,24 @@ import com.faltenreich.skeletonlayout.mask.SkeletonMask
 import com.faltenreich.skeletonlayout.mask.SkeletonMaskFactory
 
 class SkeletonLayout @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0,
-        originView: View? = null,
-        @ColorInt private var maskColorInternal: Int = ContextCompat.getColor(context, DEFAULT_MASK_COLOR),
-        private var cornerRadiusInternal: Float = DEFAULT_CORNER_RADIUS,
-        private var showShimmerInternal: Boolean = DEFAULT_SHIMMER_SHOW,
-        @ColorInt private var shimmerColorInternal: Int =  ContextCompat.getColor(context, DEFAULT_SHIMMER_COLOR),
-        private var shimmerDurationInMillisInternal: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    originView: View? = null,
+    @ColorInt private var maskColorInternal: Int = ContextCompat.getColor(context, DEFAULT_MASK_COLOR),
+    private var cornerRadiusInternal: Float = DEFAULT_CORNER_RADIUS,
+    private var showShimmerInternal: Boolean = DEFAULT_SHIMMER_SHOW,
+    @ColorInt private var shimmerColorInternal: Int = ContextCompat.getColor(context, DEFAULT_SHIMMER_COLOR),
+    private var shimmerDurationInMillisInternal: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS
 ) : FrameLayout(context, attrs, defStyleAttr), Skeleton {
 
     internal constructor(
-            originView: View,
-            @ColorInt maskColor: Int,
-            cornerRadius: Float,
-            showShimmer: Boolean,
-            @ColorInt shimmerColor: Int,
-            shimmerDuration: Long = 0
+        originView: View,
+        @ColorInt maskColor: Int,
+        cornerRadius: Float,
+        showShimmer: Boolean,
+        @ColorInt shimmerColor: Int,
+        shimmerDuration: Long = 0
     ) : this(originView.context, null, 0, originView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration)
 
     override var maskColor: Int
@@ -156,8 +156,8 @@ class SkeletonLayout @JvmOverloads constructor(
             mask?.stop()
             if (width > 0 && height > 0) {
                 mask = SkeletonMaskFactory
-                        .createMask(this, maskColor, showShimmer, shimmerColor, shimmerDurationInMillis)
-                        .also { mask -> mask.mask(this, maskCornerRadius) }
+                    .createMask(this, maskColor, showShimmer, shimmerColor, shimmerDurationInMillis)
+                    .also { mask -> mask.mask(this, maskCornerRadius) }
             } else {
                 Log.e(tag(), "Failed to mask view with invalid width and height")
             }

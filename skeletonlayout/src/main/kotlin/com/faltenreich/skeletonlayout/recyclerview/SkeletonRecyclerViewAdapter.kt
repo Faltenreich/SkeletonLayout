@@ -9,13 +9,13 @@ import com.faltenreich.skeletonlayout.SkeletonLayout
 import com.faltenreich.skeletonlayout.createSkeleton
 
 internal class SkeletonRecyclerViewAdapter(
-        @LayoutRes private val layoutResId: Int,
-        private val itemCount: Int,
-        @ColorInt private val maskColor: Int,
-        private val cornerRadius: Float,
-        private val showShimmer: Boolean,
-        @ColorInt private val shimmerColor: Int,
-        private val shimmerDurationInMillis: Long
+    @LayoutRes private val layoutResId: Int,
+    private val itemCount: Int,
+    @ColorInt private val maskColor: Int,
+    private val cornerRadius: Float,
+    private val showShimmer: Boolean,
+    @ColorInt private val shimmerColor: Int,
+    private val shimmerDurationInMillis: Long
 ) : RecyclerView.Adapter<SkeletonRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkeletonRecyclerViewHolder {

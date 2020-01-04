@@ -8,8 +8,15 @@ import androidx.core.view.ViewCompat
 
 internal fun Any.tag(): String = javaClass.simpleName
 
-internal fun Context.refreshRateInSeconds(): Float = (getSystemService(Context.WINDOW_SERVICE) as? WindowManager)?.defaultDisplay?.refreshRate ?: 60f
+internal fun Context.refreshRateInSeconds(): Float {
+    val windowManager = getSystemService(Context.WINDOW_SERVICE) as? WindowManager
+    return windowManager?.defaultDisplay?.refreshRate ?: 60f
+}
 
-internal fun ViewGroup.views(): List<View> = (0 until childCount).map { getChildAt(it) }
+internal fun ViewGroup.views(): List<View> {
+    return (0 until childCount).map { child -> getChildAt(child) }
+}
 
-internal fun View.isAttachedToWindowCompat() = ViewCompat.isAttachedToWindow(this)
+internal fun View.isAttachedToWindowCompat(): Boolean {
+    return ViewCompat.isAttachedToWindow(this)
+}
