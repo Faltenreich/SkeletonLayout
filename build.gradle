@@ -6,8 +6,8 @@ buildscript {
         kotlinVersion = '1.3.50'
         jUnitVersion = '4.12'
         espressoVersion = '3.2.0'
-        projectVersion = '2.0.0'
-        projectVersionCode = 3
+        projectVersion = '2.0.1'
+        projectVersionCode = 4
     }
 
     repositories {
