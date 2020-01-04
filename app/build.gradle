@@ -55,8 +55,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    testImplementation "junit:junit:$jUnitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation 'com.google.android.material:material:1.0.0'
