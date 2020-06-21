@@ -4,8 +4,8 @@ buildscript {
         compileSdk = 28
         targetSdk = 28
 
-        projectVersion = '2.0.1'
-        projectVersionCode = 4
+        projectVersion = '2.0.2'
+        projectVersionCode = 5
         
         kotlinVersion = '1.3.72'
         jUnitVersion = '4.12'
