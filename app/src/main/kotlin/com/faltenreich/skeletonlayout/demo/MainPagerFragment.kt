@@ -1,10 +1,14 @@
-package com.faltenreich.skeletonlayout.demo.fragment
+package com.faltenreich.skeletonlayout.demo
 
 import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 import com.faltenreich.skeletonlayout.Skeleton
-import com.faltenreich.skeletonlayout.demo.logic.ValueChangedListener
+import com.faltenreich.skeletonlayout.demo.configuration.ConfigurationListener
 
-abstract class BaseSkeletonFragment(@LayoutRes layoutResId: Int, title: String) : BaseFragment(layoutResId, title), ValueChangedListener {
+abstract class MainPagerFragment(
+    @LayoutRes private val layoutResId: Int,
+    val title: String
+) : Fragment(layoutResId), ConfigurationListener {
 
     abstract var skeleton: Skeleton
 

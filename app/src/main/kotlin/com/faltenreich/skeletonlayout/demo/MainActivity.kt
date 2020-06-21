@@ -5,26 +5,21 @@ import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.faltenreich.skeletonlayout.Skeleton
-import com.faltenreich.skeletonlayout.demo.fragment.BaseSkeletonFragment
-import com.faltenreich.skeletonlayout.demo.fragment.BottomSheetFragment
-import com.faltenreich.skeletonlayout.demo.fragment.RecyclerViewFragment
-import com.faltenreich.skeletonlayout.demo.fragment.ViewGroupFragment
-import com.faltenreich.skeletonlayout.demo.logic.MainPagerAdapter
+import com.faltenreich.skeletonlayout.demo.configuration.ConfigurationFragment
+import com.faltenreich.skeletonlayout.demo.recyclerview.RecyclerViewFragment
+import com.faltenreich.skeletonlayout.demo.viewgroup.ViewGroupFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var viewPagerAdapter: MainPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        init()
-
+        initLayout()
         if (BuildConfig.isDemoMode) {
             runDemo()
         }
@@ -50,20 +45,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun init() {
+    private fun initLayout() {
         viewPagerAdapter = MainPagerAdapter(supportFragmentManager, arrayOf(RecyclerViewFragment(), ViewGroupFragment()))
         viewPager.adapter = viewPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageSelected(position: Int) {
-                invalidateSkeleton()
-            }
+            override fun onPageSelected(position: Int) = invalidateSkeleton()
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
         })
 
-        fab.setOnClickListener { openEditor() }
+        fab.setOnClickListener { openConfiguration() }
 
         val uiVisibility = if (BuildConfig.isDemoMode) View.GONE else View.VISIBLE
         tabLayout.visibility = uiVisibility
@@ -83,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getSkeleton(): Skeleton? = (viewPagerAdapter.getItem(viewPager.currentItem) as? BaseSkeletonFragment)?.skeleton
+    private fun getSkeleton(): Skeleton? = (viewPagerAdapter.getItem(viewPager.currentItem) as? MainPagerFragment)?.skeleton
 
     private fun invalidateSkeleton() {
         getSkeleton()?.let {
@@ -109,11 +102,8 @@ class MainActivity : AppCompatActivity() {
         fab.visibility = View.GONE
     }
 
-    private fun openEditor() {
+    private fun openConfiguration() {
         val visibleFragment = viewPagerAdapter.getItem(viewPager.currentItem)
-        when (visibleFragment) {
-            is BaseSkeletonFragment -> BottomSheetFragment.newInstance(visibleFragment).show(supportFragmentManager, "bottomSheet")
-            else -> Toast.makeText(this, "Unsupported", Toast.LENGTH_LONG).show()
-        }
+        ConfigurationFragment.newInstance(visibleFragment).show(supportFragmentManager, "bottomSheet")
     }
 }

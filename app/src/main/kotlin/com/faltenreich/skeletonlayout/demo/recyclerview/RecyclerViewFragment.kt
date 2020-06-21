@@ -1,4 +1,4 @@
-package com.faltenreich.skeletonlayout.demo.fragment
+package com.faltenreich.skeletonlayout.demo.recyclerview
 
 import android.os.Bundle
 import android.view.View
@@ -7,11 +7,10 @@ import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
 import com.faltenreich.skeletonlayout.demo.BuildConfig
 import com.faltenreich.skeletonlayout.demo.R
-import com.faltenreich.skeletonlayout.demo.logic.RecyclerViewAdapter
-import com.faltenreich.skeletonlayout.demo.logic.RecyclerViewListItem
+import com.faltenreich.skeletonlayout.demo.MainPagerFragment
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
-class RecyclerViewFragment : BaseSkeletonFragment(R.layout.fragment_recyclerview, "RecyclerView") {
+class RecyclerViewFragment : MainPagerFragment(R.layout.fragment_recyclerview, "RecyclerView") {
 
     override lateinit var skeleton: Skeleton
 

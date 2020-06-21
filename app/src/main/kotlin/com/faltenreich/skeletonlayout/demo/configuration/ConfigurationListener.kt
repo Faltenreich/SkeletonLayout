@@ -1,8 +1,8 @@
-package com.faltenreich.skeletonlayout.demo.logic
+package com.faltenreich.skeletonlayout.demo.configuration
 
 import androidx.annotation.ColorInt
 
-interface ValueChangedListener {
+interface ConfigurationListener {
     fun onMaskColorChanged(@ColorInt value: Int)
     fun onMaskCornerRadiusChanged(value: Float)
     fun onShowShimmerChanged(value: Boolean)

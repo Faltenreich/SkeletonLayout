@@ -1,4 +1,4 @@
-package com.faltenreich.skeletonlayout.demo.logic
+package com.faltenreich.skeletonlayout.demo.recyclerview
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
