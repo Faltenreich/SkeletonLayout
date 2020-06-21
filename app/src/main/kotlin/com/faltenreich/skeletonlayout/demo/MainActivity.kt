@@ -1,4 +1,4 @@
-package com.faltenreich.skeletonlayout
+package com.faltenreich.skeletonlayout.demo
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,11 +8,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import com.faltenreich.skeletonlayout.fragment.BaseSkeletonFragment
-import com.faltenreich.skeletonlayout.fragment.BottomSheetFragment
-import com.faltenreich.skeletonlayout.fragment.RecyclerViewFragment
-import com.faltenreich.skeletonlayout.fragment.ViewGroupFragment
-import com.faltenreich.skeletonlayout.logic.MainPagerAdapter
+import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.demo.fragment.BaseSkeletonFragment
+import com.faltenreich.skeletonlayout.demo.fragment.BottomSheetFragment
+import com.faltenreich.skeletonlayout.demo.fragment.RecyclerViewFragment
+import com.faltenreich.skeletonlayout.demo.fragment.ViewGroupFragment
+import com.faltenreich.skeletonlayout.demo.logic.MainPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

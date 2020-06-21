@@ -1,8 +1,8 @@
-package com.faltenreich.skeletonlayout.logic
+package com.faltenreich.skeletonlayout.demo.logic
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.faltenreich.skeletonlayout.R
+import com.faltenreich.skeletonlayout.demo.R
 
 data class RecyclerViewListItem(
         @StringRes val titleResId: Int,

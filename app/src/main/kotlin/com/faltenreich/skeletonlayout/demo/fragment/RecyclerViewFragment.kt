@@ -1,14 +1,14 @@
-package com.faltenreich.skeletonlayout.fragment
+package com.faltenreich.skeletonlayout.demo.fragment
 
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.faltenreich.skeletonlayout.BuildConfig
-import com.faltenreich.skeletonlayout.R
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
-import com.faltenreich.skeletonlayout.logic.RecyclerViewAdapter
-import com.faltenreich.skeletonlayout.logic.RecyclerViewListItem
+import com.faltenreich.skeletonlayout.demo.BuildConfig
+import com.faltenreich.skeletonlayout.demo.R
+import com.faltenreich.skeletonlayout.demo.logic.RecyclerViewAdapter
+import com.faltenreich.skeletonlayout.demo.logic.RecyclerViewListItem
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
 class RecyclerViewFragment : BaseSkeletonFragment(R.layout.fragment_recyclerview, "RecyclerView") {

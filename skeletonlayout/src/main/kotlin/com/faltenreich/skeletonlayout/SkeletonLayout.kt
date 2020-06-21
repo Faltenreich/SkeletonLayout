@@ -155,7 +155,7 @@ class SkeletonLayout @JvmOverloads constructor(
         if (isRendered) {
             mask?.stop()
             mask = null
-            if(isSkeleton) {
+            if (isSkeleton) {
                 if (width > 0 && height > 0) {
                     mask = SkeletonMaskFactory
                         .createMask(this, maskColor, showShimmer, shimmerColor, shimmerDurationInMillis)

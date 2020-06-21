@@ -145,7 +145,7 @@ Additionally the shimmer gets inactive onWindowFocusChanged() and onDetachedFrom
 
 ### License
 
-Copyright 2019 Philipp Fahlteich
+Copyright 2020 Philipp Fahlteich
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

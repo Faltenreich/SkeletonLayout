@@ -1,8 +1,8 @@
-package com.faltenreich.skeletonlayout.fragment
+package com.faltenreich.skeletonlayout.demo.fragment
 
 import androidx.annotation.LayoutRes
 import com.faltenreich.skeletonlayout.Skeleton
-import com.faltenreich.skeletonlayout.logic.ValueChangedListener
+import com.faltenreich.skeletonlayout.demo.logic.ValueChangedListener
 
 abstract class BaseSkeletonFragment(@LayoutRes layoutResId: Int, title: String) : BaseFragment(layoutResId, title), ValueChangedListener {
 

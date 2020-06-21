@@ -1,4 +1,4 @@
-package com.faltenreich.skeletonlayout.logic
+package com.faltenreich.skeletonlayout.demo.logic
 
 import androidx.annotation.ColorInt
 

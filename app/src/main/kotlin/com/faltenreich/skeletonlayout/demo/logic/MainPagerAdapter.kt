@@ -1,8 +1,8 @@
-package com.faltenreich.skeletonlayout.logic
+package com.faltenreich.skeletonlayout.demo.logic
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.faltenreich.skeletonlayout.fragment.BaseFragment
+import com.faltenreich.skeletonlayout.demo.fragment.BaseFragment
 
 class MainPagerAdapter(fragmentManager: FragmentManager, private val fragments: Array<BaseFragment>) : FragmentPagerAdapter(fragmentManager) {
 

@@ -1,12 +1,12 @@
-package com.faltenreich.skeletonlayout.fragment
+package com.faltenreich.skeletonlayout.demo.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import com.faltenreich.skeletonlayout.R
-import com.faltenreich.skeletonlayout.logic.ValueChangedListener
+import com.faltenreich.skeletonlayout.demo.R
+import com.faltenreich.skeletonlayout.demo.logic.ValueChangedListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.*
 

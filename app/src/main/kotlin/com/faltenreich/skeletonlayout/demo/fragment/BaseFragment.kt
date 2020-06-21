@@ -1,4 +1,4 @@
-package com.faltenreich.skeletonlayout.fragment
+package com.faltenreich.skeletonlayout.demo.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
