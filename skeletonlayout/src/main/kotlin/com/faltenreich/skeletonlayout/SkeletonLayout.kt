@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import com.faltenreich.skeletonlayout.mask.SkeletonMask
 import com.faltenreich.skeletonlayout.mask.SkeletonMaskFactory
 
-class SkeletonLayout @JvmOverloads constructor(
+open class SkeletonLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
