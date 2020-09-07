@@ -20,7 +20,8 @@ open class SkeletonLayout @JvmOverloads constructor(
     private var cornerRadiusInternal: Float = DEFAULT_CORNER_RADIUS,
     private var showShimmerInternal: Boolean = DEFAULT_SHIMMER_SHOW,
     @ColorInt private var shimmerColorInternal: Int = ContextCompat.getColor(context, DEFAULT_SHIMMER_COLOR),
-    private var shimmerDurationInMillisInternal: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS
+    private var shimmerDurationInMillisInternal: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS,
+    private var shimmerDirection: Int = DEFAULT_SHIMMER_DIRECTION
 ) : FrameLayout(context, attrs, defStyleAttr), Skeleton {
 
     internal constructor(
@@ -29,8 +30,9 @@ open class SkeletonLayout @JvmOverloads constructor(
         cornerRadius: Float,
         showShimmer: Boolean,
         @ColorInt shimmerColor: Int,
-        shimmerDuration: Long = 0
-    ) : this(originView.context, null, 0, originView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration)
+        shimmerDuration: Long = 0,
+        shimmerDirection: Int = DEFAULT_SHIMMER_DIRECTION
+    ) : this(originView.context, null, 0, originView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration, shimmerDirection)
 
     override var maskColor: Int
         get() = maskColorInternal
@@ -79,6 +81,7 @@ open class SkeletonLayout @JvmOverloads constructor(
             this.showShimmerInternal = typedArray.getBoolean(R.styleable.SkeletonLayout_showShimmer, showShimmerInternal)
             this.shimmerColorInternal = typedArray.getColor(R.styleable.SkeletonLayout_shimmerColor, shimmerColorInternal)
             this.shimmerDurationInMillisInternal = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillisInternal.toInt()).toLong()
+            this.shimmerDirection = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDirection, shimmerDirection)
             typedArray.recycle()
         }
         originView?.let { view -> addView(view) }
@@ -158,7 +161,7 @@ open class SkeletonLayout @JvmOverloads constructor(
             if (isSkeleton) {
                 if (width > 0 && height > 0) {
                     mask = SkeletonMaskFactory
-                        .createMask(this, maskColor, showShimmer, shimmerColor, shimmerDurationInMillis)
+                        .createMask(this, maskColor, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection)
                         .also { mask -> mask.mask(this, maskCornerRadius) }
                 } else {
                     Log.e(tag(), "Failed to mask view with invalid width and height")
@@ -171,9 +174,10 @@ open class SkeletonLayout @JvmOverloads constructor(
 
     companion object {
         val DEFAULT_MASK_COLOR = R.color.skeleton_mask
-        const val DEFAULT_CORNER_RADIUS = 25f
+        const val DEFAULT_CORNER_RADIUS = 8f
         const val DEFAULT_SHIMMER_SHOW = true
         val DEFAULT_SHIMMER_COLOR = R.color.skeleton_shimmer
         const val DEFAULT_SHIMMER_DURATION_IN_MILLIS = 2000L
+        const val DEFAULT_SHIMMER_DIRECTION = 1
     }
 }

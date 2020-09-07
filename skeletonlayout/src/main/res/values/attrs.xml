@@ -8,6 +8,10 @@
         <attr name="showShimmer" format="boolean"/>
         <attr name="shimmerColor" format="color"/>
         <attr name="shimmerDurationInMillis" format="integer"/>
+        <attr name="shimmerDirection" format="enum">
+            <enum name="left_to_right" value="1"/>
+            <enum name="top_left_to_bottom_right" value="2"/>
+        </attr>
     </declare-styleable>
     
 </resources>

@@ -7,19 +7,45 @@ import android.graphics.Shader
 import android.os.Handler
 import android.view.View
 import androidx.annotation.ColorInt
+import com.faltenreich.skeletonlayout.SkeletonLayout.Companion.DEFAULT_SHIMMER_DIRECTION
 import com.faltenreich.skeletonlayout.isAttachedToWindowCompat
 import com.faltenreich.skeletonlayout.refreshRateInSeconds
+import kotlin.math.cos
+import kotlin.math.sin
 
 internal class SkeletonMaskShimmer(
     parent: View,
     @ColorInt maskColor: Int,
     @ColorInt var shimmerColor: Int,
-    var durationInMillis: Long
+    var durationInMillis: Long,
+    private val shimmerDirection: Int
 ) : SkeletonMask(parent, maskColor) {
 
     private val refreshIntervalInMillis: Long by lazy { ((1000f / parent.context.refreshRateInSeconds()) * .9f).toLong() }
     private val width: Float = parent.width.toFloat()
     private val matrix: Matrix = Matrix()
+    private val shimmerGradient by lazy {
+        if (shimmerDirection == DEFAULT_SHIMMER_DIRECTION)
+            LinearGradient(
+                0f,
+                0f,
+                width,
+                0f,
+                intArrayOf(color, shimmerColor, color),
+                null,
+                Shader.TileMode.CLAMP
+            )
+        else
+            LinearGradient(
+                0f,
+                0f,
+                (cos(Math.toRadians(45.0)) * width).toFloat(),
+                (sin(Math.toRadians(45.0)) * width).toFloat(),
+                intArrayOf(color, shimmerColor, color),
+                null,
+                Shader.TileMode.CLAMP
+            )
+    }
 
     private var animation: Handler? = null
     private var animationTask: Runnable? = null
@@ -50,7 +76,7 @@ internal class SkeletonMaskShimmer(
     }
 
     override fun createPaint() = Paint().also {
-        it.shader = LinearGradient(0f, 0f, width, 0f, intArrayOf(color, shimmerColor, color), null, Shader.TileMode.CLAMP)
+        it.shader = shimmerGradient
         it.isAntiAlias = true
     }
 
