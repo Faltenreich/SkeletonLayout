@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion compileSdk
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.faltenreich.skeletonlayout"
         minSdkVersion 21
-        targetSdkVersion targetSdk
+        targetSdkVersion 29
         versionCode projectVersionCode
         versionName projectVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
