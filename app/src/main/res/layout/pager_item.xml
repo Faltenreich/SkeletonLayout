@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/margin">
+
+    <ImageView
+        android:id="@+id/wallpaperView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginEnd="@dimen/padding"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/list_image_0"
+        app:layout_constraintDimensionRatio="w,1:2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/avatarView"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginTop="@dimen/padding"
+        android:contentDescription="@null"
+        app:layout_constraintEnd_toEndOf="@id/wallpaperView"
+        app:layout_constraintStart_toStartOf="@id/wallpaperView"
+
+        app:layout_constraintTop_toBottomOf="@id/wallpaperView"
+        tools:src="@mipmap/list_avatar_0" />
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginTop="@dimen/padding"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/wallpaperView"
+        app:layout_constraintStart_toStartOf="@id/wallpaperView"
+        app:layout_constraintTop_toBottomOf="@id/avatarView"
+        tools:text="@string/user_0_name" />
+
+    <TextView
+        android:id="@+id/descriptionView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@id/titleView"
+        app:layout_constraintStart_toStartOf="@id/titleView"
+        app:layout_constraintTop_toBottomOf="@id/titleView"
+        tools:text="@string/user_0_statement" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

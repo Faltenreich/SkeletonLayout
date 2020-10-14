@@ -32,6 +32,7 @@ Create your own skeleton view with custom shapes, colors and shimmers.
 - **Make your app feel faster:** Immediate visual feedback long before your data has been fetched or requested
 - **Support any View:** Apply to any type of View or ViewGroup
 - **RecyclerView on speed:** Convenience adapter for the RecyclerView, since it is the main use case
+- **ViewPager2 support:** As ViewPager2 uses RecyclerView internally the same concepts apply
 - **Customization:** Adjust shimmer, color and shape of the skeleton to set you apart from other apps
 - **Minimum effort:** A fistful lines of code to use the SkeletonLayout
 - **Minimum footprint:** org.jetbrains.kotlin:kotlin-stdlib-jdk7 and androidx.recyclerview:recyclerview are the only dependencies
@@ -76,7 +77,10 @@ public class MainActivity extends AppCompatActivity {
         
         // or apply a new SkeletonLayout to a RecyclerView (showing 5 items)
         skeleton = SkeletonLayoutUtils.applySkeleton(recyclerView, R.layout.list_item, 5);
-        
+
+        // or apply a new SkeletonLayout to a ViewPager2 (showing 3 items)
+        skeleton = SkeletonLayoutUtils.applySkeleton(viewPager2, R.layout.pager_item, 3);
+
         skeleton.showSkeleton();
     }
     
@@ -105,7 +109,10 @@ class MainActivity : AppCompatActivity() {
         
         // or apply a new SkeletonLayout to a RecyclerView (showing 5 items)
         skeleton = recyclerView.applySkeleton(R.layout.list_item, 5)
-        
+
+        // or apply a new SkeletonLayout to a ViewPager2 (showing 3 items)
+        skeleton = viewPager2.applySkeleton(R.layout.pager_item, 3)
+
         skeleton.showSkeleton()
     }
     

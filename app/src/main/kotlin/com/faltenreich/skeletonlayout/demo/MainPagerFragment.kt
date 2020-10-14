@@ -8,7 +8,7 @@ import com.faltenreich.skeletonlayout.demo.configuration.ConfigurationListener
 abstract class MainPagerFragment(
     @LayoutRes private val layoutResId: Int,
     val title: String
-) : Fragment(layoutResId), ConfigurationListener {
+) : Fragment(layoutResId), ConfigurationListener, ToggleListener {
 
     abstract var skeleton: Skeleton
 
@@ -30,5 +30,9 @@ abstract class MainPagerFragment(
 
     override fun onShimmerDurationChanged(value: Long) {
         skeleton.shimmerDurationInMillis = value
+    }
+
+    override fun onSkeletonToggled() {
+        //Do nothing
     }
 }

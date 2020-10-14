@@ -3,8 +3,8 @@ package com.faltenreich.skeletonlayout.demo.viewgroup
 import android.os.Bundle
 import android.view.View
 import com.faltenreich.skeletonlayout.Skeleton
-import com.faltenreich.skeletonlayout.demo.R
 import com.faltenreich.skeletonlayout.demo.MainPagerFragment
+import com.faltenreich.skeletonlayout.demo.R
 import com.faltenreich.skeletonlayout.demo.recyclerview.RecyclerViewListItem
 import kotlinx.android.synthetic.main.fragment_viewgroup.*
 import kotlinx.android.synthetic.main.list_item.*

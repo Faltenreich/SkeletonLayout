@@ -2,7 +2,6 @@ package com.faltenreich.skeletonlayout.demo
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.faltenreich.skeletonlayout.demo.MainPagerFragment
 
 class MainPagerAdapter(
     fragmentManager: FragmentManager,
