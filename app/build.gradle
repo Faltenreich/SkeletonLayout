@@ -7,11 +7,10 @@ android {
 
     defaultConfig {
         applicationId "com.faltenreich.skeletonlayout"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion targetSdk
         versionCode projectVersionCode
         versionName projectVersion
-        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

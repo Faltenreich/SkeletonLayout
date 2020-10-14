@@ -23,11 +23,6 @@ class RecyclerViewFragment : MainPagerFragment(R.layout.fragment_recyclerview, "
         list.layoutManager = LinearLayoutManager(context)
         list.adapter = listAdapter
 
-        val skeletonItemSize = if (BuildConfig.isDemoMode) items.size else SKELETON_ITEM_COUNT
-        skeleton = list.applySkeleton(R.layout.list_item, skeletonItemSize).apply { showSkeleton() }
-    }
-
-    companion object {
-        private const val SKELETON_ITEM_COUNT = 30
+        skeleton = list.applySkeleton(R.layout.list_item, items.size).apply { showSkeleton() }
     }
 }

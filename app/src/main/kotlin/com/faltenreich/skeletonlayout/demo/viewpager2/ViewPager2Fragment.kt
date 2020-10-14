@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.fragment_viewpager2.*
 
 class ViewPager2Fragment : MainPagerFragment(R.layout.fragment_viewpager2, "ViewPager2") {
 
-
     override lateinit var skeleton: Skeleton
 
     private lateinit var mediator: TabLayoutMediator
@@ -25,9 +24,7 @@ class ViewPager2Fragment : MainPagerFragment(R.layout.fragment_viewpager2, "View
         val listAdapter = ViewPager2Adapter(items)
         pager.adapter = listAdapter
 
-        val skeletonItemSize = if (BuildConfig.isDemoMode) items.size else SKELETON_ITEM_COUNT
-        skeleton = pager.applySkeleton(R.layout.pager_item, skeletonItemSize).apply { showSkeleton() }
-
+        skeleton = pager.applySkeleton(R.layout.pager_item, items.size).apply { showSkeleton() }
         mediator = TabLayoutMediator(pager_tabs, pager) { _, _ -> }.apply { attach() }
     }
 
@@ -37,9 +34,4 @@ class ViewPager2Fragment : MainPagerFragment(R.layout.fragment_viewpager2, "View
         mediator.detach()
         mediator.attach()
     }
-
-    companion object {
-        private const val SKELETON_ITEM_COUNT = 2
-    }
-
 }
