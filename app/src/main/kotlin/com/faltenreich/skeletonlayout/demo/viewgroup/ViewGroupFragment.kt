@@ -7,7 +7,7 @@ import com.faltenreich.skeletonlayout.demo.MainPagerFragment
 import com.faltenreich.skeletonlayout.demo.R
 import com.faltenreich.skeletonlayout.demo.recyclerview.RecyclerViewListItem
 import kotlinx.android.synthetic.main.fragment_viewgroup.*
-import kotlinx.android.synthetic.main.list_item.*
+import kotlinx.android.synthetic.main.list_item_recyclerview.*
 
 class ViewGroupFragment : MainPagerFragment(R.layout.fragment_viewgroup, "ViewGroup") {
 

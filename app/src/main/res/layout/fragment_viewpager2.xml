@@ -15,7 +15,7 @@
         android:layout_weight="1"
         android:clipToPadding="false"
         android:padding="@dimen/margin"
-        tools:listitem="@layout/list_item" />
+        tools:listitem="@layout/list_item_viewpager2" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/pager_tabs"

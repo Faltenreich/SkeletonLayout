@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.faltenreich.skeletonlayout.demo.R
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.list_item.*
+import kotlinx.android.synthetic.main.list_item_recyclerview.*
 
 class RecyclerViewHolder(
     parent: ViewGroup,
-    private val view: View = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+    private val view: View = LayoutInflater.from(parent.context).inflate(R.layout.list_item_recyclerview, parent, false)
 ) : RecyclerView.ViewHolder(view), LayoutContainer {
 
     override val containerView: View?

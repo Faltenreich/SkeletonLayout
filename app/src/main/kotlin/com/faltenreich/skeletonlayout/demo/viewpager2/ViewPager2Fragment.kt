@@ -23,7 +23,7 @@ class ViewPager2Fragment : MainPagerFragment(R.layout.fragment_viewpager2, "View
         val listAdapter = ViewPager2Adapter(items)
         pager.adapter = listAdapter
 
-        skeleton = pager.applySkeleton(R.layout.pager_item, items.size).apply { showSkeleton() }
+        skeleton = pager.applySkeleton(R.layout.list_item_viewpager2, items.size).apply { showSkeleton() }
         mediator = TabLayoutMediator(pager_tabs, pager) { _, _ -> }.apply { attach() }
     }
 

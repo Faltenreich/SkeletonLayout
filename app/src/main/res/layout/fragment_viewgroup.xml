@@ -13,6 +13,6 @@
     app:shimmerColor="@color/colorPrimaryDark"
     app:shimmerDurationInMillis="2000">
 
-    <include layout="@layout/list_item"/>
+    <include layout="@layout/list_item_recyclerview"/>
 
 </com.faltenreich.skeletonlayout.SkeletonLayout>

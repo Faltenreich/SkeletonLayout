@@ -8,4 +8,4 @@
     android:layout_height="match_parent"
     android:padding="@dimen/margin"
     android:clipToPadding="false"
-    tools:listitem="@layout/list_item"/>
+    tools:listitem="@layout/list_item_recyclerview"/>
