@@ -6,14 +6,14 @@ import androidx.viewpager2.widget.ViewPager2
 import com.faltenreich.skeletonlayout.Skeleton
 
 internal class SkeletonViewPager2(
-        private val viewPager: ViewPager2,
-        @LayoutRes layoutResId: Int,
-        itemCount: Int,
-        @ColorInt maskColor: Int,
-        cornerRadius: Float,
-        showShimmer: Boolean,
-        @ColorInt shimmerColor: Int,
-        shimmerDurationInMillis: Long
+    private val viewPager: ViewPager2,
+    @LayoutRes layoutResId: Int,
+    itemCount: Int,
+    @ColorInt maskColor: Int,
+    cornerRadius: Float,
+    showShimmer: Boolean,
+    @ColorInt shimmerColor: Int,
+    shimmerDurationInMillis: Long
 ) : Skeleton {
 
     var layoutResId: Int = layoutResId

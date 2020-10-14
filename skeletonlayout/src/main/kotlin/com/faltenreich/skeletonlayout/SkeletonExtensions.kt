@@ -26,11 +26,11 @@ private const val LIST_ITEM_COUNT_DEFAULT = 3
  */
 @JvmOverloads
 fun View.createSkeleton(
-        @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
-        cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
-        showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
-        @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
-        shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
+    @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
+    cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
+    showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
+    @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
+    shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
 ): Skeleton {
     // If this View already has a parent, we need to replace it there with the SkeletonLayout
     val parent = (parent as? ViewGroup)
@@ -62,13 +62,13 @@ fun View.createSkeleton(
  */
 @JvmOverloads
 fun RecyclerView.applySkeleton(
-        @LayoutRes listItemLayoutResId: Int,
-        itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
-        @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
-        cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
-        showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
-        @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
-        shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
+    @LayoutRes listItemLayoutResId: Int,
+    itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
+    @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
+    cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
+    showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
+    @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
+    shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
 ): Skeleton = SkeletonRecyclerView(this, listItemLayoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)
 
 
@@ -85,11 +85,11 @@ fun RecyclerView.applySkeleton(
  */
 @JvmOverloads
 fun ViewPager2.applySkeleton(
-        @LayoutRes listItemLayoutResId: Int,
-        itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
-        @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
-        cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
-        showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
-        @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
-        shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
+    @LayoutRes listItemLayoutResId: Int,
+    itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
+    @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
+    cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
+    showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
+    @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
+    shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
 ): Skeleton = SkeletonViewPager2(this, listItemLayoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)

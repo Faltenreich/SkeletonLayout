@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
-import com.faltenreich.skeletonlayout.demo.BuildConfig
 import com.faltenreich.skeletonlayout.demo.MainPagerFragment
 import com.faltenreich.skeletonlayout.demo.R
 import com.google.android.material.tabs.TabLayoutMediator

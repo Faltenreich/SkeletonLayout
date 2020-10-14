@@ -5,9 +5,8 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
-import com.faltenreich.skeletonlayout.demo.BuildConfig
-import com.faltenreich.skeletonlayout.demo.R
 import com.faltenreich.skeletonlayout.demo.MainPagerFragment
+import com.faltenreich.skeletonlayout.demo.R
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
 class RecyclerViewFragment : MainPagerFragment(R.layout.fragment_recyclerview, "RecyclerView") {
