@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.faltenreich.skeletonlayout.demo.R
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.list_item_viewpager2.*
+import kotlinx.android.synthetic.main.list_item_recyclerview.*
 
 class ViewPager2ViewHolder(
     parent: ViewGroup,

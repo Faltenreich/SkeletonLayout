@@ -9,16 +9,14 @@
     android:orientation="vertical">
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:clipToPadding="false"
-        android:padding="@dimen/margin"
         tools:listitem="@layout/list_item_viewpager2" />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/pager_tabs"
+        android:id="@+id/viewPagerIndicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabBackground="@drawable/tab_indicator"

@@ -21,15 +21,15 @@ class ViewPager2Fragment : MainPagerFragment(R.layout.fragment_viewpager2, "View
         val items = ViewPager2ListItem.DEMO
 
         val listAdapter = ViewPager2Adapter(items)
-        pager.adapter = listAdapter
+        viewPager.adapter = listAdapter
 
-        skeleton = pager.applySkeleton(R.layout.list_item_viewpager2, items.size).apply { showSkeleton() }
-        mediator = TabLayoutMediator(pager_tabs, pager) { _, _ -> }.apply { attach() }
+        skeleton = viewPager.applySkeleton(R.layout.list_item_viewpager2, items.size).apply { showSkeleton() }
+        mediator = TabLayoutMediator(viewPagerIndicator, viewPager) { _, _ -> }.apply { attach() }
     }
 
     override fun onSkeletonToggled() {
-        //We are swapping out the adapter when showing/hiding the skeleton.
-        //Therefore we need to reattach the mediator in order to show the correct amount of Tabs
+        // We are swapping out the adapter when showing/hiding the skeleton.
+        // Therefore we need to reattach the mediator in order to show the correct amount of Tabs
         mediator.detach()
         mediator.attach()
     }
