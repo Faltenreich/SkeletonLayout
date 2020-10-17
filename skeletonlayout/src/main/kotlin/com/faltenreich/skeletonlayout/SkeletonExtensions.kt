@@ -9,7 +9,9 @@ import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.faltenreich.skeletonlayout.mask.ShimmerDirection
+import androidx.viewpager2.widget.ViewPager2
 import com.faltenreich.skeletonlayout.recyclerview.SkeletonRecyclerView
+import com.faltenreich.skeletonlayout.recyclerview.SkeletonViewPager2
 
 private const val LIST_ITEM_COUNT_DEFAULT = 3
 
@@ -77,3 +79,25 @@ fun RecyclerView.applySkeleton(
     shimmerDirection: ShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
     shimmerAngle: Int = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
 ): Skeleton = SkeletonRecyclerView(this, listItemLayoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)
+
+/**
+ * Applies a new Skeleton to the given [ViewPager2] and wraps its ViewHolders' itemViews in SkeletonLayouts
+ *
+ * @receiver [ViewPager2] whose itemViews shall be wrapped in SkeletonLayouts
+ * @param listItemLayoutResId Layout resource of the itemView that gets masked
+ * @param maskColor Color of the mask that fills the original view bounds
+ * @param cornerRadius x- and y-radius of the oval used to round the mask corners
+ * @param showShimmer Animate left-to-right shimmer, if set to true
+ * @param shimmerColor Color of the animated shimmer
+ * @param shimmerDurationInMillis Duration in milliseconds for one shimmer animation interval
+ */
+@JvmOverloads
+fun ViewPager2.applySkeleton(
+    @LayoutRes listItemLayoutResId: Int,
+    itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
+    @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
+    cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
+    showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
+    @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
+    shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
+): Skeleton = SkeletonViewPager2(this, listItemLayoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)

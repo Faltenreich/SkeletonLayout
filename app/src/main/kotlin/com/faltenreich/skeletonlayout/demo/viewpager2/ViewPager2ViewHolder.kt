@@ -1,4 +1,4 @@
-package com.faltenreich.skeletonlayout.demo.recyclerview
+package com.faltenreich.skeletonlayout.demo.viewpager2
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +8,15 @@ import com.faltenreich.skeletonlayout.demo.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_item_recyclerview.*
 
-class RecyclerViewHolder(
+class ViewPager2ViewHolder(
     parent: ViewGroup,
-    private val view: View = LayoutInflater.from(parent.context).inflate(R.layout.list_item_recyclerview, parent, false)
+    private val view: View = LayoutInflater.from(parent.context).inflate(R.layout.list_item_viewpager2, parent, false)
 ) : RecyclerView.ViewHolder(view), LayoutContainer {
 
     override val containerView: View?
         get() = view
 
-    fun bind(listItem: RecyclerViewListItem) {
+    fun bind(listItem: ViewPager2ListItem) {
         wallpaperView.setImageResource(listItem.wallpaperResId)
         avatarView.setImageResource(listItem.avatarResId)
         titleView.setText(listItem.titleResId)

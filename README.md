@@ -32,9 +32,10 @@ Create your own skeleton view with custom shapes, colors and shimmers.
 - **Make your app feel faster:** Immediate visual feedback long before your data has been fetched or requested
 - **Support any View:** Apply to any type of View or ViewGroup
 - **RecyclerView on speed:** Convenience adapter for the RecyclerView, since it is the main use case
+- **ViewPager2 support:** Convenience adapter for the ViewPager2, as it uses a RecyclerView under the hood
 - **Customization:** Adjust shimmer, color and shape of the skeleton to set you apart from other apps
 - **Minimum effort:** A fistful lines of code to use the SkeletonLayout
-- **Minimum footprint:** org.jetbrains.kotlin:kotlin-stdlib-jdk7 and androidx.recyclerview:recyclerview are the only dependencies
+- **Minimum footprint:** org.jetbrains.kotlin:kotlin-stdlib-jdk7, androidx.recyclerview:recyclerview and androidx.viewpager2.widget.ViewPager2 are the only dependencies
 
 ### Getting Started
 
@@ -57,6 +58,38 @@ dependencies {
 </com.faltenreich.skeletonlayout.SkeletonLayout>
 ```
 
+##### Kotlin
+```kotlin
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var skeleton: Skeleton
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Either use an existing Skeletonlayout
+        skeleton = findViewById(R.id.skeletonLayout)
+
+        // or create a new SkeletonLayout from a given View
+        skeleton = view.createSkeleton()
+
+        // or apply a new SkeletonLayout to a RecyclerView
+        skeleton = recyclerView.applySkeleton(R.layout.list_item_recyclerview)
+
+        // or apply a new SkeletonLayout to a ViewPager2
+        skeleton = viewPager2.applySkeleton(R.layout.list_item_viewpager2)
+
+        skeleton.showSkeleton()
+    }
+
+    // Example callback that hides skeleton
+    private fun onDataLoaded() {
+        skeleton.showOriginal()
+    }
+}
+```
+
 ##### Java
 ```java
 public class MainActivity extends AppCompatActivity {
@@ -74,44 +107,18 @@ public class MainActivity extends AppCompatActivity {
         // or create a new SkeletonLayout from a given View
         skeleton = SkeletonLayoutUtils.createSkeleton(view);
         
-        // or apply a new SkeletonLayout to a RecyclerView (showing 5 items)
-        skeleton = SkeletonLayoutUtils.applySkeleton(recyclerView, R.layout.list_item, 5);
-        
+        // or apply a new SkeletonLayout to a RecyclerView
+        skeleton = SkeletonLayoutUtils.applySkeleton(recyclerView, R.layout.list_item_recyclerview);
+
+        // or apply a new SkeletonLayout to a ViewPager2
+        skeleton = SkeletonLayoutUtils.applySkeleton(viewPager2, R.layout.list_item_viewpager2);
+
         skeleton.showSkeleton();
     }
     
     // Example callback that hides skeleton
     private void onDataLoaded() {
         skeleton.showOriginal();
-    }
-}
-```
-
-##### Kotlin
-```kotlin
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var skeleton: Skeleton
-    
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        
-        // Either use an existing Skeletonlayout
-        skeleton = findViewById(R.id.skeletonLayout)
-        
-        // or create a new SkeletonLayout from a given View
-        skeleton = view.createSkeleton()
-        
-        // or apply a new SkeletonLayout to a RecyclerView (showing 5 items)
-        skeleton = recyclerView.applySkeleton(R.layout.list_item, 5)
-        
-        skeleton.showSkeleton()
-    }
-    
-    // Example callback that hides skeleton
-    private fun onDataLoaded() {
-        skeleton.showOriginal()
     }
 }
 ```
@@ -127,7 +134,7 @@ shimmerColor | color | Color of the animated shimmer (defaults to #d5d5d5)
 shimmerDurationInMillis | integer | Duration in milliseconds for one shimmer animation interval (defaults to 2000)
 shimmerDirection | enum | Direction of animated shimmer
 shimmerAngle | integer | Angle in degrees for animated shimmer
-itemCount | integer | Item count for Skeleton adapter (RecyclerView only, defaults to 3)
+itemCount | integer | Item count for Skeleton adapter (RecyclerView and ViewPager2 only, defaults to 3)
 
 ### FAQ
 

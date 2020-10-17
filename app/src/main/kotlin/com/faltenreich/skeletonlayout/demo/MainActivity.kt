@@ -11,6 +11,7 @@ import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.demo.configuration.ConfigurationFragment
 import com.faltenreich.skeletonlayout.demo.recyclerview.RecyclerViewFragment
 import com.faltenreich.skeletonlayout.demo.viewgroup.ViewGroupFragment
+import com.faltenreich.skeletonlayout.demo.viewpager2.ViewPager2Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun initLayout() {
-        viewPagerAdapter = MainPagerAdapter(supportFragmentManager, arrayOf(RecyclerViewFragment(), ViewGroupFragment()))
+        viewPagerAdapter = MainPagerAdapter(supportFragmentManager, arrayOf(RecyclerViewFragment(), ViewGroupFragment(), ViewPager2Fragment()))
         viewPager.adapter = viewPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
 
@@ -89,7 +90,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun toggleSkeleton() {
-        getSkeleton()?.let { if (it.isSkeleton()) hideSkeleton(it) else showSkeleton(it) }
+        getSkeleton()?.let {
+            if (it.isSkeleton()) hideSkeleton(it) else showSkeleton(it)
+            notifyFragmentAboutToggle()
+        }
+    }
+
+    private fun notifyFragmentAboutToggle() {
+        (viewPagerAdapter.getItem(viewPager.currentItem) as? MainPagerFragment)?.onSkeletonToggled()
     }
 
     private fun showSkeleton(skeleton: Skeleton) {

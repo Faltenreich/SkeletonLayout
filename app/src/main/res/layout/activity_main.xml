@@ -15,12 +15,12 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"/>
+            app:tabMode="fixed" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/margin"
-        app:srcCompat="@drawable/ic_edit"
-        app:fabSize="normal"/>
+        android:src="@drawable/ic_edit"
+        app:fabSize="normal" />
 
 </FrameLayout>
