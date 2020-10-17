@@ -9,19 +9,13 @@ import com.faltenreich.skeletonlayout.recyclerview.SkeletonRecyclerViewAdapter
 
 internal class SkeletonViewPager2(
     private val viewPager: ViewPager2,
-    @LayoutRes private val layoutResId: Int,
-    private val itemCount: Int,
-    private val config: SkeletonConfig
+    @LayoutRes layoutResId: Int,
+    itemCount: Int,
+    config: SkeletonConfig
 ) : Skeleton, SkeletonStyle by config {
 
     private val originalAdapter = viewPager.adapter
-
-    private var skeletonAdapter: SkeletonRecyclerViewAdapter? = null
-
-    init {
-        config.onValueChanged = ::invalidate
-        invalidate()
-    }
+    private var skeletonAdapter: SkeletonRecyclerViewAdapter = SkeletonRecyclerViewAdapter(layoutResId, itemCount, config)
 
     override fun showOriginal() {
         viewPager.adapter = originalAdapter
@@ -31,13 +25,7 @@ internal class SkeletonViewPager2(
         viewPager.adapter = skeletonAdapter
     }
 
-    override fun isSkeleton() = skeletonAdapter != null && viewPager.adapter == skeletonAdapter
-
-    private fun invalidate() {
-        val showSkeleton = isSkeleton()
-        skeletonAdapter = SkeletonRecyclerViewAdapter(layoutResId, itemCount, config)
-        if (showSkeleton) {
-            showSkeleton()
-        }
+    override fun isSkeleton(): Boolean {
+        return viewPager.adapter == skeletonAdapter
     }
 }

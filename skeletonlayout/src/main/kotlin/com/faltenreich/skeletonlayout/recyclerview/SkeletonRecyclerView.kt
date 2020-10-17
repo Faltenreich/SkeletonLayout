@@ -8,19 +8,13 @@ import com.faltenreich.skeletonlayout.SkeletonStyle
 
 internal class SkeletonRecyclerView(
     private val recyclerView: RecyclerView,
-    @LayoutRes private val layoutResId: Int,
-    private val itemCount: Int,
-    private val config: SkeletonConfig
+    @LayoutRes layoutResId: Int,
+    itemCount: Int,
+    config: SkeletonConfig
 ) : Skeleton, SkeletonStyle by config {
 
     private val originalAdapter = recyclerView.adapter
-
-    private var skeletonAdapter: SkeletonRecyclerViewAdapter? = null
-
-    init {
-        config.onValueChanged = ::invalidate
-        invalidate()
-    }
+    private var skeletonAdapter: SkeletonRecyclerViewAdapter = SkeletonRecyclerViewAdapter(layoutResId, itemCount, config)
 
     override fun showOriginal() {
         recyclerView.adapter = originalAdapter
@@ -31,14 +25,6 @@ internal class SkeletonRecyclerView(
     }
 
     override fun isSkeleton(): Boolean {
-        return skeletonAdapter != null && recyclerView.adapter == skeletonAdapter
-    }
-
-    private fun invalidate() {
-        val showSkeleton = isSkeleton()
-        skeletonAdapter = SkeletonRecyclerViewAdapter(layoutResId, itemCount, config)
-        if (showSkeleton) {
-            showSkeleton()
-        }
+        return recyclerView.adapter == skeletonAdapter
     }
 }

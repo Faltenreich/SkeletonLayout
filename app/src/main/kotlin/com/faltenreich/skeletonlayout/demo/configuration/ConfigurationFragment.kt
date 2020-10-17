@@ -113,6 +113,7 @@ class ConfigurationFragment : BottomSheetDialogFragment() {
         fun newInstance(child: MainPagerFragment): ConfigurationFragment {
             val fragment = ConfigurationFragment()
             fragment.configurationListener = child
+
             val skeleton = child.skeleton
 
             val arguments = Bundle()
