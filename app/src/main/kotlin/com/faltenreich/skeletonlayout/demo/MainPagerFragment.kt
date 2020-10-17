@@ -32,6 +32,10 @@ abstract class MainPagerFragment(
         skeleton.shimmerDurationInMillis = value
     }
 
+    override fun onShimmerAngleChanged(value: Int) {
+        skeleton.shimmerAngle = value
+    }
+
     override fun onSkeletonToggled() {
         //Do nothing
     }

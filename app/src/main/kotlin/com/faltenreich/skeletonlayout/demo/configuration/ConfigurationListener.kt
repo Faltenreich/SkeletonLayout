@@ -8,4 +8,5 @@ interface ConfigurationListener {
     fun onShowShimmerChanged(value: Boolean)
     fun onShimmerColorChanged(@ColorInt value: Int)
     fun onShimmerDurationChanged(value: Long)
+    fun onShimmerAngleChanged(value: Int)
 }

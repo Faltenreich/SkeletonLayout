@@ -44,6 +44,11 @@ class ConfigurationFragment : BottomSheetDialogFragment() {
             val shimmerDurationProgress = ((shimmerDuration.toFloat() / MAX_SHIMMER_DURATION_IN_MILLIS) * 100).toInt()
             shimmerDurationView.progress = shimmerDurationProgress
             shimmerDurationLabel.text = String.format(getString(R.string.shimmer_duration), shimmerDuration)
+
+            val shimmerAngle = getInt(ARGUMENT_SHIMMER_ANGLE)
+            val shimmerAngleProgress = ((shimmerAngle.toFloat() / MAX_SHIMMER_ANGLE) * 100).toInt()
+            shimmerAngleView.progress = shimmerAngleProgress
+            shimmerAngleLabel.text = String.format(getString(R.string.shimmer_angle), shimmerAngle)
         }
     }
 
@@ -64,6 +69,11 @@ class ConfigurationFragment : BottomSheetDialogFragment() {
             shimmerDurationLabel.text = String.format(getString(R.string.shimmer_duration), durationInMillis)
             configurationListener.onShimmerDurationChanged(durationInMillis)
         }
+        shimmerAngleView.onProgressChanged { progress ->
+            val angle = ((progress.toFloat() / 100) * MAX_SHIMMER_ANGLE).toInt()
+            shimmerAngleLabel.text = String.format(getString(R.string.shimmer_angle), angle)
+            configurationListener.onShimmerAngleChanged(angle)
+        }
     }
 
     private fun SeekBar.onProgressChanged(onProgressChanged: (progress: Int) -> Unit) {
@@ -83,9 +93,11 @@ class ConfigurationFragment : BottomSheetDialogFragment() {
         private const val ARGUMENT_SHOW_SHIMMER = "showShimmer"
         private const val ARGUMENT_SHIMMER_COLOR = "shimmerColor"
         private const val ARGUMENT_SHIMMER_DURATION_IN_MILLIS = "shimmerDurationInMillis"
+        private const val ARGUMENT_SHIMMER_ANGLE = "shimmerAngle"
 
         private const val MAX_MASK_CORNER_RADIUS = 100f
         private const val MAX_SHIMMER_DURATION_IN_MILLIS = 10000L
+        private const val MAX_SHIMMER_ANGLE = 360
 
         fun newInstance(child: MainPagerFragment): ConfigurationFragment {
             val fragment = ConfigurationFragment()
@@ -98,6 +110,7 @@ class ConfigurationFragment : BottomSheetDialogFragment() {
             arguments.putBoolean(ARGUMENT_SHOW_SHIMMER, skeleton.showShimmer)
             arguments.putInt(ARGUMENT_SHIMMER_COLOR, skeleton.shimmerColor)
             arguments.putLong(ARGUMENT_SHIMMER_DURATION_IN_MILLIS, skeleton.shimmerDurationInMillis)
+            arguments.putInt(ARGUMENT_SHIMMER_ANGLE, skeleton.shimmerAngle)
             fragment.arguments = arguments
 
             return fragment
