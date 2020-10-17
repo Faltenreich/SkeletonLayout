@@ -2,13 +2,11 @@ package com.faltenreich.skeletonlayout.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.faltenreich.skeletonlayout.SkeletonConfig
 import com.faltenreich.skeletonlayout.SkeletonLayout
 import com.faltenreich.skeletonlayout.createSkeleton
-import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 
 internal class SkeletonRecyclerViewAdapter(
     @LayoutRes private val layoutResId: Int,

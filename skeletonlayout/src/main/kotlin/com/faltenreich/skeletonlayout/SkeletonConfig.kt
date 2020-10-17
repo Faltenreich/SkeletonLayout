@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 import kotlin.properties.Delegates
+import kotlin.properties.ReadWriteProperty
 
 class SkeletonConfig(
     maskColor: Int,
@@ -15,13 +16,13 @@ class SkeletonConfig(
     shimmerAngle: Int,
 ) : SkeletonStyle {
 
-    override var maskColor: Int by Delegates.observable(maskColor) { _, _, _ -> onValueChanged() }
-    override var maskCornerRadius: Float by Delegates.observable(maskCornerRadius) { _, _, _ -> onValueChanged() }
-    override var showShimmer: Boolean by Delegates.observable(showShimmer) { _, _, _ -> onValueChanged() }
-    override var shimmerColor: Int by Delegates.observable(shimmerColor) { _, _, _ -> onValueChanged() }
-    override var shimmerDurationInMillis: Long by Delegates.observable(shimmerDurationInMillis) { _, _, _ -> onValueChanged() }
-    override var shimmerDirection: SkeletonShimmerDirection by Delegates.observable(shimmerDirection) { _, _, _ -> onValueChanged() }
-    override var shimmerAngle: Int by Delegates.observable(shimmerAngle) { _, _, _ -> onValueChanged() }
+    override var maskColor: Int by observable(maskColor)
+    override var maskCornerRadius: Float by observable(maskCornerRadius)
+    override var showShimmer: Boolean by observable(showShimmer)
+    override var shimmerColor: Int by observable(shimmerColor)
+    override var shimmerDurationInMillis: Long by observable(shimmerDurationInMillis)
+    override var shimmerDirection: SkeletonShimmerDirection by observable(shimmerDirection)
+    override var shimmerAngle: Int by observable(shimmerAngle)
 
     private val valueObservers = mutableListOf<(() -> Unit)>()
     
@@ -31,6 +32,10 @@ class SkeletonConfig(
 
     fun addValueObserver(onValueChanged: () -> Unit) {
         valueObservers.add(onValueChanged)
+    }
+
+    private fun <T> observable(value: T): ReadWriteProperty<Any?, T> {
+        return Delegates.observable(value) { _, _, _ -> onValueChanged() }
     }
 
     companion object {

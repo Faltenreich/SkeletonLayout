@@ -6,11 +6,9 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
-import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
-import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 import com.faltenreich.skeletonlayout.mask.SkeletonMask
 import com.faltenreich.skeletonlayout.mask.SkeletonMaskFactory
+import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 
 open class SkeletonLayout @JvmOverloads constructor(
     context: Context,

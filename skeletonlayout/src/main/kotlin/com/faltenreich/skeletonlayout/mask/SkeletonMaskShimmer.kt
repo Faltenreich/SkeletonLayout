@@ -10,6 +10,7 @@ import androidx.annotation.ColorInt
 import com.faltenreich.skeletonlayout.isAttachedToWindowCompat
 import com.faltenreich.skeletonlayout.refreshRateInSeconds
 import kotlin.math.cos
+import kotlin.math.floor
 import kotlin.math.sin
 
 internal class SkeletonMaskShimmer(
@@ -56,12 +57,12 @@ internal class SkeletonMaskShimmer(
                     animation?.postDelayed(this, refreshIntervalInMillis)
                 }
             }
-            animation?.post(animationTask)
+            animationTask?.let { task -> animation?.post(task) }
         }
     }
 
     override fun stop() {
-        animation?.removeCallbacks(animationTask)
+        animationTask?.let { task -> animation?.removeCallbacks(task) }
         animation = null
     }
 
@@ -92,7 +93,7 @@ internal class SkeletonMaskShimmer(
         val millis = System.currentTimeMillis()
         val current = millis.toDouble()
         val interval = durationInMillis
-        val divisor = Math.floor(current / interval)
+        val divisor = floor(current / interval)
         val start = interval * divisor
         val end = start + interval
         val percentage = (current - start) / (end - start)
