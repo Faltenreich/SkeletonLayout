@@ -4,6 +4,7 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.demo.configuration.ConfigurationListener
+import com.faltenreich.skeletonlayout.mask.ShimmerDirection
 
 abstract class MainPagerFragment(
     @LayoutRes private val layoutResId: Int,
@@ -30,6 +31,10 @@ abstract class MainPagerFragment(
 
     override fun onShimmerDurationChanged(value: Long) {
         skeleton.shimmerDurationInMillis = value
+    }
+
+    override fun onShimmerDirectionChanged(value: Int) {
+        skeleton.shimmerDirection = ShimmerDirection.valueOf(value) ?: ShimmerDirection.LEFT_TO_RIGHT
     }
 
     override fun onShimmerAngleChanged(value: Int) {
