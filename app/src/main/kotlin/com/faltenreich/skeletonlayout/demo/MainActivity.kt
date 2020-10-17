@@ -21,19 +21,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initLayout()
-        if (BuildConfig.isDemoMode) {
-            runDemo()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menu?.findItem(R.id.action_toggle)?.isVisible = !BuildConfig.isDemoMode
-        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -58,23 +50,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         })
 
         fab.setOnClickListener { openConfiguration() }
-
-        val uiVisibility = if (BuildConfig.isDemoMode) View.GONE else View.VISIBLE
-        tabLayout.visibility = uiVisibility
-        fab.visibility = uiVisibility
-    }
-
-    private fun runDemo() {
-        val duration = 4000L
-        Handler().apply {
-            val runnable = object : Runnable {
-                override fun run() {
-                    toggleSkeleton()
-                    postDelayed(this, duration)
-                }
-            }
-            postDelayed(runnable, duration)
-        }
     }
 
     private fun getSkeleton(): Skeleton? {
@@ -105,7 +80,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun showSkeleton(skeleton: Skeleton) {
         skeleton.showSkeleton()
-        fab.visibility = if (!BuildConfig.isDemoMode) View.VISIBLE else View.GONE
+        fab.visibility = View.VISIBLE
     }
 
     private fun hideSkeleton(skeleton: Skeleton) {
