@@ -6,6 +6,7 @@ import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
 import com.faltenreich.skeletonlayout.demo.MainPagerFragment
 import com.faltenreich.skeletonlayout.demo.R
+import com.faltenreich.skeletonlayout.demo.recyclerview.RecyclerViewListItem
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_viewpager2.*
 
@@ -18,7 +19,7 @@ class ViewPager2Fragment : MainPagerFragment(R.layout.fragment_viewpager2, "View
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val items = ViewPager2ListItem.DEMO
+        val items = RecyclerViewListItem.DEMO
 
         val listAdapter = ViewPager2Adapter(items)
         viewPager.adapter = listAdapter

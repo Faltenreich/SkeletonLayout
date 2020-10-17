@@ -2,8 +2,9 @@ package com.faltenreich.skeletonlayout.demo.viewpager2
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.faltenreich.skeletonlayout.demo.recyclerview.RecyclerViewListItem
 
-class ViewPager2Adapter(private val items: List<ViewPager2ListItem>) : RecyclerView.Adapter<ViewPager2ViewHolder>() {
+class ViewPager2Adapter(private val items: List<RecyclerViewListItem>) : RecyclerView.Adapter<ViewPager2ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewPager2ViewHolder(parent)
 

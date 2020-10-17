@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.faltenreich.skeletonlayout.demo.R
+import com.faltenreich.skeletonlayout.demo.recyclerview.RecyclerViewListItem
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_item_recyclerview.*
 
@@ -16,7 +17,7 @@ class ViewPager2ViewHolder(
     override val containerView: View?
         get() = view
 
-    fun bind(listItem: ViewPager2ListItem) {
+    fun bind(listItem: RecyclerViewListItem) {
         wallpaperView.setImageResource(listItem.wallpaperResId)
         avatarView.setImageResource(listItem.avatarResId)
         titleView.setText(listItem.titleResId)
