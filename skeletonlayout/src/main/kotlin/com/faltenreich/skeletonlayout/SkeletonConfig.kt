@@ -3,16 +3,27 @@ package com.faltenreich.skeletonlayout
 import android.content.Context
 import androidx.core.content.ContextCompat
 import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
+import kotlin.properties.Delegates
 
-data class SkeletonConfig(
-    override var maskColor: Int,
-    override var maskCornerRadius: Float,
-    override var showShimmer: Boolean,
-    override var shimmerColor: Int,
-    override var shimmerDurationInMillis: Long,
-    override var shimmerDirection: SkeletonShimmerDirection,
-    override var shimmerAngle: Int,
+class SkeletonConfig(
+    maskColor: Int,
+    maskCornerRadius: Float,
+    showShimmer: Boolean,
+    shimmerColor: Int,
+    shimmerDurationInMillis: Long,
+    shimmerDirection: SkeletonShimmerDirection,
+    shimmerAngle: Int,
 ) : SkeletonStyle {
+
+    override var maskColor: Int by Delegates.observable(maskColor) { _, _, _ -> onValueChanged?.invoke() }
+    override var maskCornerRadius: Float by Delegates.observable(maskCornerRadius) { _, _, _ -> onValueChanged?.invoke() }
+    override var showShimmer: Boolean by Delegates.observable(showShimmer) { _, _, _ -> onValueChanged?.invoke() }
+    override var shimmerColor: Int by Delegates.observable(shimmerColor) { _, _, _ -> onValueChanged?.invoke() }
+    override var shimmerDurationInMillis: Long by Delegates.observable(shimmerDurationInMillis) { _, _, _ -> onValueChanged?.invoke() }
+    override var shimmerDirection: SkeletonShimmerDirection by Delegates.observable(shimmerDirection) { _, _, _ -> onValueChanged?.invoke() }
+    override var shimmerAngle: Int by Delegates.observable(shimmerAngle) { _, _, _ -> onValueChanged?.invoke() }
+
+    var onValueChanged: (() -> Unit)? = null
 
     companion object {
 

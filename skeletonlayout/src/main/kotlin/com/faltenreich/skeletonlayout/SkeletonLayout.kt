@@ -41,6 +41,7 @@ open class SkeletonLayout @JvmOverloads constructor(
             this.shimmerAngle = typedArray.getInt(R.styleable.SkeletonLayout_shimmerAngle, shimmerAngle)
             typedArray.recycle()
         }
+        config.onValueChanged = ::invalidateMask
         originView?.let { view -> addView(view) }
     }
 
@@ -118,7 +119,7 @@ open class SkeletonLayout @JvmOverloads constructor(
             if (isSkeleton) {
                 if (width > 0 && height > 0) {
                     mask = SkeletonMaskFactory
-                        .createMask(this, maskColor, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)
+                        .createMask(this, config)
                         .also { mask -> mask.mask(this, maskCornerRadius) }
                 } else {
                     Log.e(tag(), "Failed to mask view with invalid width and height")

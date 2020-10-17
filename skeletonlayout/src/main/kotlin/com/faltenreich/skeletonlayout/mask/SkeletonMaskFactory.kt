@@ -2,21 +2,17 @@ package com.faltenreich.skeletonlayout.mask
 
 import android.view.View
 import androidx.annotation.ColorInt
+import com.faltenreich.skeletonlayout.SkeletonConfig
 
 internal object SkeletonMaskFactory {
 
     fun createMask(
         view: View,
-        @ColorInt maskColor: Int,
-        showShimmer: Boolean,
-        @ColorInt shimmerColor: Int,
-        shimmerDurationInMillis: Long,
-        shimmerDirection: SkeletonShimmerDirection,
-        shimmerAngle: Int
+        config: SkeletonConfig
     ): SkeletonMask {
-        return when (showShimmer) {
-            true -> SkeletonMaskShimmer(view, maskColor, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)
-            false -> SkeletonMaskSolid(view, maskColor)
+        return when (config.showShimmer) {
+            true -> SkeletonMaskShimmer(view, config.maskColor, config.shimmerColor, config.shimmerDurationInMillis, config.shimmerDirection, config.shimmerAngle)
+            false -> SkeletonMaskSolid(view, config.maskColor)
         }
     }
 }

@@ -75,7 +75,6 @@ class ConfigurationFragment : BottomSheetDialogFragment() {
         }
         shimmerDirectionView.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                shimmerDirectionView.setSelection(position)
                 configurationListener.onShimmerDirectionChanged(position)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) = Unit
