@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         return super.onPrepareOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
             R.id.action_toggle -> {
                 toggleSkeleton()
                 true
@@ -77,27 +77,30 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
     }
 
-    private fun getSkeleton(): Skeleton? = (viewPagerAdapter.getItem(viewPager.currentItem) as? MainPagerFragment)?.skeleton
+    private fun getSkeleton(): Skeleton? {
+        return (viewPagerAdapter.getItem(viewPager.currentItem) as? MainPagerFragment)?.skeleton
+    }
 
     private fun invalidateSkeleton() {
-        getSkeleton()?.let {
-            val shouldShow = fab.visibility == View.VISIBLE
-            val isShown = it.isSkeleton()
-            if (shouldShow != isShown) {
-                if (shouldShow) showSkeleton(it) else hideSkeleton(it)
+        val skeleton = getSkeleton() ?: return
+        val shouldShow = fab.visibility == View.VISIBLE
+        val isShown = skeleton.isSkeleton()
+        if (shouldShow != isShown) {
+            if (shouldShow) {
+                showSkeleton(skeleton)
+            } else {
+                hideSkeleton(skeleton)
             }
         }
     }
 
     private fun toggleSkeleton() {
-        getSkeleton()?.let {
-            if (it.isSkeleton()) hideSkeleton(it) else showSkeleton(it)
-            notifyFragmentAboutToggle()
+        val skeleton = getSkeleton() ?: return
+        if (skeleton.isSkeleton()) {
+            hideSkeleton(skeleton)
+        } else {
+            showSkeleton(skeleton)
         }
-    }
-
-    private fun notifyFragmentAboutToggle() {
-        (viewPagerAdapter.getItem(viewPager.currentItem) as? MainPagerFragment)?.onSkeletonToggled()
     }
 
     private fun showSkeleton(skeleton: Skeleton) {
