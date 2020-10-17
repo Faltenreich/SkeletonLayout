@@ -18,33 +18,22 @@ internal class SkeletonMaskShimmer(
     @ColorInt maskColor: Int,
     @ColorInt var shimmerColor: Int,
     var durationInMillis: Long,
-    private val shimmerDirection: Int
+    private val shimmerDirection: ShimmerDirection
 ) : SkeletonMask(parent, maskColor) {
 
     private val refreshIntervalInMillis: Long by lazy { ((1000f / parent.context.refreshRateInSeconds()) * .9f).toLong() }
     private val width: Float = parent.width.toFloat()
     private val matrix: Matrix = Matrix()
     private val shimmerGradient by lazy {
-        if (shimmerDirection == DEFAULT_SHIMMER_DIRECTION)
-            LinearGradient(
-                0f,
-                0f,
-                width,
-                0f,
-                intArrayOf(color, shimmerColor, color),
-                null,
-                Shader.TileMode.CLAMP
-            )
-        else
-            LinearGradient(
-                0f,
-                0f,
-                (cos(Math.toRadians(45.0)) * width).toFloat(),
-                (sin(Math.toRadians(45.0)) * width).toFloat(),
-                intArrayOf(color, shimmerColor, color),
-                null,
-                Shader.TileMode.CLAMP
-            )
+        LinearGradient(
+            0f,
+            0f,
+            width,
+            0f,
+            intArrayOf(color, shimmerColor, color),
+            null,
+            Shader.TileMode.CLAMP
+        )
     }
 
     private var animation: Handler? = null
@@ -93,7 +82,10 @@ internal class SkeletonMaskShimmer(
     }
 
     private fun currentOffset(): Float {
-        val progress = currentProgress()
+        val progress = when (shimmerDirection) {
+            ShimmerDirection.LEFT_TO_RIGHT -> currentProgress()
+            ShimmerDirection.RIGHT_TO_LEFT -> 1 - currentProgress()
+        }
         val offset = width * 2
         val min = -offset
         val max = width + offset

@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
+import com.faltenreich.skeletonlayout.mask.ShimmerDirection
 import com.faltenreich.skeletonlayout.mask.SkeletonMask
 import com.faltenreich.skeletonlayout.mask.SkeletonMaskFactory
 
@@ -21,7 +22,7 @@ open class SkeletonLayout @JvmOverloads constructor(
     private var showShimmerInternal: Boolean = DEFAULT_SHIMMER_SHOW,
     @ColorInt private var shimmerColorInternal: Int = ContextCompat.getColor(context, DEFAULT_SHIMMER_COLOR),
     private var shimmerDurationInMillisInternal: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS,
-    private var shimmerDirection: Int = DEFAULT_SHIMMER_DIRECTION
+    private var shimmerDirectionInternal: ShimmerDirection = DEFAULT_SHIMMER_DIRECTION
 ) : FrameLayout(context, attrs, defStyleAttr), Skeleton {
 
     internal constructor(
@@ -31,7 +32,7 @@ open class SkeletonLayout @JvmOverloads constructor(
         showShimmer: Boolean,
         @ColorInt shimmerColor: Int,
         shimmerDuration: Long = 0,
-        shimmerDirection: Int = DEFAULT_SHIMMER_DIRECTION
+        shimmerDirection: ShimmerDirection = DEFAULT_SHIMMER_DIRECTION
     ) : this(originView.context, null, 0, originView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration, shimmerDirection)
 
     override var maskColor: Int
@@ -69,6 +70,13 @@ open class SkeletonLayout @JvmOverloads constructor(
             invalidateMask()
         }
 
+    override var shimmerDirection: ShimmerDirection
+        get() = shimmerDirectionInternal
+        set(value) {
+            shimmerDirectionInternal = value
+            invalidateMask()
+        }
+
     private var mask: SkeletonMask? = null
     private var isSkeleton: Boolean = false
     private var isRendered: Boolean = false
@@ -81,7 +89,7 @@ open class SkeletonLayout @JvmOverloads constructor(
             this.showShimmerInternal = typedArray.getBoolean(R.styleable.SkeletonLayout_showShimmer, showShimmerInternal)
             this.shimmerColorInternal = typedArray.getColor(R.styleable.SkeletonLayout_shimmerColor, shimmerColorInternal)
             this.shimmerDurationInMillisInternal = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillisInternal.toInt()).toLong()
-            this.shimmerDirection = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDirection, shimmerDirection)
+            this.shimmerDirectionInternal = ShimmerDirection.valueOf(typedArray.getInt(R.styleable.SkeletonLayout_shimmerDirection, shimmerDirectionInternal.ordinal)) ?: DEFAULT_SHIMMER_DIRECTION
             typedArray.recycle()
         }
         originView?.let { view -> addView(view) }
@@ -178,6 +186,6 @@ open class SkeletonLayout @JvmOverloads constructor(
         const val DEFAULT_SHIMMER_SHOW = true
         val DEFAULT_SHIMMER_COLOR = R.color.skeleton_shimmer
         const val DEFAULT_SHIMMER_DURATION_IN_MILLIS = 2000L
-        const val DEFAULT_SHIMMER_DIRECTION = 1
+        val DEFAULT_SHIMMER_DIRECTION = ShimmerDirection.LEFT_TO_RIGHT
     }
 }
