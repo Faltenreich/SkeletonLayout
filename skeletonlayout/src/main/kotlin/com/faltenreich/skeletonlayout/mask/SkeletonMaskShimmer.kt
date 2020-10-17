@@ -7,19 +7,36 @@ import android.graphics.Shader
 import android.os.Handler
 import android.view.View
 import androidx.annotation.ColorInt
+import com.faltenreich.skeletonlayout.SkeletonLayout.Companion.DEFAULT_SHIMMER_DIRECTION
 import com.faltenreich.skeletonlayout.isAttachedToWindowCompat
 import com.faltenreich.skeletonlayout.refreshRateInSeconds
+import kotlin.math.cos
+import kotlin.math.sin
 
 internal class SkeletonMaskShimmer(
     parent: View,
     @ColorInt maskColor: Int,
-    @ColorInt var shimmerColor: Int,
-    var durationInMillis: Long
+    @ColorInt private val shimmerColor: Int,
+    private val durationInMillis: Long,
+    private val shimmerDirection: ShimmerDirection,
+    private val shimmerAngle: Int
 ) : SkeletonMask(parent, maskColor) {
 
     private val refreshIntervalInMillis: Long by lazy { ((1000f / parent.context.refreshRateInSeconds()) * .9f).toLong() }
     private val width: Float = parent.width.toFloat()
     private val matrix: Matrix = Matrix()
+    private val shimmerGradient by lazy {
+        val radians = Math.toRadians(shimmerAngle.toDouble())
+        LinearGradient(
+            0f,
+            0f,
+            cos(radians.toFloat()) * width,
+            sin(radians.toFloat()) * width,
+            intArrayOf(color, shimmerColor, color),
+            null,
+            Shader.TileMode.CLAMP
+        )
+    }
 
     private var animation: Handler? = null
     private var animationTask: Runnable? = null
@@ -50,8 +67,25 @@ internal class SkeletonMaskShimmer(
     }
 
     override fun createPaint() = Paint().also {
-        it.shader = LinearGradient(0f, 0f, width, 0f, intArrayOf(color, shimmerColor, color), null, Shader.TileMode.CLAMP)
+        it.shader = shimmerGradient
         it.isAntiAlias = true
+    }
+
+    private fun updateShimmer() {
+        matrix.setTranslate(currentOffset(), 0f)
+        paint.shader.setLocalMatrix(matrix)
+        parent.invalidate()
+    }
+
+    private fun currentOffset(): Float {
+        val progress = when (shimmerDirection) {
+            ShimmerDirection.LEFT_TO_RIGHT -> currentProgress()
+            ShimmerDirection.RIGHT_TO_LEFT -> 1 - currentProgress()
+        }
+        val offset = width * 2
+        val min = -offset
+        val max = width + offset
+        return progress * (max - min) + min
     }
 
     // Progress is time-dependent to support synchronization between uncoupled views
@@ -64,19 +98,5 @@ internal class SkeletonMaskShimmer(
         val end = start + interval
         val percentage = (current - start) / (end - start)
         return percentage.toFloat()
-    }
-
-    private fun currentOffset(): Float {
-        val progress = currentProgress()
-        val offset = width * 2
-        val min = -offset
-        val max = width + offset
-        return progress * (max - min) + min
-    }
-
-    private fun updateShimmer() {
-        matrix.setTranslate(currentOffset(), 0f)
-        paint.shader.setLocalMatrix(matrix)
-        parent.invalidate()
     }
 }

@@ -129,9 +129,11 @@ Property | Type | Description
 --- | --- | ---
 maskColor | color | Color of the mask that fills the original view bounds (defaults to #E0E0E0)
 maskCornerRadius | dimension | The x- and y-radius of the oval used to round the mask corners (defaults to 25)
-showShimmer | boolean | Animate left-to-right shimmer, if set to true (defaults to true)
+showShimmer | boolean | Animate shimmer if set to true (defaults to true)
 shimmerColor | color | Color of the animated shimmer (defaults to #d5d5d5)
 shimmerDurationInMillis | integer | Duration in milliseconds for one shimmer animation interval (defaults to 2000)
+shimmerDirection | enum | Direction of animated shimmer
+shimmerAngle | integer | Angle in degrees for animated shimmer
 itemCount | integer | Item count for Skeleton adapter (RecyclerView and ViewPager2 only, defaults to 3)
 
 ### FAQ

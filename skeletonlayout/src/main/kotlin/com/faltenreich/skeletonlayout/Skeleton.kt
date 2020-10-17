@@ -1,5 +1,7 @@
 package com.faltenreich.skeletonlayout
 
+import com.faltenreich.skeletonlayout.mask.ShimmerDirection
+
 /**
  * Toggle state and change properties through this interface after a Skeleton has been applied to a View
  */
@@ -16,7 +18,7 @@ interface Skeleton {
     var maskCornerRadius: Float
 
     /**
-     * Animate left-to-right shimmer, if set to true
+     * Animate shimmer if set to true
      */
     var showShimmer: Boolean
 
@@ -29,6 +31,16 @@ interface Skeleton {
      * Duration in milliseconds for one shimmer animation interval
      */
     var shimmerDurationInMillis: Long
+
+    /**
+     * Direction of animated shimmer
+     */
+    var shimmerDirection: ShimmerDirection
+
+    /**
+     * Angle in degrees for animated shimmer
+     */
+    var shimmerAngle: Int
 
     /**
      * Display the original layout and hide the skeleton

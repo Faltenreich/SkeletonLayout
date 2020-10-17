@@ -6,6 +6,11 @@
     <string name="mask_corner_radius">Mask corner radius (%d)</string>
     <string name="shimmer_color">Shimmer color</string>
     <string name="shimmer_duration">Shimmer duration (%d ms)</string>
+    <string-array name="shimmer_directions">
+        <item>Left-to-right</item>
+        <item>Right-to-left</item>
+    </string-array>
+    <string name="shimmer_angle">Shimmer angle (%d°)</string>
     <string name="shimmer_show">Show shimmer</string>
     <string name="toggle">Toggle skeleton</string>
 
