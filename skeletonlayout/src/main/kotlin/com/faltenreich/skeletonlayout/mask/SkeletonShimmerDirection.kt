@@ -1,12 +1,12 @@
 package com.faltenreich.skeletonlayout.mask
 
-enum class ShimmerDirection(private val stableId: Int) {
+enum class SkeletonShimmerDirection(private val stableId: Int) {
     LEFT_TO_RIGHT(0),
     RIGHT_TO_LEFT(1);
 
     companion object {
 
-        fun valueOf(stableId: Int): ShimmerDirection? {
+        fun valueOf(stableId: Int): SkeletonShimmerDirection? {
             return values().firstOrNull { it.stableId == stableId }
         }
     }

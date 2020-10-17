@@ -1,10 +1,11 @@
-package com.faltenreich.skeletonlayout.recyclerview
+package com.faltenreich.skeletonlayout.viewpager2
 
 import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import androidx.viewpager2.widget.ViewPager2
 import com.faltenreich.skeletonlayout.Skeleton
-import com.faltenreich.skeletonlayout.mask.ShimmerDirection
+import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
+import com.faltenreich.skeletonlayout.recyclerview.SkeletonRecyclerViewAdapter
 
 internal class SkeletonViewPager2(
     private val viewPager: ViewPager2,
@@ -15,7 +16,7 @@ internal class SkeletonViewPager2(
     showShimmer: Boolean,
     @ColorInt shimmerColor: Int,
     shimmerDurationInMillis: Long,
-    shimmerDirection: ShimmerDirection,
+    shimmerDirection: SkeletonShimmerDirection,
     shimmerAngle: Int
 ) : Skeleton {
 
@@ -61,7 +62,7 @@ internal class SkeletonViewPager2(
             invalidate()
         }
 
-    override var shimmerDirection: ShimmerDirection = shimmerDirection
+    override var shimmerDirection: SkeletonShimmerDirection = shimmerDirection
         set(value) {
             field = value
             invalidate()

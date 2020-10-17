@@ -8,10 +8,10 @@ import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.faltenreich.skeletonlayout.mask.ShimmerDirection
+import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 import androidx.viewpager2.widget.ViewPager2
 import com.faltenreich.skeletonlayout.recyclerview.SkeletonRecyclerView
-import com.faltenreich.skeletonlayout.recyclerview.SkeletonViewPager2
+import com.faltenreich.skeletonlayout.viewpager2.SkeletonViewPager2
 
 private const val LIST_ITEM_COUNT_DEFAULT = 3
 
@@ -34,7 +34,7 @@ fun View.createSkeleton(
     showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
     @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
     shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
-    shimmerDirection: ShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
+    shimmerDirection: SkeletonShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
     shimmerAngle: Int = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
 ): Skeleton {
     // If this View already has a parent, we need to replace it there with the SkeletonLayout
@@ -76,7 +76,7 @@ fun RecyclerView.applySkeleton(
     showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
     @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
     shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
-    shimmerDirection: ShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
+    shimmerDirection: SkeletonShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
     shimmerAngle: Int = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
 ): Skeleton = SkeletonRecyclerView(this, listItemLayoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)
 
@@ -102,6 +102,6 @@ fun ViewPager2.applySkeleton(
     showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
     @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
     shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
-    shimmerDirection: ShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
+    shimmerDirection: SkeletonShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
     shimmerAngle: Int = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
 ): Skeleton = SkeletonViewPager2(this, listItemLayoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)

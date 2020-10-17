@@ -7,7 +7,6 @@ import android.graphics.Shader
 import android.os.Handler
 import android.view.View
 import androidx.annotation.ColorInt
-import com.faltenreich.skeletonlayout.SkeletonLayout.Companion.DEFAULT_SHIMMER_DIRECTION
 import com.faltenreich.skeletonlayout.isAttachedToWindowCompat
 import com.faltenreich.skeletonlayout.refreshRateInSeconds
 import kotlin.math.cos
@@ -18,7 +17,7 @@ internal class SkeletonMaskShimmer(
     @ColorInt maskColor: Int,
     @ColorInt private val shimmerColor: Int,
     private val durationInMillis: Long,
-    private val shimmerDirection: ShimmerDirection,
+    private val shimmerDirection: SkeletonShimmerDirection,
     private val shimmerAngle: Int
 ) : SkeletonMask(parent, maskColor) {
 
@@ -79,8 +78,8 @@ internal class SkeletonMaskShimmer(
 
     private fun currentOffset(): Float {
         val progress = when (shimmerDirection) {
-            ShimmerDirection.LEFT_TO_RIGHT -> currentProgress()
-            ShimmerDirection.RIGHT_TO_LEFT -> 1 - currentProgress()
+            SkeletonShimmerDirection.LEFT_TO_RIGHT -> currentProgress()
+            SkeletonShimmerDirection.RIGHT_TO_LEFT -> 1 - currentProgress()
         }
         val offset = width * 2
         val min = -offset

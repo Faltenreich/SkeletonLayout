@@ -7,7 +7,7 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.faltenreich.skeletonlayout.SkeletonLayout
 import com.faltenreich.skeletonlayout.createSkeleton
-import com.faltenreich.skeletonlayout.mask.ShimmerDirection
+import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 
 internal class SkeletonRecyclerViewAdapter(
     @LayoutRes private val layoutResId: Int,
@@ -17,7 +17,7 @@ internal class SkeletonRecyclerViewAdapter(
     private val showShimmer: Boolean,
     @ColorInt private val shimmerColor: Int,
     private val shimmerDurationInMillis: Long,
-    private val shimmerDirection: ShimmerDirection,
+    private val shimmerDirection: SkeletonShimmerDirection,
     private val shimmerAngle: Int
 ) : RecyclerView.Adapter<SkeletonRecyclerViewHolder>() {
 
