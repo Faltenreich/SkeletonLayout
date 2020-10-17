@@ -90,6 +90,8 @@ fun RecyclerView.applySkeleton(
  * @param showShimmer Animate left-to-right shimmer, if set to true
  * @param shimmerColor Color of the animated shimmer
  * @param shimmerDurationInMillis Duration in milliseconds for one shimmer animation interval
+ * @param shimmerDirection Direction of animated shimmer
+ * @param shimmerAngle Angle in degrees for animated shimmer
  */
 @JvmOverloads
 fun ViewPager2.applySkeleton(
@@ -99,5 +101,7 @@ fun ViewPager2.applySkeleton(
     cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
     showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
     @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
-    shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS
-): Skeleton = SkeletonViewPager2(this, listItemLayoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis)
+    shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
+    shimmerDirection: ShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
+    shimmerAngle: Int = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
+): Skeleton = SkeletonViewPager2(this, listItemLayoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)
