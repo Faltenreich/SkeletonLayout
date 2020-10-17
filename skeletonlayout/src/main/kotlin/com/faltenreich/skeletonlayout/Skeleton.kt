@@ -38,6 +38,11 @@ interface Skeleton {
     var shimmerDirection: ShimmerDirection
 
     /**
+     * Angle in degrees for animated shimmer
+     */
+    var shimmerAngle: Int
+
+    /**
      * Display the original layout and hide the skeleton
      */
     fun showOriginal()

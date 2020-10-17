@@ -12,6 +12,7 @@
             <enum name="left_to_right" value="0"/>
             <enum name="right_to_left" value="1"/>
         </attr>
+        <attr name="shimmerAngle" format="integer" />
     </declare-styleable>
     
 </resources>

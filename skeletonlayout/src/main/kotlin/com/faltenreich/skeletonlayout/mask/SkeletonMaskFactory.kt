@@ -11,10 +11,11 @@ internal object SkeletonMaskFactory {
         showShimmer: Boolean,
         @ColorInt shimmerColor: Int,
         shimmerDurationInMillis: Long,
-        shimmerDirection: ShimmerDirection
+        shimmerDirection: ShimmerDirection,
+        shimmerAngle: Int
     ): SkeletonMask {
         return when (showShimmer) {
-            true -> SkeletonMaskShimmer(view, maskColor, shimmerColor, shimmerDurationInMillis, shimmerDirection)
+            true -> SkeletonMaskShimmer(view, maskColor, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)
             false -> SkeletonMaskSolid(view, maskColor)
         }
     }

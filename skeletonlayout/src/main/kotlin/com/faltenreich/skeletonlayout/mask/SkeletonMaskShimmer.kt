@@ -16,20 +16,22 @@ import kotlin.math.sin
 internal class SkeletonMaskShimmer(
     parent: View,
     @ColorInt maskColor: Int,
-    @ColorInt var shimmerColor: Int,
-    var durationInMillis: Long,
-    private val shimmerDirection: ShimmerDirection
+    @ColorInt private val shimmerColor: Int,
+    private val durationInMillis: Long,
+    private val shimmerDirection: ShimmerDirection,
+    private val shimmerAngle: Int
 ) : SkeletonMask(parent, maskColor) {
 
     private val refreshIntervalInMillis: Long by lazy { ((1000f / parent.context.refreshRateInSeconds()) * .9f).toLong() }
     private val width: Float = parent.width.toFloat()
     private val matrix: Matrix = Matrix()
     private val shimmerGradient by lazy {
+        val radians = Math.toRadians(shimmerAngle.toDouble())
         LinearGradient(
             0f,
             0f,
-            width,
-            0f,
+            cos(radians.toFloat()) * width,
+            sin(radians.toFloat()) * width,
             intArrayOf(color, shimmerColor, color),
             null,
             Shader.TileMode.CLAMP
@@ -69,16 +71,10 @@ internal class SkeletonMaskShimmer(
         it.isAntiAlias = true
     }
 
-    // Progress is time-dependent to support synchronization between uncoupled views
-    private fun currentProgress(): Float {
-        val millis = System.currentTimeMillis()
-        val current = millis.toDouble()
-        val interval = durationInMillis
-        val divisor = Math.floor(current / interval)
-        val start = interval * divisor
-        val end = start + interval
-        val percentage = (current - start) / (end - start)
-        return percentage.toFloat()
+    private fun updateShimmer() {
+        matrix.setTranslate(currentOffset(), 0f)
+        paint.shader.setLocalMatrix(matrix)
+        parent.invalidate()
     }
 
     private fun currentOffset(): Float {
@@ -92,9 +88,15 @@ internal class SkeletonMaskShimmer(
         return progress * (max - min) + min
     }
 
-    private fun updateShimmer() {
-        matrix.setTranslate(currentOffset(), 0f)
-        paint.shader.setLocalMatrix(matrix)
-        parent.invalidate()
+    // Progress is time-dependent to support synchronization between uncoupled views
+    private fun currentProgress(): Float {
+        val millis = System.currentTimeMillis()
+        val current = millis.toDouble()
+        val interval = durationInMillis
+        val divisor = Math.floor(current / interval)
+        val start = interval * divisor
+        val end = start + interval
+        val percentage = (current - start) / (end - start)
+        return percentage.toFloat()
     }
 }

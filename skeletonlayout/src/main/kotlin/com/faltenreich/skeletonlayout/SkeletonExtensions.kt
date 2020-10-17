@@ -23,6 +23,7 @@ private const val LIST_ITEM_COUNT_DEFAULT = 3
  * @param shimmerColor Color of the animated shimmer
  * @param shimmerDurationInMillis Duration in milliseconds for one shimmer animation interval
  * @param shimmerDirection Direction of animated shimmer
+ * @param shimmerAngle Angle in degrees for animated shimmer
  */
 @JvmOverloads
 fun View.createSkeleton(
@@ -31,7 +32,8 @@ fun View.createSkeleton(
     showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
     @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
     shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
-    shimmerDirection: ShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION
+    shimmerDirection: ShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
+    shimmerAngle: Int = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
 ): Skeleton {
     // If this View already has a parent, we need to replace it there with the SkeletonLayout
     val parent = (parent as? ViewGroup)
@@ -40,7 +42,7 @@ fun View.createSkeleton(
 
     parent?.removeView(this)
 
-    val skeleton = SkeletonLayout(this, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection)
+    val skeleton = SkeletonLayout(this, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)
 
     if (params != null) {
         skeleton.layoutParams = params
@@ -61,6 +63,7 @@ fun View.createSkeleton(
  * @param shimmerColor Color of the animated shimmer
  * @param shimmerDurationInMillis Duration in milliseconds for one shimmer animation interval
  * @param shimmerDirection Direction of animated shimmer
+ * @param shimmerAngle Angle in degrees for animated shimmer
  */
 @JvmOverloads
 fun RecyclerView.applySkeleton(
@@ -71,5 +74,6 @@ fun RecyclerView.applySkeleton(
     showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
     @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
     shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
-    shimmerDirection: ShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION
-): Skeleton = SkeletonRecyclerView(this, listItemLayoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection)
+    shimmerDirection: ShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
+    shimmerAngle: Int = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
+): Skeleton = SkeletonRecyclerView(this, listItemLayoutResId, itemCount, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)

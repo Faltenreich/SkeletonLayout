@@ -15,7 +15,8 @@ internal class SkeletonRecyclerView(
     showShimmer: Boolean,
     @ColorInt shimmerColor: Int,
     shimmerDurationInMillis: Long,
-    shimmerDirection: ShimmerDirection
+    shimmerDirection: ShimmerDirection,
+    shimmerAngle: Int
 ) : Skeleton {
 
     var layoutResId: Int = layoutResId
@@ -66,6 +67,12 @@ internal class SkeletonRecyclerView(
             invalidate()
         }
 
+    override var shimmerAngle: Int = shimmerAngle
+        set(value) {
+            field = value
+            invalidate()
+        }
+
     private val originalAdapter = recyclerView.adapter
 
     private var skeletonAdapter: SkeletonRecyclerViewAdapter? = null
@@ -94,7 +101,8 @@ internal class SkeletonRecyclerView(
             showShimmer,
             shimmerColor,
             shimmerDurationInMillis,
-            shimmerDirection
+            shimmerDirection,
+            shimmerAngle
         )
         if (showSkeleton) {
             showSkeleton()
