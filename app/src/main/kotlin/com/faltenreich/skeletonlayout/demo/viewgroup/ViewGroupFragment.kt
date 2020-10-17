@@ -22,7 +22,6 @@ class ViewGroupFragment : MainPagerFragment(R.layout.fragment_viewgroup, "ViewGr
         titleView.setText(item.titleResId)
         descriptionView.setText(item.descriptionResId)
 
-        skeleton = skeletonLayout
-        skeletonLayout.showSkeleton()
+        skeleton = skeletonLayout.apply { showSkeleton() }
     }
 }

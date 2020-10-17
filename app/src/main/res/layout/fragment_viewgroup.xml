@@ -2,16 +2,10 @@
 
 <com.faltenreich.skeletonlayout.SkeletonLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/skeletonLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/margin"
-    app:maskColor="@color/colorPrimary"
-    app:maskCornerRadius="10dp"
-    app:showShimmer="true"
-    app:shimmerColor="@color/colorPrimaryDark"
-    app:shimmerDurationInMillis="2000">
+    android:padding="@dimen/margin">
 
     <include layout="@layout/list_item_recyclerview"/>
 

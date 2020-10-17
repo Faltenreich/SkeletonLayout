@@ -41,7 +41,5 @@ abstract class MainPagerFragment(
         skeleton.shimmerAngle = value
     }
 
-    override fun onSkeletonToggled() {
-        //Do nothing
-    }
+    override fun onSkeletonToggled() = Unit
 }
