@@ -14,7 +14,7 @@ internal class SkeletonRecyclerView(
 ) : Skeleton, SkeletonStyle by config {
 
     private val originalAdapter = recyclerView.adapter
-    private var skeletonAdapter: SkeletonRecyclerViewAdapter = SkeletonRecyclerViewAdapter(layoutResId, itemCount, config)
+    private var skeletonAdapter = SkeletonRecyclerViewAdapter(layoutResId, itemCount, config)
 
     override fun showOriginal() {
         recyclerView.adapter = originalAdapter

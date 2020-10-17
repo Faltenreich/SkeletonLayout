@@ -15,7 +15,7 @@ internal class SkeletonViewPager2(
 ) : Skeleton, SkeletonStyle by config {
 
     private val originalAdapter = viewPager.adapter
-    private var skeletonAdapter: SkeletonRecyclerViewAdapter = SkeletonRecyclerViewAdapter(layoutResId, itemCount, config)
+    private var skeletonAdapter = SkeletonRecyclerViewAdapter(layoutResId, itemCount, config)
 
     override fun showOriginal() {
         viewPager.adapter = originalAdapter
