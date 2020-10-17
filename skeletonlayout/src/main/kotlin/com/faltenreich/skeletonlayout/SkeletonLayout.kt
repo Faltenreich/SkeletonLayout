@@ -41,7 +41,7 @@ open class SkeletonLayout @JvmOverloads constructor(
             this.shimmerAngle = typedArray.getInt(R.styleable.SkeletonLayout_shimmerAngle, shimmerAngle)
             typedArray.recycle()
         }
-        config.onValueChanged = ::invalidateMask
+        config.addValueObserver(::invalidateMask)
         originView?.let { view -> addView(view) }
     }
 

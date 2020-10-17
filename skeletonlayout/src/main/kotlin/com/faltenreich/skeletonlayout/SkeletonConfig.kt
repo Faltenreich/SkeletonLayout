@@ -15,15 +15,23 @@ class SkeletonConfig(
     shimmerAngle: Int,
 ) : SkeletonStyle {
 
-    override var maskColor: Int by Delegates.observable(maskColor) { _, _, _ -> onValueChanged?.invoke() }
-    override var maskCornerRadius: Float by Delegates.observable(maskCornerRadius) { _, _, _ -> onValueChanged?.invoke() }
-    override var showShimmer: Boolean by Delegates.observable(showShimmer) { _, _, _ -> onValueChanged?.invoke() }
-    override var shimmerColor: Int by Delegates.observable(shimmerColor) { _, _, _ -> onValueChanged?.invoke() }
-    override var shimmerDurationInMillis: Long by Delegates.observable(shimmerDurationInMillis) { _, _, _ -> onValueChanged?.invoke() }
-    override var shimmerDirection: SkeletonShimmerDirection by Delegates.observable(shimmerDirection) { _, _, _ -> onValueChanged?.invoke() }
-    override var shimmerAngle: Int by Delegates.observable(shimmerAngle) { _, _, _ -> onValueChanged?.invoke() }
+    override var maskColor: Int by Delegates.observable(maskColor) { _, _, _ -> onValueChanged() }
+    override var maskCornerRadius: Float by Delegates.observable(maskCornerRadius) { _, _, _ -> onValueChanged() }
+    override var showShimmer: Boolean by Delegates.observable(showShimmer) { _, _, _ -> onValueChanged() }
+    override var shimmerColor: Int by Delegates.observable(shimmerColor) { _, _, _ -> onValueChanged() }
+    override var shimmerDurationInMillis: Long by Delegates.observable(shimmerDurationInMillis) { _, _, _ -> onValueChanged() }
+    override var shimmerDirection: SkeletonShimmerDirection by Delegates.observable(shimmerDirection) { _, _, _ -> onValueChanged() }
+    override var shimmerAngle: Int by Delegates.observable(shimmerAngle) { _, _, _ -> onValueChanged() }
 
-    var onValueChanged: (() -> Unit)? = null
+    private val valueObservers = mutableListOf<(() -> Unit)>()
+    
+    private fun onValueChanged() {
+        valueObservers.forEach { it.invoke() }
+    }
+
+    fun addValueObserver(onValueChanged: () -> Unit) {
+        valueObservers.add(onValueChanged)
+    }
 
     companion object {
 

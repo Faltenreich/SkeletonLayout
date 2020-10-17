@@ -17,6 +17,10 @@ internal class SkeletonViewPager2(
     private val originalAdapter = viewPager.adapter
     private var skeletonAdapter = SkeletonRecyclerViewAdapter(layoutResId, itemCount, config)
 
+    init {
+        config.addValueObserver { skeletonAdapter.notifyDataSetChanged() }
+    }
+
     override fun showOriginal() {
         viewPager.adapter = originalAdapter
     }

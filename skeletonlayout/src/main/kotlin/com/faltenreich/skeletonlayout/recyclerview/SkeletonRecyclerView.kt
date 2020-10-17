@@ -16,6 +16,10 @@ internal class SkeletonRecyclerView(
     private val originalAdapter = recyclerView.adapter
     private var skeletonAdapter = SkeletonRecyclerViewAdapter(layoutResId, itemCount, config)
 
+    init {
+        config.addValueObserver { skeletonAdapter.notifyDataSetChanged() }
+    }
+
     override fun showOriginal() {
         recyclerView.adapter = originalAdapter
     }
