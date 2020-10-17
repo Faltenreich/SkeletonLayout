@@ -17,74 +17,13 @@ open class SkeletonLayout @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
     originView: View? = null,
-    @ColorInt private var maskColorInternal: Int = ContextCompat.getColor(context, DEFAULT_MASK_COLOR),
-    private var cornerRadiusInternal: Float = DEFAULT_CORNER_RADIUS,
-    private var showShimmerInternal: Boolean = DEFAULT_SHIMMER_SHOW,
-    @ColorInt private var shimmerColorInternal: Int = ContextCompat.getColor(context, DEFAULT_SHIMMER_COLOR),
-    private var shimmerDurationInMillisInternal: Long = DEFAULT_SHIMMER_DURATION_IN_MILLIS,
-    private var shimmerDirectionInternal: SkeletonShimmerDirection = DEFAULT_SHIMMER_DIRECTION,
-    private var shimmerAngleInternal: Int = DEFAULT_SHIMMER_ANGLE
-) : FrameLayout(context, attrs, defStyleAttr), Skeleton {
+    private val config: SkeletonConfig = SkeletonConfig.default(context)
+) : FrameLayout(context, attrs, defStyleAttr), Skeleton, SkeletonStyle by config {
 
     internal constructor(
         originView: View,
-        @ColorInt maskColor: Int,
-        cornerRadius: Float,
-        showShimmer: Boolean,
-        @ColorInt shimmerColor: Int,
-        shimmerDuration: Long = 0,
-        shimmerDirection: SkeletonShimmerDirection = DEFAULT_SHIMMER_DIRECTION,
-        shimmerAngle: Int = DEFAULT_SHIMMER_ANGLE
-    ) : this(originView.context, null, 0, originView, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDuration, shimmerDirection, shimmerAngle)
-
-    override var maskColor: Int
-        get() = maskColorInternal
-        set(value) {
-            maskColorInternal = value
-            invalidateMask()
-        }
-
-    override var maskCornerRadius: Float
-        get() = cornerRadiusInternal
-        set(value) {
-            cornerRadiusInternal = value
-            invalidateMask()
-        }
-
-    override var showShimmer: Boolean
-        get() = showShimmerInternal
-        set(value) {
-            showShimmerInternal = value
-            invalidateMask()
-        }
-
-    override var shimmerColor: Int
-        get() = shimmerColorInternal
-        set(value) {
-            shimmerColorInternal = value
-            invalidateMask()
-        }
-
-    override var shimmerDurationInMillis: Long
-        get() = shimmerDurationInMillisInternal
-        set(value) {
-            shimmerDurationInMillisInternal = value
-            invalidateMask()
-        }
-
-    override var shimmerDirection: SkeletonShimmerDirection
-        get() = shimmerDirectionInternal
-        set(value) {
-            shimmerDirectionInternal = value
-            invalidateMask()
-        }
-
-    override var shimmerAngle: Int
-        get() = shimmerAngleInternal
-        set(value) {
-            shimmerAngleInternal = value
-            invalidateMask()
-        }
+        config: SkeletonConfig
+    ) : this(originView.context, null, 0, originView, config)
 
     private var mask: SkeletonMask? = null
     private var isSkeleton: Boolean = false
@@ -93,13 +32,13 @@ open class SkeletonLayout @JvmOverloads constructor(
     init {
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.SkeletonLayout, 0, 0)
-            this.maskColorInternal = typedArray.getColor(R.styleable.SkeletonLayout_maskColor, maskColorInternal)
-            this.cornerRadiusInternal = typedArray.getDimensionPixelSize(R.styleable.SkeletonLayout_maskCornerRadius, cornerRadiusInternal.toInt()).toFloat()
-            this.showShimmerInternal = typedArray.getBoolean(R.styleable.SkeletonLayout_showShimmer, showShimmerInternal)
-            this.shimmerColorInternal = typedArray.getColor(R.styleable.SkeletonLayout_shimmerColor, shimmerColorInternal)
-            this.shimmerDurationInMillisInternal = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillisInternal.toInt()).toLong()
-            this.shimmerDirectionInternal = SkeletonShimmerDirection.valueOf(typedArray.getInt(R.styleable.SkeletonLayout_shimmerDirection, shimmerDirectionInternal.ordinal)) ?: DEFAULT_SHIMMER_DIRECTION
-            this.shimmerAngleInternal = typedArray.getInt(R.styleable.SkeletonLayout_shimmerAngle, shimmerAngle)
+            this.maskColor = typedArray.getColor(R.styleable.SkeletonLayout_maskColor, maskColor)
+            this.maskCornerRadius = typedArray.getDimensionPixelSize(R.styleable.SkeletonLayout_maskCornerRadius, maskCornerRadius.toInt()).toFloat()
+            this.showShimmer = typedArray.getBoolean(R.styleable.SkeletonLayout_showShimmer, showShimmer)
+            this.shimmerColor = typedArray.getColor(R.styleable.SkeletonLayout_shimmerColor, shimmerColor)
+            this.shimmerDurationInMillis = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillis.toInt()).toLong()
+            this.shimmerDirection = SkeletonShimmerDirection.valueOf(typedArray.getInt(R.styleable.SkeletonLayout_shimmerDirection, shimmerDirection.ordinal)) ?: DEFAULT_SHIMMER_DIRECTION
+            this.shimmerAngle = typedArray.getInt(R.styleable.SkeletonLayout_shimmerAngle, shimmerAngle)
             typedArray.recycle()
         }
         originView?.let { view -> addView(view) }
@@ -192,7 +131,7 @@ open class SkeletonLayout @JvmOverloads constructor(
 
     companion object {
         val DEFAULT_MASK_COLOR = R.color.skeleton_mask
-        const val DEFAULT_CORNER_RADIUS = 8f
+        const val DEFAULT_MASK_CORNER_RADIUS = 8f
         const val DEFAULT_SHIMMER_SHOW = true
         val DEFAULT_SHIMMER_COLOR = R.color.skeleton_shimmer
         const val DEFAULT_SHIMMER_DURATION_IN_MILLIS = 2000L

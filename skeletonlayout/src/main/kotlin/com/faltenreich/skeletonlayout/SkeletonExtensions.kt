@@ -27,16 +27,7 @@ private const val LIST_ITEM_COUNT_DEFAULT = 3
  * @param shimmerDirection Direction of animated shimmer
  * @param shimmerAngle Angle in degrees for animated shimmer
  */
-@JvmOverloads
-fun View.createSkeleton(
-    @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
-    cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
-    showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
-    @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
-    shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
-    shimmerDirection: SkeletonShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
-    shimmerAngle: Int = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
-): Skeleton {
+fun View.createSkeleton(config: SkeletonConfig): Skeleton {
     // If this View already has a parent, we need to replace it there with the SkeletonLayout
     val parent = (parent as? ViewGroup)
     val index = parent?.indexOfChild(this) ?: 0
@@ -44,7 +35,7 @@ fun View.createSkeleton(
 
     parent?.removeView(this)
 
-    val skeleton = SkeletonLayout(this, maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)
+    val skeleton = SkeletonLayout(this, config)
 
     if (params != null) {
         skeleton.layoutParams = params
@@ -72,7 +63,7 @@ fun RecyclerView.applySkeleton(
     @LayoutRes listItemLayoutResId: Int,
     itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
     @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
-    cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
+    cornerRadius: Float = SkeletonLayout.DEFAULT_MASK_CORNER_RADIUS,
     showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
     @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
     shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
@@ -98,7 +89,7 @@ fun ViewPager2.applySkeleton(
     @LayoutRes listItemLayoutResId: Int,
     itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
     @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
-    cornerRadius: Float = SkeletonLayout.DEFAULT_CORNER_RADIUS,
+    cornerRadius: Float = SkeletonLayout.DEFAULT_MASK_CORNER_RADIUS,
     showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
     @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
     shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
