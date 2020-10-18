@@ -1,8 +1,8 @@
 buildscript {
 
     ext {
-        projectVersion = '3.0.0'
-        projectVersionCode = 7
+        projectVersion = '4.0.0'
+        projectVersionCode = 8
         
         kotlinVersion = '1.4.10'
         jUnitVersion = '4.12'

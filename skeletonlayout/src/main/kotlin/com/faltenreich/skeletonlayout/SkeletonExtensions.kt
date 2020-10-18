@@ -47,12 +47,8 @@ fun ViewPager2.applySkeleton(
     config: SkeletonConfig = SkeletonConfig.default(context)
 ): Skeleton = SkeletonViewPager2(this, listItemLayoutResId, itemCount, config)
 
-/**
- * Following methods are kept for downwards-compatibility until the next release
- */
-
 @Deprecated(
-    "Replaced with wrapper class to shrink parameter-list",
+    "Wrapped properties of Skeleton in SkeletonConfig to reduce parameter count. Will be removed with upcoming major release.",
     replaceWith = ReplaceWith(
         "createSkeleton(SkeletonConfig(maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)",
         "com.faltenreich.skeletonlayout.SkeletonConfig"
@@ -72,7 +68,7 @@ fun View.createSkeleton(
 }
 
 @Deprecated(
-    "Replaced with wrapper class to shrink parameter-list",
+    "Wrapped properties of Skeleton in SkeletonConfig to reduce parameter count. Will be removed with upcoming major release.",
     replaceWith = ReplaceWith(
         "applySkeleton(listItemLayoutResId, itemCount, SkeletonConfig(maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)",
         "com.faltenreich.skeletonlayout.SkeletonConfig"
@@ -95,7 +91,7 @@ fun RecyclerView.applySkeleton(
 
 
 @Deprecated(
-    "Replaced with wrapper class to shrink parameter-list",
+    "Wrapped properties of Skeleton in SkeletonConfig to reduce parameter count. Will be removed with upcoming major release.",
     replaceWith = ReplaceWith(
         "applySkeleton(listItemLayoutResId, itemCount, SkeletonConfig(maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)",
         "com.faltenreich.skeletonlayout.SkeletonConfig"
