@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.faltenreich.skeletonlayout.tag
 import com.faltenreich.skeletonlayout.views
 
@@ -25,7 +26,7 @@ internal abstract class SkeletonMask(protected val parent: View, @ColorInt color
 
     protected open fun createCanvas(): Canvas = Canvas(bitmap)
 
-    protected open fun createPaint(): Paint = Paint().also { paint -> paint.color = color }
+    protected open fun createPaint(): Paint = Paint().also { it.color = color }
 
     fun draw(canvas: Canvas) {
         canvas.drawBitmap(bitmap, 0f, 0f, paint)
@@ -70,7 +71,7 @@ internal abstract class SkeletonMask(protected val parent: View, @ColorInt color
 
     private fun validate(view: View) {
         when (view) {
-            is RecyclerView -> Log.w(tag(), "Passing ViewGroup with reusable children to SkeletonLayout - consider using SkeletonFactory.skeletonForView(recyclerView: RecyclerView, layoutResId: Int)")
+            is RecyclerView, is ViewPager2 -> Log.w(tag(), "Passing ViewGroup with reusable children to SkeletonLayout - consider using applySkeleton() instead")
         }
     }
 }

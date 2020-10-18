@@ -66,9 +66,11 @@ internal class SkeletonMaskShimmer(
         animation = null
     }
 
-    override fun createPaint() = Paint().also {
-        it.shader = shimmerGradient
-        it.isAntiAlias = true
+    override fun createPaint(): Paint {
+        return Paint().also {
+            it.shader = shimmerGradient
+            it.isAntiAlias = true
+        }
     }
 
     private fun updateShimmer() {
