@@ -4,9 +4,12 @@ package com.faltenreich.skeletonlayout
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 import com.faltenreich.skeletonlayout.recyclerview.SkeletonRecyclerView
 import com.faltenreich.skeletonlayout.viewpager2.SkeletonViewPager2
 
@@ -43,3 +46,72 @@ fun ViewPager2.applySkeleton(
     itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
     config: SkeletonConfig = SkeletonConfig.default(context)
 ): Skeleton = SkeletonViewPager2(this, listItemLayoutResId, itemCount, config)
+
+/**
+ * Following methods are kept for downwards-compatibility until the next release
+ */
+
+@Deprecated(
+    "Replaced with wrapper class to shrink parameter-list",
+    replaceWith = ReplaceWith(
+        "createSkeleton(SkeletonConfig(maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)",
+        "com.faltenreich.skeletonlayout.SkeletonConfig"
+    )
+)
+@JvmOverloads
+fun View.createSkeleton(
+    @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
+    cornerRadius: Float = SkeletonLayout.DEFAULT_MASK_CORNER_RADIUS,
+    showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
+    @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
+    shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
+    shimmerDirection: SkeletonShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
+    shimmerAngle: Int = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
+): Skeleton {
+    return createSkeleton(SkeletonConfig(maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle))
+}
+
+@Deprecated(
+    "Replaced with wrapper class to shrink parameter-list",
+    replaceWith = ReplaceWith(
+        "applySkeleton(listItemLayoutResId, itemCount, SkeletonConfig(maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)",
+        "com.faltenreich.skeletonlayout.SkeletonConfig"
+    )
+)
+@JvmOverloads
+fun RecyclerView.applySkeleton(
+    @LayoutRes listItemLayoutResId: Int,
+    itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
+    @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
+    cornerRadius: Float = SkeletonLayout.DEFAULT_MASK_CORNER_RADIUS,
+    showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
+    @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
+    shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
+    shimmerDirection: SkeletonShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
+    shimmerAngle: Int = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
+): Skeleton {
+    return applySkeleton(listItemLayoutResId, itemCount, SkeletonConfig(maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle))
+}
+
+
+@Deprecated(
+    "Replaced with wrapper class to shrink parameter-list",
+    replaceWith = ReplaceWith(
+        "applySkeleton(listItemLayoutResId, itemCount, SkeletonConfig(maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle)",
+        "com.faltenreich.skeletonlayout.SkeletonConfig"
+    )
+)
+@JvmOverloads
+fun ViewPager2.applySkeleton(
+    @LayoutRes listItemLayoutResId: Int,
+    itemCount: Int = LIST_ITEM_COUNT_DEFAULT,
+    @ColorInt maskColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
+    cornerRadius: Float = SkeletonLayout.DEFAULT_MASK_CORNER_RADIUS,
+    showShimmer: Boolean = SkeletonLayout.DEFAULT_SHIMMER_SHOW,
+    @ColorInt shimmerColor: Int = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
+    shimmerDurationInMillis: Long = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
+    shimmerDirection: SkeletonShimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
+    shimmerAngle: Int = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
+): Skeleton {
+    return applySkeleton(listItemLayoutResId, itemCount, SkeletonConfig(maskColor, cornerRadius, showShimmer, shimmerColor, shimmerDurationInMillis, shimmerDirection, shimmerAngle))
+}
