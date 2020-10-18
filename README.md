@@ -33,7 +33,7 @@ Create your own skeleton view with custom shapes, colors and shimmers.
 - **Support any View:** Apply to any type of View or ViewGroup
 - **RecyclerView on speed:** Convenience adapter for RecyclerView as it is the main use case
 - **ViewPager2 support:** Convenience adapter for ViewPager2 as it uses a RecyclerView under the hood
-- **Customization:** Adjust shimmer, color, shape, direction and angle of the skeleton to set you apart from other apps
+- **Customization:** Adjust shimmer, color and shape of the skeleton to set you apart from other apps
 - **Minimum effort:** A fistful lines of code to use the SkeletonLayout
 - **Minimum footprint:** org.jetbrains.kotlin:kotlin-stdlib-jdk7, androidx.recyclerview:recyclerview and androidx.viewpager2.widget.ViewPager2 are the only dependencies
 
@@ -132,8 +132,8 @@ maskCornerRadius | dimension | The x- and y-radius of the oval used to round the
 showShimmer | boolean | Animate shimmer if set to true (defaults to true)
 shimmerColor | color | Color of the animated shimmer (defaults to #d5d5d5)
 shimmerDurationInMillis | integer | Duration in milliseconds for one shimmer animation interval (defaults to 2000)
-shimmerDirection | enum | Direction of animated shimmer
-shimmerAngle | integer | Angle in degrees for animated shimmer
+shimmerDirection | enum | Direction of animated shimmer (defaults to LEFT_TO_RIGHT)
+shimmerAngle | integer | Angle in degrees for animated shimmer (defaults to 0)
 itemCount | integer | Item count for Skeleton adapter (RecyclerView and ViewPager2 only, defaults to 3)
 
 ### FAQ

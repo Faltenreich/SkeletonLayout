@@ -1,25 +1,26 @@
 package com.faltenreich.skeletonlayout
 
 import android.content.Context
+import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 import kotlin.properties.Delegates
 import kotlin.properties.ReadWriteProperty
 
 class SkeletonConfig(
-    maskColor: Int,
+    @ColorInt maskColor: Int,
     maskCornerRadius: Float,
     showShimmer: Boolean,
-    shimmerColor: Int,
+    @ColorInt shimmerColor: Int,
     shimmerDurationInMillis: Long,
     shimmerDirection: SkeletonShimmerDirection,
     shimmerAngle: Int,
 ) : SkeletonStyle {
 
-    override var maskColor: Int by observable(maskColor)
+    @get:ColorInt override var maskColor: Int by observable(maskColor)
     override var maskCornerRadius: Float by observable(maskCornerRadius)
     override var showShimmer: Boolean by observable(showShimmer)
-    override var shimmerColor: Int by observable(shimmerColor)
+    @get:ColorInt override var shimmerColor: Int by observable(shimmerColor)
     override var shimmerDurationInMillis: Long by observable(shimmerDurationInMillis)
     override var shimmerDirection: SkeletonShimmerDirection by observable(shimmerDirection)
     override var shimmerAngle: Int by observable(shimmerAngle)

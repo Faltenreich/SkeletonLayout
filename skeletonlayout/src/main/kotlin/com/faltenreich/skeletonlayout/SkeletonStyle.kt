@@ -1,5 +1,6 @@
 package com.faltenreich.skeletonlayout
 
+import androidx.annotation.ColorInt
 import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 
 interface SkeletonStyle {
@@ -7,6 +8,7 @@ interface SkeletonStyle {
     /**
      * Color of the mask that fills the original view bounds
      */
+    @get:ColorInt
     var maskColor: Int
 
     /**
@@ -22,15 +24,16 @@ interface SkeletonStyle {
     /**
      * Color of the animated shimmer
      */
+    @get:ColorInt
     var shimmerColor: Int
 
     /**
-     * Duration in milliseconds for one shimmer animation interval
+     * Duration in milliseconds for one shimmer animation to pass the masked view
      */
     var shimmerDurationInMillis: Long
 
     /**
-     * Direction of animated shimmer
+     * Direction of the animated shimmer
      */
     var shimmerDirection: SkeletonShimmerDirection
 

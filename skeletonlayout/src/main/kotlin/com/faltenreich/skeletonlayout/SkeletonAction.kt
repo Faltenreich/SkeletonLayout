@@ -3,12 +3,12 @@ package com.faltenreich.skeletonlayout
 interface SkeletonAction {
 
     /**
-     * Display the original layout and hide the skeleton
+     * Displays the original layout and hides the skeleton
      */
     fun showOriginal()
 
     /**
-     * Display a skeleton and hide the original layout
+     * Displays the skeleton and hides the original layout
      */
     fun showSkeleton()
 
