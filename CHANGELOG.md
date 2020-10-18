@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added property for shimmer direction https://github.com/Faltenreich/SkeletonLayout/pull/23
+- Added property for shimmer direction [#23](https://github.com/Faltenreich/SkeletonLayout/pull/23)
 - Added property for shimmer angle
 
 ### Changed
@@ -20,31 +20,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Supporting ViewPager2 https://github.com/Faltenreich/SkeletonLayout/pull/22
+- Supporting ViewPager2 [#22](https://github.com/Faltenreich/SkeletonLayout/pull/22)
 
 ## [2.1.0] - 2020-08-08
 
 ### Changed
 
-- Supporting subclassing SkeletonLayout https://github.com/Faltenreich/SkeletonLayout/pull/18
+- Supporting subclassing SkeletonLayout [#18](https://github.com/Faltenreich/SkeletonLayout/pull/18)
 
 ## [2.0.2] - 2020-06-21
 
 ### Changed
 
-- Fixed lifecycle problem with ViewBinding https://github.com/Faltenreich/SkeletonLayout/pull/17
+- Fixed lifecycle problem with ViewBinding [#17](https://github.com/Faltenreich/SkeletonLayout/pull/17)
 
 ## [2.0.1] - 2020-01-04
 
 ### Changed
 
-- Fixed IllegalStateException: The specified child already has a parent https://github.com/Faltenreich/SkeletonLayout/issues/14
+- Fixed IllegalStateException: The specified child already has a parent [#14](https://github.com/Faltenreich/SkeletonLayout/issues/14)
 
 ## [2.0.0] - 2019-03-20
 
 ### Changed
 
-- Migrated to androix https://github.com/Faltenreich/SkeletonLayout/pull/4
+- Migrated to androix [#4](https://github.com/Faltenreich/SkeletonLayout/pull/4)
 - Fixed skeleton dimensions in RecyclerView
 - Fixed crash when creating skeleton manually within ViewHolder
 
