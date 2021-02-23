@@ -40,17 +40,25 @@ internal abstract class SkeletonMask(protected val parent: View, @ColorInt color
         canvas.drawRect(rect, paint)
     }
 
-    fun mask(viewGroup: ViewGroup, maskCornerRadius: Float) {
+    fun mask(viewGroup: ViewGroup, maskCornerRadius: Float, offsetFromRootView:Int) {
         val xferPaint = Paint().apply {
             xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC)
             isAntiAlias = maskCornerRadius > 0
         }
-        mask(viewGroup, viewGroup, xferPaint, maskCornerRadius)
+        mask(viewGroup, viewGroup, xferPaint, maskCornerRadius,offsetFromRootView,currentLevel=0)
     }
 
-    private fun mask(view: View, root: ViewGroup, paint: Paint, maskCornerRadius: Float) {
+    private fun mask(view: View, root: ViewGroup, paint: Paint, maskCornerRadius: Float, limitViewLevel: Int, currentLevel:Int = 0) {
         (view as? ViewGroup)?.let { viewGroup ->
-            viewGroup.views().forEach { view -> mask(view, root, paint, maskCornerRadius) }
+            viewGroup.views().forEach {
+                if (limitViewLevel <= currentLevel){
+                    maskView(it, root, paint, maskCornerRadius)
+                }
+                else{
+                    mask(it, root, paint, maskCornerRadius,limitViewLevel,currentLevel+1)
+                }
+
+            }
         } ?: maskView(view, root, paint, maskCornerRadius)
     }
 

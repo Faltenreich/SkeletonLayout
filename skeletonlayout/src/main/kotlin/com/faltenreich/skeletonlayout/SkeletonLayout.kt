@@ -11,21 +11,22 @@ import com.faltenreich.skeletonlayout.mask.SkeletonMaskFactory
 import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 
 open class SkeletonLayout @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
-    originView: View? = null,
-    private val config: SkeletonConfig = SkeletonConfig.default(context)
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0,
+        originView: View? = null,
+        private val config: SkeletonConfig = SkeletonConfig.default(context)
 ) : FrameLayout(context, attrs, defStyleAttr), Skeleton, SkeletonStyle by config {
 
     internal constructor(
-        originView: View,
-        config: SkeletonConfig
+            originView: View,
+            config: SkeletonConfig
     ) : this(originView.context, null, 0, originView, config)
 
     private var mask: SkeletonMask? = null
     private var isSkeleton: Boolean = false
     private var isRendered: Boolean = false
+    private var limitToLevel: Int = Int.MAX_VALUE
 
     init {
         attrs?.let {
@@ -68,7 +69,6 @@ open class SkeletonLayout @JvmOverloads constructor(
             }
         }
     }
-
     override fun isSkeleton(): Boolean = isSkeleton
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -117,8 +117,8 @@ open class SkeletonLayout @JvmOverloads constructor(
             if (isSkeleton) {
                 if (width > 0 && height > 0) {
                     mask = SkeletonMaskFactory
-                        .createMask(this, config)
-                        .also { mask -> mask.mask(this, maskCornerRadius) }
+                            .createMask(this, config)
+                            .also { mask -> mask.mask(this, maskCornerRadius,limitToLevel) }
                 } else {
                     Log.e(tag(), "Failed to mask view with invalid width and height")
                 }
@@ -127,7 +127,12 @@ open class SkeletonLayout @JvmOverloads constructor(
             Log.e(tag(), "Skipping invalidation until view is rendered")
         }
     }
-
+    fun getLimitToLevel():Int{
+        return limitToLevel
+    }
+    fun setLimitToLevel(value:Int){
+        this.limitToLevel = value
+    }
     companion object {
         val DEFAULT_MASK_COLOR = R.color.skeleton_mask
         const val DEFAULT_MASK_CORNER_RADIUS = 8f
