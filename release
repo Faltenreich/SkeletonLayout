@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+./gradlew :skeletonlayout:clean :skeletonlayout:build :skeletonlayout:publish --stacktrace --no-daemon --no-parallel && \
+
+if ! grep -q -- "VERSION_NAME=.*-SNAPSHOT" gradle.properties;
+then
+./gradlew closeAndReleaseRepository --stacktrace
+else
+echo "Nothing else to do for a snapshot"
+fi

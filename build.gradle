@@ -1,10 +1,10 @@
 buildscript {
 
     ext {
-        projectVersion = '4.0.0'
+        projectVersion = project.property("VERSION_NAME")
         projectVersionCode = 8
         
-        kotlinVersion = '1.4.10'
+        kotlinVersion = '1.4.32'
         jUnitVersion = '4.12'
         espressoVersion = '3.3.0'
 
@@ -19,9 +19,9 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath 'org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.18'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.15.1'
+        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.32'
+
     }
 }
 

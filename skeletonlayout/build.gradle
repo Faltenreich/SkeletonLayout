@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'org.jetbrains.dokka-android'
+apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'com.vanniktech.maven.publish'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode projectVersionCode
         versionName projectVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -29,19 +29,16 @@ android {
     }
 }
 
-dokka {
-    outputFormat = 'html'
-    outputDirectory = "$buildDir/javadoc"
-}
-
 dependencies {
     testImplementation "junit:junit:$jUnitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
 
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-    api "androidx.recyclerview:recyclerview:1.1.0"
+    api "androidx.recyclerview:recyclerview:1.2.0"
     api 'androidx.viewpager2:viewpager2:1.0.0'
 }
 
-apply from: 'deploy.gradle'
+mavenPublish {
+    sonatypeHost = "S01"
+}
