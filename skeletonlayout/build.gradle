@@ -1,3 +1,5 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.dokka'
@@ -40,5 +42,5 @@ dependencies {
 }
 
 mavenPublish {
-    sonatypeHost = "S01"
+    sonatypeHost = SonatypeHost.S01
 }
