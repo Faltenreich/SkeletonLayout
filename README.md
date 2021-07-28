@@ -1,6 +1,6 @@
 # SkeletonLayout
 
-[![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.faltenreich/skeletonlayout/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/com.faltenreich/skeletonlayout)
+[![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.faltenreich/skeletonlayout/badge.svg?style=flat)](https://mvnrepository.com/artifact/com.faltenreich/skeletonlayout)
 
 *Make your app feel faster*
 
