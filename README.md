@@ -158,6 +158,15 @@ The shimmer is a shader (LinearGradient) whose local matrix is updated according
 so no redrawing is required and processing time is kept to an absolute minimum. 
 Additionally the shimmer gets inactive onWindowFocusChanged() and onDetachedFromWindow().
 
+### Third-party licenses
+
+This software uses following technologies with great appreciation:
+
+* [AndroidX](https://developer.android.com/jetpack/androidx)
+* [ColorSlider](https://github.com/naz013/ColorSlider)
+* [gradle-maven-publish-plugin](https://github.com/vanniktech/gradle-maven-publish-plugin)
+* [Material Components for Android](https://material.io/components)
+
 ### License
 
 Copyright 2021 Philipp Fahlteich

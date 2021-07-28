@@ -4,9 +4,9 @@ buildscript {
         projectVersion = '4.0.0'
         projectVersionCode = 8
         
-        kotlinVersion = '1.4.32'
-        jUnitVersion = '4.12'
-        espressoVersion = '3.3.0'
+        kotlinVersion = '1.5.10'
+        jUnitVersion = '4.13.2'
+        espressoVersion = '3.4.0'
 
         repos = {
             google()
@@ -17,10 +17,9 @@ buildscript {
     repositories repos
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.vanniktech:gradle-maven-publish-plugin:0.17.0'
-        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.32'
 
     }
 }
