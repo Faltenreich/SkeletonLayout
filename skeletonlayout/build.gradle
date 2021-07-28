@@ -1,8 +1,5 @@
-import com.vanniktech.maven.publish.SonatypeHost
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'com.vanniktech.maven.publish'
 
 android {
@@ -39,8 +36,4 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     api "androidx.recyclerview:recyclerview:1.2.0"
     api 'androidx.viewpager2:viewpager2:1.0.0'
-}
-
-mavenPublish {
-    sonatypeHost = SonatypeHost.S01
 }

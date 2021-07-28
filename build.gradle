@@ -1,7 +1,7 @@
 buildscript {
 
     ext {
-        projectVersion = project.property("VERSION_NAME")
+        projectVersion = '4.0.0'
         projectVersionCode = 8
         
         kotlinVersion = '1.4.32'
@@ -10,7 +10,7 @@ buildscript {
 
         repos = {
             google()
-            jcenter()
+            mavenCentral()
         }
     }
 
@@ -19,7 +19,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.16.0'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.17.0'
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.32'
 
     }
@@ -31,4 +31,12 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+allprojects {
+    plugins.withId("com.vanniktech.maven.publish") {
+        mavenPublish {
+            sonatypeHost = "S01"
+        }
+    }
 }
