@@ -1,7 +1,6 @@
 # SkeletonLayout
 
-[ ![Download](https://api.bintray.com/packages/faltenreich/maven/SkeletonLayout/images/download.svg) ](https://bintray.com/faltenreich/maven/SkeletonLayout/_latestVersion) 
-[![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
+[![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.faltenreich/skeletonlayout/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/com.faltenreich/skeletonlayout)
 
 *Make your app feel faster*
 
@@ -40,6 +39,13 @@ Create your own skeleton view with custom shapes, colors and shimmers.
 ### Getting Started
 
 ##### Gradle
+```gradle
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+```
 ```gradle
 dependencies {
     implementation 'com.faltenreich:skeletonlayout:<version>'
@@ -154,7 +160,7 @@ Additionally the shimmer gets inactive onWindowFocusChanged() and onDetachedFrom
 
 ### License
 
-Copyright 2020 Philipp Fahlteich
+Copyright 2021 Philipp Fahlteich
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
