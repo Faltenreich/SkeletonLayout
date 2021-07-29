@@ -1,7 +1,6 @@
 package com.faltenreich.skeletonlayout.demo
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
