@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.faltenreich.skeletonlayout.SkeletonLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.faltenreich.skeletonlayout.SkeletonConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/skeletonLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/margin">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include
+        android:id="@+id/include1"
+        layout="@layout/list_item_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/include1"
-            layout="@layout/list_item_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/include2"
+        layout="@layout/list_item_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/include1" />
 
-        <include
-            android:id="@+id/include2"
-            layout="@layout/list_item_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/include1" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</com.faltenreich.skeletonlayout.SkeletonLayout>
+</com.faltenreich.skeletonlayout.SkeletonConstraintLayout>
