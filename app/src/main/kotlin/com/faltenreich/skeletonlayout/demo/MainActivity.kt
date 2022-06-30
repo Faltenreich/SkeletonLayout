@@ -28,15 +28,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_toggle -> {
-                toggleSkeleton()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
+
+
 
     private fun initLayout() {
         viewPagerAdapter = MainPagerAdapter(supportFragmentManager, arrayOf(RecyclerViewFragment(), ViewGroupFragment(), ViewPager2Fragment()))
