@@ -4,6 +4,7 @@ import android.graphics.*
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Space
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -55,6 +56,10 @@ internal abstract class SkeletonMask(protected val parent: View, @ColorInt color
     }
 
     private fun maskView(view: View, root: ViewGroup, paint: Paint, maskCornerRadius: Float) {
+        if (view is Space) {
+            return
+        }
+
         validate(view)
 
         val rect = Rect()
