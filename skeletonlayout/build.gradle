@@ -3,11 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'com.vanniktech.maven.publish'
 
 android {
-    compileSdkVersion 30
+    compileSdk 33
+    namespace "com.faltenreich.skeletonlayout"
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 30
+        minSdk 14
+        targetSdk 33
         versionCode projectVersionCode
         versionName projectVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -26,14 +27,22 @@ android {
         androidTest.java.srcDirs += 'src/androidTest/java'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+mavenPublish {
+    sonatypeHost = "S01"
 }
 
 dependencies {
     testImplementation "junit:junit:$jUnitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-    api "androidx.recyclerview:recyclerview:1.2.1"
+    api 'androidx.recyclerview:recyclerview:1.3.1'
     api 'androidx.viewpager2:viewpager2:1.0.0'
 }

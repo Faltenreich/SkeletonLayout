@@ -1,27 +1,45 @@
 package com.faltenreich.skeletonlayout.demo.viewgroup
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.demo.MainPagerFragment
 import com.faltenreich.skeletonlayout.demo.R
+import com.faltenreich.skeletonlayout.demo.databinding.FragmentViewgroupBinding
 import com.faltenreich.skeletonlayout.demo.recyclerview.RecyclerViewListItem
-import kotlinx.android.synthetic.main.fragment_viewgroup.*
-import kotlinx.android.synthetic.main.list_item_recyclerview.*
 
 class ViewGroupFragment : MainPagerFragment(R.layout.fragment_viewgroup, "ViewGroup") {
 
+    private var _binding: FragmentViewgroupBinding? = null
+    private val binding get() = _binding!!
+
     override lateinit var skeleton: Skeleton
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentViewgroupBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
 
         val item = RecyclerViewListItem.DEMO.first()
-        wallpaperView.setImageResource(item.wallpaperResId)
-        avatarView.setImageResource(item.avatarResId)
-        titleView.setText(item.titleResId)
-        descriptionView.setText(item.descriptionResId)
+        recyclerView.wallpaperView.setImageResource(item.wallpaperResId)
+        recyclerView.avatarView.setImageResource(item.avatarResId)
+        recyclerView.titleView.setText(item.titleResId)
+        recyclerView.descriptionView.setText(item.descriptionResId)
 
         skeleton = skeletonLayout.apply { showSkeleton() }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

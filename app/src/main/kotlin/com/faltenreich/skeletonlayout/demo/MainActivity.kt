@@ -8,21 +8,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.demo.configuration.ConfigurationFragment
+import com.faltenreich.skeletonlayout.demo.databinding.ActivityMainBinding
 import com.faltenreich.skeletonlayout.demo.recyclerview.RecyclerViewFragment
 import com.faltenreich.skeletonlayout.demo.viewgroup.ViewGroupFragment
 import com.faltenreich.skeletonlayout.demo.viewpager2.ViewPager2Fragment
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
+    private lateinit var binding: ActivityMainBinding
     private lateinit var viewPagerAdapter: MainPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initLayout()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         return super.onCreateOptionsMenu(menu)
     }
@@ -37,7 +40,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
     }
 
-    private fun initLayout() {
+    private fun initLayout() = with(binding) {
         viewPagerAdapter = MainPagerAdapter(supportFragmentManager, arrayOf(RecyclerViewFragment(), ViewGroupFragment(), ViewPager2Fragment()))
         viewPager.adapter = viewPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
@@ -51,11 +54,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         fab.setOnClickListener { openConfiguration() }
     }
 
-    private fun getSkeleton(): Skeleton? {
+    private fun getSkeleton(): Skeleton? = with(binding) {
         return (viewPagerAdapter.getItem(viewPager.currentItem) as? MainPagerFragment)?.skeleton
     }
 
-    private fun invalidateSkeleton() {
+    private fun invalidateSkeleton() = with(binding) {
         val skeleton = getSkeleton() ?: return
         val shouldShow = fab.visibility == View.VISIBLE
         val isShown = skeleton.isSkeleton()
@@ -77,17 +80,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
     }
 
-    private fun showSkeleton(skeleton: Skeleton) {
+    private fun showSkeleton(skeleton: Skeleton) = with(binding) {
         skeleton.showSkeleton()
         fab.visibility = View.VISIBLE
     }
 
-    private fun hideSkeleton(skeleton: Skeleton) {
+    private fun hideSkeleton(skeleton: Skeleton) = with(binding) {
         skeleton.showOriginal()
         fab.visibility = View.GONE
     }
 
-    private fun openConfiguration() {
+    private fun openConfiguration() = with(binding) {
         val visibleFragment = viewPagerAdapter.getItem(viewPager.currentItem)
         ConfigurationFragment.newInstance(visibleFragment).show(supportFragmentManager, "bottomSheet")
     }

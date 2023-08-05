@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:padding="@dimen/margin">
 
-    <include layout="@layout/list_item_recyclerview" />
+    <include
+        android:id="@+id/recycler_view"
+        layout="@layout/list_item_recyclerview" />
 
 </FrameLayout>

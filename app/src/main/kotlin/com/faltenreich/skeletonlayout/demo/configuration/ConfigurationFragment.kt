@@ -8,10 +8,13 @@ import android.widget.AdapterView
 import android.widget.SeekBar
 import com.faltenreich.skeletonlayout.demo.MainPagerFragment
 import com.faltenreich.skeletonlayout.demo.R
+import com.faltenreich.skeletonlayout.demo.databinding.FragmentConfigurationBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_configuration.*
 
 class ConfigurationFragment : BottomSheetDialogFragment() {
+
+    private var _binding: FragmentConfigurationBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var configurationListener: ConfigurationListener
 
@@ -19,7 +22,10 @@ class ConfigurationFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_configuration, container, false)
+    ): View {
+        _binding = FragmentConfigurationBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,7 +34,12 @@ class ConfigurationFragment : BottomSheetDialogFragment() {
         initShimmerView()
     }
 
-    private fun loadConfiguration() {
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun loadConfiguration() = with(binding) {
         arguments?.apply {
             maskColorView.selectColor(getInt(ARGUMENT_MASK_COLOR))
 
@@ -56,7 +67,7 @@ class ConfigurationFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun initMaskView() {
+    private fun initMaskView() = with(binding) {
         maskColorView.setListener { _, color -> configurationListener.onMaskColorChanged(color) }
         maskCornerRadiusView.onProgressChanged { progress ->
             val cornerRadius = (progress.toFloat() / 100) * MAX_MASK_CORNER_RADIUS
@@ -65,7 +76,7 @@ class ConfigurationFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun initShimmerView() {
+    private fun initShimmerView() = with(binding) {
         shimmerShowView.setOnCheckedChangeListener { _, isChecked -> configurationListener.onShowShimmerChanged(isChecked) }
         shimmerColorView.setListener { _, color -> configurationListener.onShimmerColorChanged(color) }
         shimmerDurationView.onProgressChanged { progress ->
