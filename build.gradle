@@ -1,9 +1,9 @@
 buildscript {
 
     ext {
-        projectVersion = '5.0.0'
+        projectVersion = '5.0.0-SNAPSHOT'
         projectVersionCode = 9
-        
+
         kotlinVersion = '1.9.0'
         jUnitVersion = '4.13.2'
         espressoVersion = '3.5.1'
@@ -19,17 +19,13 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:8.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.17.0'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.25.3'
 
     }
 }
 
 allprojects {
     repositories repos
-}
-
-tasks.register("Delete") {
-    delete rootProject.buildDir
 }
 
 task clean(type: Delete) {

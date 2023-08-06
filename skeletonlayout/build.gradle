@@ -34,8 +34,9 @@ android {
     }
 }
 
-mavenPublish {
-    sonatypeHost = "S01"
+mavenPublishing {
+    publishToMavenCentral("S01")
+    signAllPublications()
 }
 
 dependencies {
