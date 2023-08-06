@@ -52,16 +52,30 @@ internal abstract class SkeletonMask(protected val parent: View, @ColorInt color
     private fun mask(view: View, root: ViewGroup, paint: Paint, maskCornerRadius: Float) {
         (view as? ViewGroup)?.let { viewGroup ->
             viewGroup.views().forEach { view -> mask(view, root, paint, maskCornerRadius) }
-        } ?: maskView(view, root, paint, maskCornerRadius)
+        } ?: maskViewIfValid(view, root, paint, maskCornerRadius)
+    }
+
+    private fun maskViewIfValid(view: View, root: ViewGroup, paint: Paint, maskCornerRadius: Float) {
+        if (isValid(view)) {
+            maskView(view, root, paint, maskCornerRadius)
+        }
+    }
+
+    private fun isValid(view: View): Boolean {
+        return when (view) {
+            is RecyclerView, is ViewPager2 -> {
+                Log.w(tag(), "Passing ViewGroup with reusable children to SkeletonLayout - consider using applySkeleton() instead")
+                true
+            }
+            is Space -> {
+                Log.d(tag(), "Skipping Space during masking process")
+                false
+            }
+            else -> true
+        }
     }
 
     private fun maskView(view: View, root: ViewGroup, paint: Paint, maskCornerRadius: Float) {
-        if (view is Space) {
-            return
-        }
-
-        validate(view)
-
         val rect = Rect()
         view.getDrawingRect(rect)
         root.offsetDescendantRectToMyCoords(view, rect)
@@ -71,12 +85,6 @@ internal abstract class SkeletonMask(protected val parent: View, @ColorInt color
             draw(rectF, maskCornerRadius, paint)
         } else {
             draw(rect, paint)
-        }
-    }
-
-    private fun validate(view: View) {
-        when (view) {
-            is RecyclerView, is ViewPager2 -> Log.w(tag(), "Passing ViewGroup with reusable children to SkeletonLayout - consider using applySkeleton() instead")
         }
     }
 }

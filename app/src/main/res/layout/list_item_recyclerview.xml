@@ -19,16 +19,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <Space
+        android:id="@+id/space"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/padding"
+        app:layout_constraintTop_toBottomOf="@id/wallpaperView"
+        app:layout_constraintEnd_toEndOf="@id/wallpaperView"
+        app:layout_constraintStart_toStartOf="@id/wallpaperView"/>
+
     <ImageView
         android:id="@+id/avatarView"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="@dimen/padding"
         android:layout_marginStart="@dimen/padding"
-        android:layout_marginLeft="@dimen/padding"
         android:contentDescription="@null"
         app:layout_constraintStart_toStartOf="@id/wallpaperView"
-        app:layout_constraintTop_toBottomOf="@id/wallpaperView"
+        app:layout_constraintTop_toBottomOf="@id/space"
         tools:src="@mipmap/list_avatar_0"/>
 
     <TextView
@@ -36,7 +43,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/padding"
-        android:layout_marginLeft="@dimen/padding"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="@id/avatarView"
