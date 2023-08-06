@@ -1,7 +1,7 @@
 buildscript {
 
     ext {
-        projectVersion = '5.0.0-SNAPSHOT'
+        projectVersion = '5.0.0'
         projectVersionCode = 9
 
         kotlinVersion = '1.9.0'
