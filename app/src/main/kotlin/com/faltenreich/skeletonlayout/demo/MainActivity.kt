@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.demo.basic.BasicSkeletonFragment
 import com.faltenreich.skeletonlayout.demo.configuration.ConfigurationFragment
 import com.faltenreich.skeletonlayout.demo.databinding.ActivityMainBinding
 import com.faltenreich.skeletonlayout.demo.recyclerview.RecyclerViewFragment
@@ -36,19 +37,33 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 toggleSkeleton()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
 
     private fun initLayout() = with(binding) {
-        viewPagerAdapter = MainPagerAdapter(supportFragmentManager, arrayOf(RecyclerViewFragment(), ViewGroupFragment(), ViewPager2Fragment()))
+        viewPagerAdapter = MainPagerAdapter(
+            supportFragmentManager,
+            arrayOf(
+                BasicSkeletonFragment(),
+                RecyclerViewFragment(),
+                ViewGroupFragment(),
+                ViewPager2Fragment()
+            )
+        )
         viewPager.adapter = viewPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageSelected(position: Int) = invalidateSkeleton()
             override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
         })
 
         fab.setOnClickListener { openConfiguration() }
@@ -92,6 +107,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun openConfiguration() = with(binding) {
         val visibleFragment = viewPagerAdapter.getItem(viewPager.currentItem)
-        ConfigurationFragment.newInstance(visibleFragment).show(supportFragmentManager, "bottomSheet")
+        ConfigurationFragment.newInstance(visibleFragment)
+            .show(supportFragmentManager, "bottomSheet")
     }
 }

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/root_room"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/txt_title"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Tiny home in Rome" />
+
+    <ImageView
+        app:layout_constraintBottom_toBottomOf="@+id/txt_rate"
+        app:layout_constraintEnd_toStartOf="@+id/txt_rate"
+        app:layout_constraintTop_toTopOf="@+id/txt_rate"
+        app:tint="#000"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_star" />
+
+    <TextView
+        android:id="@+id/txt_rate"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="4.7 (217)" />
+
+
+    <TextView
+        android:id="@+id/txt_guest_count"
+        style="@style/TextAppearance.Material3.BodySmall"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="4 guests" />
+
+    <View
+        android:id="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.5"
+
+        app:layout_constraintStart_toEndOf="@+id/txt_guest_count"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        android:layout_width="2dp"
+        android:layout_height="2dp"
+        android:layout_margin="4dp"
+        android:background="#8b8b8b" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/TextAppearance.Material3.BodySmall"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+
+        app:layout_constraintEnd_toStartOf="@+id/view2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view2"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 bedrooms" />
+
+    <View
+        android:id="@+id/view2"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        android:layout_width="2dp"
+        android:layout_height="2dp"
+        android:layout_margin="4dp"
+        android:background="#8b8b8b" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/TextAppearance.Material3.BodySmall"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintEnd_toStartOf="@+id/view3"
+
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="@+id/view3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 beds" />
+
+    <View
+        android:id="@+id/view3"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView4"
+        android:layout_width="2dp"
+        android:layout_height="2dp"
+        android:layout_margin="4dp"
+        android:background="#8b8b8b" />
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/TextAppearance.Material3.BodySmall"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_guest_count"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.5"
+
+        app:layout_constraintStart_toEndOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="@+id/txt_guest_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1 bathroom" />
+
+
+    <TextView
+        android:id="@+id/txt_price"
+        app:layout_constraintStart_toStartOf="@+id/txt_guest_count"
+        app:layout_constraintTop_toBottomOf="@+id/txt_guest_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="$91 night"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+</androidx.constraintlayout.widget.ConstraintLayout>
