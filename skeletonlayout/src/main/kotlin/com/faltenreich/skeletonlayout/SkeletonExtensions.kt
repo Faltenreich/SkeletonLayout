@@ -4,12 +4,9 @@ package com.faltenreich.skeletonlayout
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 import com.faltenreich.skeletonlayout.recyclerview.SkeletonRecyclerView
 import com.faltenreich.skeletonlayout.viewpager2.SkeletonViewPager2
 
@@ -17,7 +14,8 @@ private const val LIST_ITEM_COUNT_DEFAULT = 3
 
 @JvmOverloads
 fun View.createSkeleton(
-    config: SkeletonConfig = SkeletonConfig.default(context)
+    config: SkeletonConfig = SkeletonConfig.default(context),
+    @LayoutRes maskTemplateId: Int? = null
 ): Skeleton {
     // If this View already has a parent, we need to replace it with the SkeletonLayout
     val parent = (parent as? ViewGroup)
@@ -26,7 +24,7 @@ fun View.createSkeleton(
 
     parent?.removeView(this)
 
-    val skeleton = SkeletonLayout(this, config)
+    val skeleton = SkeletonLayout(this, maskTemplateId, config)
 
     if (params != null) {
         skeleton.layoutParams = params

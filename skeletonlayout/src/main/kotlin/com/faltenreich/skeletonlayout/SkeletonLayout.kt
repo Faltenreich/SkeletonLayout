@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.faltenreich.skeletonlayout.mask.SkeletonMask
 import com.faltenreich.skeletonlayout.mask.SkeletonMaskFactory
@@ -15,17 +17,25 @@ open class SkeletonLayout @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
     originView: View? = null,
+    maskTemplateId: Int? = null,
     private val config: SkeletonConfig = SkeletonConfig.default(context)
 ) : FrameLayout(context, attrs, defStyleAttr), Skeleton, SkeletonStyle by config {
 
     internal constructor(
         originView: View,
         config: SkeletonConfig
-    ) : this(originView.context, null, 0, originView, config)
+    ) : this(originView.context, null, 0, originView, null, config)
+
+    internal constructor(
+        originView: View,
+        maskTemplateId: Int? = null,
+        config: SkeletonConfig
+    ) : this(originView.context, null, 0, originView, maskTemplateId, config)
 
     private var mask: SkeletonMask? = null
     private var isSkeleton: Boolean = false
     private var isRendered: Boolean = false
+    private var customMaskTemplate: ViewGroup? = null
 
     init {
         attrs?.let {
@@ -41,6 +51,14 @@ open class SkeletonLayout @JvmOverloads constructor(
         }
         config.addValueObserver(::invalidateMask)
         originView?.let { view -> addView(view) }
+        maskTemplateId?.let { maskLayoutId ->
+            val maskTemplate = LayoutInflater.from(this.context).inflate(maskLayoutId, null, false)
+            if (maskTemplate !is ViewGroup) return@let
+            maskTemplate.visibility = View.INVISIBLE
+            addView(maskTemplate)
+            customMaskTemplate = maskTemplate
+        }
+
     }
 
     override fun showOriginal() {
@@ -48,6 +66,7 @@ open class SkeletonLayout @JvmOverloads constructor(
 
         if (childCount > 0) {
             views().forEach { it.visibility = View.VISIBLE }
+            customMaskTemplate?.visibility = View.GONE
             mask?.stop()
             mask = null
         }
@@ -59,6 +78,7 @@ open class SkeletonLayout @JvmOverloads constructor(
         if (isRendered) {
             if (childCount > 0) {
                 views().forEach { it.visibility = View.INVISIBLE }
+                customMaskTemplate?.visibility = View.INVISIBLE
                 setWillNotDraw(false)
                 invalidateMask()
                 mask?.invalidate()
@@ -118,7 +138,12 @@ open class SkeletonLayout @JvmOverloads constructor(
                 if (width > 0 && height > 0) {
                     mask = SkeletonMaskFactory
                         .createMask(this, config)
-                        .also { mask -> mask.mask(this, maskCornerRadius) }
+                        .also { mask ->
+                            mask.mask(
+                                viewGroup = customMaskTemplate ?: this,
+                                maskCornerRadius = maskCornerRadius
+                            )
+                        }
                 } else {
                     Log.e(tag(), "Failed to mask view with invalid width and height")
                 }
