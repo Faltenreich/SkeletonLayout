@@ -32,7 +32,8 @@ class BasicSkeletonFragment : MainPagerFragment(R.layout.fragment_basic, "Basic"
         skeleton = SkeletonArray(
             listOf(
                 roomItem1.rootRoom.createSkeleton(),
-                roomItem2.rootRoom.createSkeleton(maskTemplateId = R.layout.layout_custom_skeleton)
+                roomItem2.rootRoom.createSkeleton(maskTemplateId = R.layout.layout_custom_skeleton),
+                room3Skeleton,
             )
         ).apply { showSkeleton() }
     }

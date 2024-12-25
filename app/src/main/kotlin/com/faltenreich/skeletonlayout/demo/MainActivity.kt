@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 toggleSkeleton()
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -58,12 +57,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageSelected(position: Int) = invalidateSkeleton()
             override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-            }
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
         })
 
         fab.setOnClickListener { openConfiguration() }
@@ -107,7 +101,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun openConfiguration() = with(binding) {
         val visibleFragment = viewPagerAdapter.getItem(viewPager.currentItem)
-        ConfigurationFragment.newInstance(visibleFragment)
-            .show(supportFragmentManager, "bottomSheet")
+        ConfigurationFragment.newInstance(visibleFragment).show(supportFragmentManager, "bottomSheet")
     }
 }

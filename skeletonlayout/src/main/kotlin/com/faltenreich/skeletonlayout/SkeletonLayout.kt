@@ -17,7 +17,7 @@ open class SkeletonLayout @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
     originView: View? = null,
-    maskTemplateId: Int? = null,
+    private var maskTemplateId: Int? = null,
     private val config: SkeletonConfig = SkeletonConfig.default(context)
 ) : FrameLayout(context, attrs, defStyleAttr), Skeleton, SkeletonStyle by config {
 
@@ -47,14 +47,22 @@ open class SkeletonLayout @JvmOverloads constructor(
             this.shimmerDurationInMillis = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillis.toInt()).toLong()
             this.shimmerDirection = SkeletonShimmerDirection.valueOf(typedArray.getInt(R.styleable.SkeletonLayout_shimmerDirection, shimmerDirection.ordinal)) ?: DEFAULT_SHIMMER_DIRECTION
             this.shimmerAngle = typedArray.getInt(R.styleable.SkeletonLayout_shimmerAngle, shimmerAngle)
+            val maskTemplate = typedArray.getResourceId(R.styleable.SkeletonLayout_maskTemplate, 0)
+            if (maskTemplate != 0) {
+                this.maskTemplateId = maskTemplate
+            }
             typedArray.recycle()
         }
         config.addValueObserver(::invalidateMask)
         originView?.let { view -> addView(view) }
         maskTemplateId?.let { maskLayoutId ->
-            val maskTemplate = LayoutInflater.from(this.context).inflate(maskLayoutId, null, false)
-            if (maskTemplate !is ViewGroup) return@let
-            maskTemplate.visibility = View.INVISIBLE
+            val maskTemplate: ViewGroup = kotlin.runCatching {
+                LayoutInflater.from(this.context).inflate(maskLayoutId, null, false) as ViewGroup
+            }.getOrElse {
+                Log.e(tag(), "Failed to create mask template")
+                return@let
+            }
+            maskTemplate.visibility = View.GONE
             addView(maskTemplate)
             customMaskTemplate = maskTemplate
         }
