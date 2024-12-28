@@ -85,8 +85,7 @@ open class SkeletonLayout @JvmOverloads constructor(
 
         if (isRendered) {
             if (childCount > 0) {
-                views().forEach { it.visibility = View.INVISIBLE }
-                customMaskTemplate?.visibility = View.INVISIBLE
+                hideAllViews()
                 setWillNotDraw(false)
                 invalidateMask()
                 mask?.invalidate()
@@ -158,6 +157,15 @@ open class SkeletonLayout @JvmOverloads constructor(
             }
         } else {
             Log.e(tag(), "Skipping invalidation until view is rendered")
+        }
+    }
+
+    private fun hideAllViews() {
+        if (customMaskTemplate == null) {
+            views().forEach { it.visibility = View.INVISIBLE }
+        } else {
+            customMaskTemplate?.visibility = INVISIBLE
+            views().forEach { if (it != customMaskTemplate) it.visibility = GONE }
         }
     }
 
