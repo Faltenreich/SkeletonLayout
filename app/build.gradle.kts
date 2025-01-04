@@ -1,16 +1,16 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin)
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     namespace = "com.faltenreich.skeletonlayout.demo"
 
     defaultConfig {
         applicationId = "com.faltenreich.skeletonlayout"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 10
         versionName = "6.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -43,10 +43,10 @@ android {
 dependencies {
     implementation(project(":skeletonlayout"))
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.espresso)
 
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.github.naz013:ColorSlider:2.0.7")
+    implementation(libs.material)
+    implementation(libs.constraintlayout)
+    implementation(libs.colorslider)
 }

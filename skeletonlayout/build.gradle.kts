@@ -1,11 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin)
     alias(libs.plugins.maven.publish)
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     namespace = "com.faltenreich.skeletonlayout"
 
     defaultConfig {
@@ -36,10 +36,10 @@ mavenPublishing {
 }
 
 dependencies {
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.espresso)
+    androidTestImplementation(libs.junit.androidx)
 
-    api("androidx.recyclerview:recyclerview:1.3.1")
-    api("androidx.viewpager2:viewpager2:1.0.0")
+    api(libs.recyclerview)
+    api(libs.viewpager2)
 }
