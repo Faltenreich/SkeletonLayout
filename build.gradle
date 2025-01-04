@@ -1,8 +1,8 @@
 buildscript {
 
     ext {
-        projectVersion = '5.0.0'
-        projectVersionCode = 9
+        projectVersion = '6.0.0'
+        projectVersionCode = 10
 
         kotlinVersion = '2.1.0'
         jUnitVersion = '4.13.2'
@@ -17,7 +17,7 @@ buildscript {
     repositories repos
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.4'
+        classpath 'com.android.tools.build:gradle:8.7.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.vanniktech:gradle-maven-publish-plugin:0.25.3'
 
