@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        // Either use an existing Skeletonlayout
+        // Either use an existing SkeletonLayout
         skeleton = findViewById(R.id.skeletonLayout);
         
         // or create a new SkeletonLayout from a given View
@@ -156,7 +156,7 @@ The mask is drawn onto a single Bitmap by iterating once through the given Views
 Yes. Any change to the skeleton leads to a redraw, since the whole content of the SkeletonLayout gets drawn onto a single bitmap.
 
 **Will the shimmer eat my users' battery?**
-The shimmer is a shader (LinearGradient) whose local matrix is updated according to the framerate of the target device, 
+The shimmer is a shader (LinearGradient) whose local matrix is updated according to the frame rate of the target device, 
 so no redrawing is required and processing time is kept to an absolute minimum. 
 Additionally the shimmer gets inactive onWindowFocusChanged() and onDetachedFromWindow().
 
