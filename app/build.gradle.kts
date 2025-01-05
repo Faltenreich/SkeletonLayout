@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    compileSdk = 34
+    compileSdk = 35
     namespace = "com.faltenreich.skeletonlayout.demo"
 
     defaultConfig {
         applicationId = "com.faltenreich.skeletonlayout"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 10
-        versionName = "6.0.0"
+        versionName = "5.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildFeatures {
             viewBinding = true
