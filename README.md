@@ -4,7 +4,7 @@
 
 *Make your app feel faster*
 
-<img src="./images/preview.gif" width="250" alt="Animated showcase that illustrates alternating between normal view and skeleton">
+<img src="./images/preview.gif" alt="Animated showcase that illustrates alternating between normal view and skeleton">
 
 Users are time-sensitive and may skip an app due to long loading times and missing visual feedback. 
 Instagram, Facebook, Google and other services tackled this problem with the so-called Skeleton View.
@@ -19,12 +19,12 @@ This library implements the Skeleton View pattern and provides an easy way for o
 
 ## Preview
 
-<img src="./images/preview.png" width="620" alt="Showcase that illustrates alternating between normal view and skeleton">
+<img src="./images/preview.png" alt="Showcase that illustrates alternating between normal view and skeleton">
 
 The SkeletonLayout mimics the design of established implementations per default, but you are free to get creative. 
 Create your own skeleton view with custom shapes, colors and shimmers.
 
-<img src="./images/mask_square.png" width="200" alt="Square mask">   <img src="./images/mask_round.png" width="200" alt="Rounded mask">   <img src="./images/mask_color.png" width="200" alt="Colored mask">
+<img src="./images/mask_square.png" alt="Square mask">   <img src="./images/mask_round.png" alt="Rounded mask">   <img src="./images/mask_color.png" alt="Colored mask">
 
 ## Features
 
@@ -183,4 +183,4 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-<img src="./images/android.png" width="100" alt=""> 
+<img src="./images/android.png" alt=""> 
