@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import androidx.viewpager.widget.ViewPager
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.demo.basic.BasicSkeletonFragment
@@ -23,6 +27,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         initLayout()
     }
 
@@ -42,6 +47,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun initLayout() = with(binding) {
+        ViewCompat.setOnApplyWindowInsetsListener(fab) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                leftMargin = insets.left
+                bottomMargin = insets.bottom
+                rightMargin = insets.right
+            }
+            WindowInsetsCompat.CONSUMED
+        }
+
         viewPagerAdapter = MainPagerAdapter(
             supportFragmentManager,
             arrayOf(
@@ -64,7 +79,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun getSkeleton(): Skeleton? = with(binding) {
-        return (viewPagerAdapter.getItem(viewPager.currentItem) as? MainPagerFragment)?.skeleton
+        return (viewPagerAdapter.getItem(viewPager.currentItem)).skeleton
     }
 
     private fun invalidateSkeleton() = with(binding) {
