@@ -24,7 +24,9 @@ This library implements the Skeleton View pattern and provides an easy way for o
 The SkeletonLayout mimics the design of established implementations per default, but you are free to get creative. 
 Create your own skeleton view with custom shapes, colors and shimmers.
 
-<img src="./images/mask_square.png" alt="Square mask">   <img src="./images/mask_round.png" alt="Rounded mask">   <img src="./images/mask_color.png" alt="Colored mask">
+<img src="./images/mask_square.png" alt="Square mask">&nbsp;
+<img src="./images/mask_round.png" alt="Rounded mask">&nbsp;
+<img src="./images/mask_color.png" alt="Colored mask">
 
 ## Features
 
