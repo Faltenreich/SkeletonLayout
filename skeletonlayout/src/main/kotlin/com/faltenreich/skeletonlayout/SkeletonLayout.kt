@@ -12,25 +12,18 @@ import com.faltenreich.skeletonlayout.mask.SkeletonMask
 import com.faltenreich.skeletonlayout.mask.SkeletonMaskFactory
 import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 
-open class SkeletonLayout @JvmOverloads constructor(
+class SkeletonLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
     originView: View? = null,
-    private var maskTemplateId: Int? = null,
     private val config: SkeletonConfig = SkeletonConfig.default(context)
 ) : FrameLayout(context, attrs, defStyleAttr), Skeleton, SkeletonStyle by config {
 
     internal constructor(
         originView: View,
         config: SkeletonConfig
-    ) : this(originView.context, null, 0, originView, null, config)
-
-    internal constructor(
-        originView: View,
-        maskTemplateId: Int? = null,
-        config: SkeletonConfig
-    ) : this(originView.context, null, 0, originView, maskTemplateId, config)
+    ) : this(originView.context, null, 0, originView, config)
 
     private var mask: SkeletonMask? = null
     private var isSkeleton: Boolean = false
@@ -49,13 +42,13 @@ open class SkeletonLayout @JvmOverloads constructor(
             this.shimmerAngle = typedArray.getInt(R.styleable.SkeletonLayout_shimmerAngle, shimmerAngle)
             val maskTemplate = typedArray.getResourceId(R.styleable.SkeletonLayout_maskTemplate, 0)
             if (maskTemplate != 0) {
-                this.maskTemplateId = maskTemplate
+                this.maskTemplateLayoutId = maskTemplate
             }
             typedArray.recycle()
         }
         config.addValueObserver(::invalidateMask)
         originView?.let { view -> addView(view) }
-        maskTemplateId?.let { maskLayoutId ->
+        maskTemplateLayoutId?.let { maskLayoutId ->
             val maskTemplate: ViewGroup = kotlin.runCatching {
                 LayoutInflater.from(this.context).inflate(maskLayoutId, null, false) as ViewGroup
             }.getOrElse {

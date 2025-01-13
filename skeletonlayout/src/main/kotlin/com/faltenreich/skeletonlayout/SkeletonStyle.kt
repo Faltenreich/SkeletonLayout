@@ -1,6 +1,7 @@
 package com.faltenreich.skeletonlayout
 
 import androidx.annotation.ColorInt
+import androidx.annotation.LayoutRes
 import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 
 interface SkeletonStyle {
@@ -41,4 +42,10 @@ interface SkeletonStyle {
      * Angle in degrees for animated shimmer
      */
     var shimmerAngle: Int
+
+    /**
+     * Custom mask template to customize how skeleton looks like
+     */
+    @get:LayoutRes
+    var maskTemplateLayoutId: Int?
 }

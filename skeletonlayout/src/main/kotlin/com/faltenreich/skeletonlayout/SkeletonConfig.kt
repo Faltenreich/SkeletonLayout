@@ -2,6 +2,7 @@ package com.faltenreich.skeletonlayout
 
 import android.content.Context
 import androidx.annotation.ColorInt
+import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 import kotlin.properties.Delegates
@@ -15,6 +16,7 @@ class SkeletonConfig(
     shimmerDurationInMillis: Long,
     shimmerDirection: SkeletonShimmerDirection,
     shimmerAngle: Int,
+    @LayoutRes maskTemplateLayoutId: Int?,
 ) : SkeletonStyle {
 
     @get:ColorInt override var maskColor: Int by observable(maskColor)
@@ -24,6 +26,7 @@ class SkeletonConfig(
     override var shimmerDurationInMillis: Long by observable(shimmerDurationInMillis)
     override var shimmerDirection: SkeletonShimmerDirection by observable(shimmerDirection)
     override var shimmerAngle: Int by observable(shimmerAngle)
+    override var maskTemplateLayoutId: Int? by observable(maskTemplateLayoutId)
 
     private val valueObservers = mutableListOf<(() -> Unit)>()
     
@@ -41,7 +44,10 @@ class SkeletonConfig(
 
     companion object {
 
-        fun default(context: Context): SkeletonConfig {
+        fun default(
+            context: Context,
+            @LayoutRes  maskTemplateLayoutId: Int? = null
+        ): SkeletonConfig {
             return SkeletonConfig(
                 maskColor = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_MASK_COLOR),
                 maskCornerRadius = SkeletonLayout.DEFAULT_MASK_CORNER_RADIUS,
@@ -49,7 +55,8 @@ class SkeletonConfig(
                 shimmerColor = ContextCompat.getColor(context, SkeletonLayout.DEFAULT_SHIMMER_COLOR),
                 shimmerDurationInMillis = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
                 shimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
-                shimmerAngle = SkeletonLayout.DEFAULT_SHIMMER_ANGLE
+                shimmerAngle = SkeletonLayout.DEFAULT_SHIMMER_ANGLE,
+                maskTemplateLayoutId = maskTemplateLayoutId
             )
         }
     }

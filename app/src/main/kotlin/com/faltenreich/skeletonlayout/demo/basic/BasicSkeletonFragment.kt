@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.SkeletonConfig
 import com.faltenreich.skeletonlayout.createSkeleton
 import com.faltenreich.skeletonlayout.demo.MainPagerFragment
 import com.faltenreich.skeletonlayout.demo.R
@@ -32,7 +33,12 @@ class BasicSkeletonFragment : MainPagerFragment(R.layout.fragment_basic, "Basic"
         skeleton = SkeletonArray(
             listOf(
                 roomItem1.rootRoom.createSkeleton(),
-                roomItem2.rootRoom.createSkeleton(maskTemplateId = R.layout.layout_custom_skeleton),
+                roomItem2.rootRoom.createSkeleton(
+                    SkeletonConfig.default(
+                        requireContext(),
+                        maskTemplateLayoutId = R.layout.layout_custom_skeleton
+                    )
+                ),
                 room3Skeleton,
             )
         ).apply { showSkeleton() }
@@ -88,6 +94,11 @@ class SkeletonArray(
         get() = skeletons.first().shimmerAngle
         set(value) {
             skeletons.forEach { it.shimmerAngle = value }
+        }
+    override var maskTemplateLayoutId: Int?
+        get() = skeletons.first().maskTemplateLayoutId
+        set(value) {
+            skeletons.forEach { it.maskTemplateLayoutId = value }
         }
 
     override fun showOriginal() {

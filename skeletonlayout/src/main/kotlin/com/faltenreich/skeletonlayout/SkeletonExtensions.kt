@@ -14,8 +14,7 @@ private const val LIST_ITEM_COUNT_DEFAULT = 3
 
 @JvmOverloads
 fun View.createSkeleton(
-    config: SkeletonConfig = SkeletonConfig.default(context),
-    @LayoutRes maskTemplateId: Int? = null
+    config: SkeletonConfig = SkeletonConfig.default(context)
 ): Skeleton {
     // If this View already has a parent, we need to replace it with the SkeletonLayout
     val parent = (parent as? ViewGroup)
@@ -24,7 +23,7 @@ fun View.createSkeleton(
 
     parent?.removeView(this)
 
-    val skeleton = SkeletonLayout(this, maskTemplateId, config)
+    val skeleton = SkeletonLayout(this, config)
 
     if (params != null) {
         skeleton.layoutParams = params
