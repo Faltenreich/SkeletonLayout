@@ -13,6 +13,7 @@
             <enum name="right_to_left" value="1"/>
         </attr>
         <attr name="shimmerAngle" format="integer" />
+        <attr name="maskTemplate" format="reference" />
     </declare-styleable>
     
 </resources>

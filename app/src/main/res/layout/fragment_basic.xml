@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/roomItem1"
+        layout="@layout/layout_hotel_booking_item" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="16dp" />
+
+    <include
+        android:id="@+id/roomItem2"
+        layout="@layout/layout_hotel_booking_item" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="16dp" />
+
+    <com.faltenreich.skeletonlayout.SkeletonLayout
+        android:id="@+id/room3Skeleton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:maskTemplate="@layout/layout_custom_skeleton">
+
+        <include
+            android:id="@+id/roomItem3"
+            layout="@layout/layout_hotel_booking_item" />
+    </com.faltenreich.skeletonlayout.SkeletonLayout>
+</LinearLayout>

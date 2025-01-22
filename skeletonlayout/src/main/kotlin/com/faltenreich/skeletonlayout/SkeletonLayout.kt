@@ -4,13 +4,15 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.faltenreich.skeletonlayout.mask.SkeletonMask
 import com.faltenreich.skeletonlayout.mask.SkeletonMaskFactory
 import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 
-open class SkeletonLayout @JvmOverloads constructor(
+class SkeletonLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -26,6 +28,7 @@ open class SkeletonLayout @JvmOverloads constructor(
     private var mask: SkeletonMask? = null
     private var isSkeleton: Boolean = false
     private var isRendered: Boolean = false
+    private var customMaskTemplate: ViewGroup? = null
 
     init {
         attrs?.let {
@@ -37,10 +40,26 @@ open class SkeletonLayout @JvmOverloads constructor(
             this.shimmerDurationInMillis = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillis.toInt()).toLong()
             this.shimmerDirection = SkeletonShimmerDirection.valueOf(typedArray.getInt(R.styleable.SkeletonLayout_shimmerDirection, shimmerDirection.ordinal)) ?: DEFAULT_SHIMMER_DIRECTION
             this.shimmerAngle = typedArray.getInt(R.styleable.SkeletonLayout_shimmerAngle, shimmerAngle)
+            val maskTemplate = typedArray.getResourceId(R.styleable.SkeletonLayout_maskTemplate, 0)
+            if (maskTemplate != 0) {
+                this.maskTemplateLayoutId = maskTemplate
+            }
             typedArray.recycle()
         }
         config.addValueObserver(::invalidateMask)
         originView?.let { view -> addView(view) }
+        maskTemplateLayoutId?.let { maskLayoutId ->
+            val maskTemplate: ViewGroup = kotlin.runCatching {
+                LayoutInflater.from(this.context).inflate(maskLayoutId, null, false) as ViewGroup
+            }.getOrElse {
+                Log.e(tag(), "Failed to create mask template")
+                return@let
+            }
+            maskTemplate.visibility = View.GONE
+            addView(maskTemplate)
+            customMaskTemplate = maskTemplate
+        }
+
     }
 
     override fun showOriginal() {
@@ -48,6 +67,7 @@ open class SkeletonLayout @JvmOverloads constructor(
 
         if (childCount > 0) {
             views().forEach { it.visibility = View.VISIBLE }
+            customMaskTemplate?.visibility = View.GONE
             mask?.stop()
             mask = null
         }
@@ -58,7 +78,7 @@ open class SkeletonLayout @JvmOverloads constructor(
 
         if (isRendered) {
             if (childCount > 0) {
-                views().forEach { it.visibility = View.INVISIBLE }
+                hideAllViews()
                 setWillNotDraw(false)
                 invalidateMask()
                 mask?.invalidate()
@@ -118,13 +138,27 @@ open class SkeletonLayout @JvmOverloads constructor(
                 if (width > 0 && height > 0) {
                     mask = SkeletonMaskFactory
                         .createMask(this, config)
-                        .also { mask -> mask.mask(this, maskCornerRadius) }
+                        .also { mask ->
+                            mask.mask(
+                                viewGroup = customMaskTemplate ?: this,
+                                maskCornerRadius = maskCornerRadius
+                            )
+                        }
                 } else {
                     Log.e(tag(), "Failed to mask view with invalid width and height")
                 }
             }
         } else {
             Log.e(tag(), "Skipping invalidation until view is rendered")
+        }
+    }
+
+    private fun hideAllViews() {
+        if (customMaskTemplate == null) {
+            views().forEach { it.visibility = View.INVISIBLE }
+        } else {
+            customMaskTemplate?.visibility = INVISIBLE
+            views().forEach { if (it != customMaskTemplate) it.visibility = GONE }
         }
     }
 
