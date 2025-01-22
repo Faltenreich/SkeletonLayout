@@ -12,7 +12,7 @@ import com.faltenreich.skeletonlayout.mask.SkeletonMask
 import com.faltenreich.skeletonlayout.mask.SkeletonMaskFactory
 import com.faltenreich.skeletonlayout.mask.SkeletonShimmerDirection
 
-class SkeletonLayout @JvmOverloads constructor(
+open class SkeletonLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
