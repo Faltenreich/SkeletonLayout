@@ -9,7 +9,7 @@ android {
     namespace = "com.faltenreich.skeletonlayout"
 
     defaultConfig {
-        minSdk = 14
+        minSdk = 21
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
