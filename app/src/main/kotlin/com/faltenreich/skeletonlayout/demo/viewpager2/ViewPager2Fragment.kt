@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updateLayoutParams
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
 import com.faltenreich.skeletonlayout.demo.MainPagerFragment
@@ -43,14 +40,6 @@ class ViewPager2Fragment : MainPagerFragment(R.layout.fragment_viewpager2, "View
 
         skeleton = viewPager.applySkeleton(R.layout.list_item_viewpager2, items.size).apply { showSkeleton() }
         mediator = TabLayoutMediator(viewPagerIndicator, viewPager) { _, _ -> }.apply { attach() }
-
-        ViewCompat.setOnApplyWindowInsetsListener(viewPagerIndicator) { view, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                bottomMargin = insets.bottom
-            }
-            WindowInsetsCompat.CONSUMED
-        }
     }
 
     override fun onDestroyView() {

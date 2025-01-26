@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">SkeletonLayout</string>
-    <string name="editor">Value editor</string>
+    <string name="editor">Configure</string>
     <string name="mask_color">Mask color</string>
     <string name="mask_corner_radius">Mask corner radius (%d)</string>
     <string name="shimmer_color">Shimmer color</string>
@@ -12,7 +12,7 @@
     </string-array>
     <string name="shimmer_angle">Shimmer angle (%d°)</string>
     <string name="shimmer_show">Show shimmer</string>
-    <string name="toggle">Toggle skeleton</string>
+    <string name="toggle">Toggle</string>
 
     <string name="user_0_name">Reynold Arnold</string>
     <string name="user_0_statement">If it fails, we can rewrite it</string>

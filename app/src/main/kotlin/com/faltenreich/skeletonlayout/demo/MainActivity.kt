@@ -1,9 +1,6 @@
 package com.faltenreich.skeletonlayout.demo
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -30,23 +27,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         initLayout()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_toggle -> {
-                toggleSkeleton()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     private fun initLayout() = with(binding) {
-        ViewCompat.setOnApplyWindowInsetsListener(fab) { view, windowInsets ->
+        ViewCompat.setOnApplyWindowInsetsListener(buttonLayout) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 leftMargin = insets.left
@@ -73,7 +55,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
         })
 
-        fab.setOnClickListener { openConfiguration() }
+        toggleButton.setOnClickListener { toggleSkeleton() }
+        editButton.setOnClickListener { openConfiguration() }
     }
 
     private fun getSkeleton(): Skeleton? = with(binding) {
@@ -82,14 +65,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun invalidateSkeleton() = with(binding) {
         val skeleton = getSkeleton() ?: return
-        val shouldShow = fab.visibility == View.VISIBLE
         val isShown = skeleton.isSkeleton()
-        if (shouldShow != isShown) {
-            if (shouldShow) {
-                showSkeleton(skeleton)
-            } else {
-                hideSkeleton(skeleton)
-            }
+        if (isShown) {
+            hideSkeleton(skeleton)
+        } else {
+            showSkeleton(skeleton)
         }
     }
 
@@ -102,14 +82,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
     }
 
-    private fun showSkeleton(skeleton: Skeleton) = with(binding) {
+    private fun showSkeleton(skeleton: Skeleton) {
         skeleton.showSkeleton()
-        fab.visibility = View.VISIBLE
     }
 
-    private fun hideSkeleton(skeleton: Skeleton) = with(binding) {
+    private fun hideSkeleton(skeleton: Skeleton) {
         skeleton.showOriginal()
-        fab.visibility = View.GONE
     }
 
     private fun openConfiguration() = with(binding) {
