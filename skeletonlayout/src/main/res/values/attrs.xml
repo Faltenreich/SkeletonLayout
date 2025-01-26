@@ -3,6 +3,7 @@
 <resources>
 
     <declare-styleable name="SkeletonLayout">
+        <attr name="maskLayout" format="reference" />
         <attr name="maskColor" format="color"/>
         <attr name="maskCornerRadius" format="dimension"/>
         <attr name="showShimmer" format="boolean"/>
@@ -13,7 +14,6 @@
             <enum name="right_to_left" value="1"/>
         </attr>
         <attr name="shimmerAngle" format="integer" />
-        <attr name="maskTemplate" format="reference" />
     </declare-styleable>
     
 </resources>

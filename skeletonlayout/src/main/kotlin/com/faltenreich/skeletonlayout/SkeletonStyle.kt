@@ -47,5 +47,5 @@ interface SkeletonStyle {
      * Custom mask template to customize how skeleton looks like
      */
     @get:LayoutRes
-    var maskTemplateLayoutId: Int?
+    var maskLayout: Int?
 }

@@ -28,7 +28,7 @@ open class SkeletonLayout @JvmOverloads constructor(
     private var mask: SkeletonMask? = null
     private var isSkeleton: Boolean = false
     private var isRendered: Boolean = false
-    private var customMaskTemplate: ViewGroup? = null
+    private var maskView: ViewGroup? = null
 
     init {
         attrs?.let {
@@ -40,24 +40,24 @@ open class SkeletonLayout @JvmOverloads constructor(
             this.shimmerDurationInMillis = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillis.toInt()).toLong()
             this.shimmerDirection = SkeletonShimmerDirection.valueOf(typedArray.getInt(R.styleable.SkeletonLayout_shimmerDirection, shimmerDirection.ordinal)) ?: DEFAULT_SHIMMER_DIRECTION
             this.shimmerAngle = typedArray.getInt(R.styleable.SkeletonLayout_shimmerAngle, shimmerAngle)
-            val maskTemplate = typedArray.getResourceId(R.styleable.SkeletonLayout_maskTemplate, 0)
-            if (maskTemplate != 0) {
-                this.maskTemplateLayoutId = maskTemplate
+            val maskLayout = typedArray.getResourceId(R.styleable.SkeletonLayout_maskLayout, 0)
+            if (maskLayout != 0) {
+                this.maskLayout = maskLayout
             }
             typedArray.recycle()
         }
         config.addValueObserver(::invalidateMask)
         originView?.let { view -> addView(view) }
-        maskTemplateLayoutId?.let { maskLayoutId ->
-            val maskTemplate: ViewGroup = kotlin.runCatching {
-                LayoutInflater.from(this.context).inflate(maskLayoutId, null, false) as ViewGroup
+        maskLayout?.let { maskLayout ->
+            val maskView = runCatching {
+                LayoutInflater.from(this.context).inflate(maskLayout, null, false) as ViewGroup
             }.getOrElse {
                 Log.e(tag(), "Failed to create mask template")
                 return@let
             }
-            maskTemplate.visibility = View.GONE
-            addView(maskTemplate)
-            customMaskTemplate = maskTemplate
+            maskView.visibility = GONE
+            addView(maskView)
+            this.maskView = maskView
         }
 
     }
@@ -66,8 +66,8 @@ open class SkeletonLayout @JvmOverloads constructor(
         isSkeleton = false
 
         if (childCount > 0) {
-            views().forEach { it.visibility = View.VISIBLE }
-            customMaskTemplate?.visibility = View.GONE
+            views().forEach { it.visibility = VISIBLE }
+            maskView?.visibility = GONE
             mask?.stop()
             mask = null
         }
@@ -140,7 +140,7 @@ open class SkeletonLayout @JvmOverloads constructor(
                         .createMask(this, config)
                         .also { mask ->
                             mask.mask(
-                                viewGroup = customMaskTemplate ?: this,
+                                viewGroup = maskView ?: this,
                                 maskCornerRadius = maskCornerRadius
                             )
                         }
@@ -154,11 +154,11 @@ open class SkeletonLayout @JvmOverloads constructor(
     }
 
     private fun hideAllViews() {
-        if (customMaskTemplate == null) {
-            views().forEach { it.visibility = View.INVISIBLE }
+        if (maskView == null) {
+            views().forEach { it.visibility = INVISIBLE }
         } else {
-            customMaskTemplate?.visibility = INVISIBLE
-            views().forEach { if (it != customMaskTemplate) it.visibility = GONE }
+            maskView?.visibility = INVISIBLE
+            views().forEach { if (it != maskView) it.visibility = GONE }
         }
     }
 
