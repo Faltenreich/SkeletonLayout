@@ -30,10 +30,11 @@ class ViewGroupFragment : MainPagerFragment(R.layout.fragment_viewgroup, "ViewGr
         super.onViewCreated(view, savedInstanceState)
 
         val item = RecyclerViewListItem.DEMO.first()
-        recyclerView.wallpaperView.setImageResource(item.wallpaperResId)
-        recyclerView.avatarView.setImageResource(item.avatarResId)
-        recyclerView.titleView.setText(item.titleResId)
-        recyclerView.descriptionView.setText(item.descriptionResId)
+
+        container.wallpaperView.setImageResource(item.wallpaperResId)
+        container.avatarView.setImageResource(item.avatarResId)
+        container.titleView.setText(item.titleResId)
+        container.descriptionView.setText(item.descriptionResId)
 
         skeleton = skeletonLayout.apply { showSkeleton() }
     }

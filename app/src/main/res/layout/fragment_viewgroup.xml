@@ -11,7 +11,7 @@
     app:maskTemplate="@layout/list_item_template">
 
     <include
-        android:id="@+id/recycler_view"
+        android:id="@+id/container"
         layout="@layout/list_item_recyclerview"/>
 
 </com.faltenreich.skeletonlayout.SkeletonLayout>

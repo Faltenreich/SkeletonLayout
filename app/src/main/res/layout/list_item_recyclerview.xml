@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:divider="@drawable/divider"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/padding_large">
+    android:paddingBottom="@dimen/padding_large"
+    android:showDividers="middle">
 
     <ImageView
         android:id="@+id/wallpaperView"
@@ -20,7 +22,6 @@
         android:layout_height="wrap_content"
         android:divider="@drawable/divider"
         android:orientation="horizontal"
-        android:padding="@dimen/padding"
         android:showDividers="middle">
 
         <ImageView
@@ -39,7 +40,7 @@
 
             <TextView
                 android:id="@+id/titleView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
@@ -47,7 +48,7 @@
 
             <TextView
                 android:id="@+id/descriptionView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 tools:text="@string/user_0_statement" />
