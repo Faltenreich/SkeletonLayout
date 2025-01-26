@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- FIXME: maskTemplate ignores padding -->
-<com.faltenreich.skeletonlayout.SkeletonLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/skeletonLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_large"
-    app:maskLayout="@layout/list_item_mask_layout">
+    android:padding="@dimen/padding_large">
 
-    <include
-        android:id="@+id/container"
-        layout="@layout/list_item_recyclerview"/>
+    <com.faltenreich.skeletonlayout.SkeletonLayout
+        android:id="@+id/skeletonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:maskLayout="@layout/list_item_mask_layout">
 
-</com.faltenreich.skeletonlayout.SkeletonLayout>
+        <include
+            android:id="@+id/container"
+            layout="@layout/list_item_recyclerview"/>
+
+    </com.faltenreich.skeletonlayout.SkeletonLayout>
+
+</FrameLayout>
