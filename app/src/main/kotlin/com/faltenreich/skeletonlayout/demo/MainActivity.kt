@@ -11,7 +11,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.viewpager.widget.ViewPager
 import com.faltenreich.skeletonlayout.Skeleton
-import com.faltenreich.skeletonlayout.demo.basic.BasicSkeletonFragment
 import com.faltenreich.skeletonlayout.demo.configuration.ConfigurationFragment
 import com.faltenreich.skeletonlayout.demo.databinding.ActivityMainBinding
 import com.faltenreich.skeletonlayout.demo.recyclerview.RecyclerViewFragment
@@ -60,10 +59,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         viewPagerAdapter = MainPagerAdapter(
             supportFragmentManager,
             arrayOf(
-                BasicSkeletonFragment(),
-                RecyclerViewFragment(),
                 ViewGroupFragment(),
-                ViewPager2Fragment()
+                ViewPager2Fragment(),
+                RecyclerViewFragment(),
             )
         )
         viewPager.adapter = viewPagerAdapter
