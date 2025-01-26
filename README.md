@@ -82,12 +82,15 @@ class MainActivity : AppCompatActivity() {
         // or create a new SkeletonLayout from a given View
         skeleton = view.createSkeleton()
 
-        // or apply a new SkeletonLayout to a RecyclerView
-        skeleton = recyclerView.applySkeleton(R.layout.list_item_recyclerview)
-
-        // or apply a new SkeletonLayout to a ViewPager2
+        // and customize every detail including the layout used for the skeleton mask
+        skeleton = view.createSkeleton(config = SkeletonConfig.default(this, maskLayout = R.layout.custom_mask))
+        
+        // support ViewPager2
         skeleton = viewPager2.applySkeleton(R.layout.list_item_viewpager2)
 
+        // support RecyclerView
+        skeleton = recyclerView.applySkeleton(R.layout.list_item_recyclerview)
+        
         skeleton.showSkeleton()
     }
 
@@ -114,12 +117,15 @@ public class MainActivity extends AppCompatActivity {
         
         // or create a new SkeletonLayout from a given View
         skeleton = SkeletonLayoutUtils.createSkeleton(view);
-        
-        // or apply a new SkeletonLayout to a RecyclerView
-        skeleton = SkeletonLayoutUtils.applySkeleton(recyclerView, R.layout.list_item_recyclerview);
 
-        // or apply a new SkeletonLayout to a ViewPager2
+        // and customize every detail including the layout used for the skeleton mask
+        skeleton = SkeletonLayoutUtils.createSkeleton(view, SkeletonConfig.Companion.defaults(this, R.layout.custom_mask));
+
+        // support ViewPager2
         skeleton = SkeletonLayoutUtils.applySkeleton(viewPager2, R.layout.list_item_viewpager2);
+
+        // support RecyclerView
+        skeleton = SkeletonLayoutUtils.applySkeleton(recyclerView, R.layout.list_item_recyclerview);
 
         skeleton.showSkeleton();
     }
@@ -133,16 +139,17 @@ public class MainActivity extends AppCompatActivity {
 
 ### Configuration
 
-| Property                | Type      | Description                                                                       |
-|-------------------------|-----------|-----------------------------------------------------------------------------------|
-| maskColor               | color     | Color of the mask that fills the original view bounds (defaults to #E0E0E0)       |
-| maskCornerRadius        | dimension | The x- and y-radius of the oval used to round the mask corners (defaults to 25)   |
-| showShimmer             | boolean   | Animate shimmer if set to true (defaults to true)                                 |
-| shimmerColor            | color     | Color of the animated shimmer (defaults to #d5d5d5)                               |
-| shimmerDurationInMillis | integer   | Duration in milliseconds for one shimmer animation interval (defaults to 2000)    |
-| shimmerDirection        | enum      | Direction of animated shimmer (defaults to LEFT_TO_RIGHT)                         |
-| shimmerAngle            | integer   | Angle in degrees for animated shimmer (defaults to 0)                             |
-| itemCount               | integer   | Item count for Skeleton adapter (RecyclerView and ViewPager2 only, defaults to 3) |
+| Property                | Type      | Description                                                                                                               |
+|-------------------------|-----------|---------------------------------------------------------------------------------------------------------------------------|
+| maskLayout              | reference | Optional reference to layout resource that should be masked when skeleton is applied (defaults to wrapped view if null)   |
+| maskColor               | color     | Color of the mask that fills the original view bounds (defaults to #E0E0E0)                                               |
+| maskCornerRadius        | dimension | The x- and y-radius of the oval used to round the mask corners (defaults to 25)                                           |
+| showShimmer             | boolean   | Animate shimmer if set to true (defaults to true)                                                                         |
+| shimmerColor            | color     | Color of the animated shimmer (defaults to #d5d5d5)                                                                       |
+| shimmerDurationInMillis | integer   | Duration in milliseconds for one shimmer animation interval (defaults to 2000)                                            |
+| shimmerDirection        | enum      | Direction of animated shimmer (defaults to LEFT_TO_RIGHT)                                                                 |
+| shimmerAngle            | integer   | Angle in degrees for animated shimmer (defaults to 0)                                                                     |
+| itemCount               | integer   | Item count for Skeleton adapter (RecyclerView and ViewPager2 only, defaults to 3)                                         |
 
 ### FAQ
 
@@ -171,7 +178,7 @@ This software uses following technologies with great appreciation:
 
 ### License
 
-Copyright 2021 Philipp Fahlteich
+Copyright 2025 Philipp Fahlteich
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

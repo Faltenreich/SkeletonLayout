@@ -47,9 +47,11 @@ class SkeletonConfig(
         /**
          * @param maskLayout Layout resource used for mask when applying skeleton (default: original view)
          */
+        @JvmName("defaults")
+        @JvmOverloads
         fun default(
             context: Context,
-            @LayoutRes  maskLayout: Int? = null,
+            @LayoutRes maskLayout: Int? = null,
         ): SkeletonConfig {
             return SkeletonConfig(
                 maskLayout = maskLayout,
