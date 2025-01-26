@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:divider="@drawable/divider"
         android:orientation="vertical"
-        android:padding="@dimen/margin"
+        android:padding="@dimen/padding_large"
         android:showDividers="middle">
 
         <LinearLayout
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:divider="@drawable/divider"
         android:orientation="vertical"
-        android:padding="@dimen/margin"
+        android:padding="@dimen/padding_large"
         android:showDividers="middle">
 
         <LinearLayout

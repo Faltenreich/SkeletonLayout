@@ -1,64 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/margin">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/padding_large">
 
     <ImageView
         android:id="@+id/wallpaperView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:contentDescription="@null"
-        android:src="@mipmap/list_image_0"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:src="@mipmap/list_image_0" />
 
-    <Space
-        android:id="@+id/space"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/padding"
-        app:layout_constraintTop_toBottomOf="@id/wallpaperView"
-        app:layout_constraintEnd_toEndOf="@id/wallpaperView"
-        app:layout_constraintStart_toStartOf="@id/wallpaperView"/>
-
-    <ImageView
-        android:id="@+id/avatarView"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="@dimen/padding"
-        android:layout_marginStart="@dimen/padding"
-        android:contentDescription="@null"
-        app:layout_constraintStart_toStartOf="@id/wallpaperView"
-        app:layout_constraintTop_toBottomOf="@id/space"
-        tools:src="@mipmap/list_avatar_0"/>
-
-    <TextView
-        android:id="@+id/titleView"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/avatarView"
-        app:layout_constraintStart_toEndOf="@id/avatarView"
-        app:layout_constraintEnd_toEndOf="@id/wallpaperView"
-        tools:text="@string/user_0_name"/>
+        android:divider="@drawable/divider"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding"
+        android:showDividers="middle">
 
-    <TextView
-        android:id="@+id/descriptionView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@id/titleView"
-        app:layout_constraintStart_toStartOf="@id/titleView"
-        app:layout_constraintEnd_toEndOf="@id/titleView"
-        tools:text="@string/user_0_statement"/>
+        <ImageView
+            android:id="@+id/avatarView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@null"
+            tools:src="@mipmap/list_avatar_0" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <TextView
+                android:id="@+id/titleView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                tools:text="@string/user_0_name" />
+
+            <TextView
+                android:id="@+id/descriptionView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                tools:text="@string/user_0_statement" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

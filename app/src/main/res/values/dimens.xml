@@ -3,8 +3,8 @@
 <resources>
 
     <dimen name="element_height">48dp</dimen>
-    <dimen name="margin">16dp</dimen>
     <dimen name="padding">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
     <dimen name="indicator_size">8dp</dimen>
 
 </resources>

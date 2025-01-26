@@ -5,7 +5,7 @@
     android:id="@+id/skeletonLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/margin">
+    android:padding="@dimen/padding_large">
 
     <include
         android:id="@+id/recycler_view"
