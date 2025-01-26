@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 class MainPagerAdapter(
     fragmentManager: FragmentManager,
-    private val fragments: Array<MainPagerFragment>
+    private val fragments: Array<MainPagerFragment>,
 ) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getCount() = fragments.size

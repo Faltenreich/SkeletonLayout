@@ -8,8 +8,9 @@ data class RecyclerViewListItem(
     @StringRes val titleResId: Int,
     @StringRes val descriptionResId: Int,
     @DrawableRes val avatarResId: Int,
-    @DrawableRes val wallpaperResId: Int
+    @DrawableRes val wallpaperResId: Int,
 ) {
+
     companion object {
         val DEMO = listOf(
             RecyclerViewListItem(R.string.user_0_name, R.string.user_0_statement, R.mipmap.list_avatar_0, R.mipmap.list_image_0),

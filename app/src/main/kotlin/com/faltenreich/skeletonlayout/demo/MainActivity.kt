@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageSelected(position: Int) = invalidateSkeleton()
-            override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageScrollStateChanged(state: Int) = Unit
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) = Unit
         })
 
         toggleButton.setOnClickListener { toggleSkeleton() }
@@ -60,13 +60,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun getSkeleton(): Skeleton? = with(binding) {
-        return (viewPagerAdapter.getItem(viewPager.currentItem)).skeleton
+        val visibleFragment = viewPagerAdapter.getItem(viewPager.currentItem)
+        return visibleFragment.skeleton
     }
 
     private fun invalidateSkeleton() = with(binding) {
         val skeleton = getSkeleton() ?: return
-        val isShown = skeleton.isSkeleton()
-        if (isShown) {
+        if (skeleton.isSkeleton()) {
             hideSkeleton(skeleton)
         } else {
             showSkeleton(skeleton)

@@ -14,9 +14,7 @@ android {
         versionCode = 10
         versionName = "6.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildFeatures {
-            viewBinding = true
-        }
+        buildFeatures.viewBinding = true
     }
 
     buildTypes {

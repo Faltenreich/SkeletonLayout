@@ -99,9 +99,7 @@ class ConfigurationFragment : BottomSheetDialogFragment() {
 
     private fun SeekBar.onProgressChanged(onProgressChanged: (progress: Int) -> Unit) {
         setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                onProgressChanged(progress)
-            }
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) = onProgressChanged(progress)
             override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
             override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
         })

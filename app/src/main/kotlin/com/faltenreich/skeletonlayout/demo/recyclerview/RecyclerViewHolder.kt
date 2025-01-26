@@ -9,7 +9,7 @@ import com.faltenreich.skeletonlayout.demo.databinding.ListItemRecyclerviewBindi
 
 class RecyclerViewHolder(
     parent: ViewGroup,
-    view: View = LayoutInflater.from(parent.context).inflate(R.layout.list_item_recyclerview, parent, false)
+    view: View = LayoutInflater.from(parent.context).inflate(R.layout.list_item_recyclerview, parent, false),
 ) : RecyclerView.ViewHolder(view) {
 
     private val binding = ListItemRecyclerviewBinding.bind(view)
