@@ -14,6 +14,10 @@
             <enum name="right_to_left" value="1"/>
         </attr>
         <attr name="shimmerAngle" format="integer" />
+        <attr name="showPulse" format="boolean"/>
+        <attr name="pulseDurationInMillis" format="integer"/>
+        <attr name="pulseMinAlpha" format="float"/>
+        <attr name="pulseMaxAlpha" format="float"/>
     </declare-styleable>
     
 </resources>
