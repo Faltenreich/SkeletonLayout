@@ -9,9 +9,23 @@ internal object SkeletonMaskFactory {
         view: View,
         config: SkeletonConfig
     ): SkeletonMask {
-        return when (config.showShimmer) {
-            true -> SkeletonMaskShimmer(view, config.maskColor, config.shimmerColor, config.shimmerDurationInMillis, config.shimmerDirection, config.shimmerAngle)
-            false -> SkeletonMaskSolid(view, config.maskColor)
+        return when {
+            config.showPulse -> SkeletonMaskPulse(
+                view,
+                config.maskColor,
+                config.pulseDurationInMillis,
+                config.pulseMinAlpha,
+                config.pulseMaxAlpha
+            )
+            config.showShimmer -> SkeletonMaskShimmer(
+                view,
+                config.maskColor,
+                config.shimmerColor,
+                config.shimmerDurationInMillis,
+                config.shimmerDirection,
+                config.shimmerAngle
+            )
+            else -> SkeletonMaskSolid(view, config.maskColor)
         }
     }
 }

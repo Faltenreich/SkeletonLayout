@@ -40,4 +40,20 @@ abstract class MainPagerFragment(
     override fun onShimmerAngleChanged(value: Int) {
         skeleton.shimmerAngle = value
     }
+
+    override fun onShowPulseChanged(value: Boolean) {
+        skeleton.showPulse = value
+    }
+
+    override fun onPulseDurationChanged(value: Long) {
+        skeleton.pulseDurationInMillis = value
+    }
+
+    override fun onPulseMinAlphaChanged(value: Float) {
+        skeleton.pulseMinAlpha = value
+    }
+
+    override fun onPulseMaxAlphaChanged(value: Float) {
+        skeleton.pulseMaxAlpha = value
+    }
 }

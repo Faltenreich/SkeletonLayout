@@ -12,6 +12,10 @@
     </string-array>
     <string name="shimmer_angle">Shimmer angle (%d°)</string>
     <string name="shimmer_show">Show shimmer</string>
+    <string name="pulse_show">Show pulse</string>
+    <string name="pulse_duration">Pulse duration (%d ms)</string>
+    <string name="pulse_min_alpha">Min alpha (%.2f)</string>
+    <string name="pulse_max_alpha">Max alpha (%.2f)</string>
     <string name="toggle">Toggle</string>
 
     <string name="user_0_name">Reynold Arnold</string>

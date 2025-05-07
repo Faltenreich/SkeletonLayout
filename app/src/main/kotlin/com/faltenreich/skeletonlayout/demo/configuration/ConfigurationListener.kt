@@ -10,4 +10,8 @@ interface ConfigurationListener {
     fun onShimmerDurationChanged(value: Long)
     fun onShimmerDirectionChanged(value: Int)
     fun onShimmerAngleChanged(value: Int)
+    fun onShowPulseChanged(value: Boolean)
+    fun onPulseDurationChanged(value: Long)
+    fun onPulseMinAlphaChanged(value: Float)
+    fun onPulseMaxAlphaChanged(value: Float)
 }

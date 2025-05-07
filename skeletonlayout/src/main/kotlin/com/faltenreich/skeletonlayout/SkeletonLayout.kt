@@ -40,6 +40,10 @@ open class SkeletonLayout @JvmOverloads constructor(
             this.shimmerDurationInMillis = typedArray.getInt(R.styleable.SkeletonLayout_shimmerDurationInMillis, shimmerDurationInMillis.toInt()).toLong()
             this.shimmerDirection = SkeletonShimmerDirection.valueOf(typedArray.getInt(R.styleable.SkeletonLayout_shimmerDirection, shimmerDirection.ordinal)) ?: DEFAULT_SHIMMER_DIRECTION
             this.shimmerAngle = typedArray.getInt(R.styleable.SkeletonLayout_shimmerAngle, shimmerAngle)
+            this.showPulse = typedArray.getBoolean(R.styleable.SkeletonLayout_showPulse, showPulse)
+            this.pulseDurationInMillis = typedArray.getInt(R.styleable.SkeletonLayout_pulseDurationInMillis, pulseDurationInMillis.toInt()).toLong()
+            this.pulseMinAlpha = typedArray.getFloat(R.styleable.SkeletonLayout_pulseMinAlpha, pulseMinAlpha)
+            this.pulseMaxAlpha = typedArray.getFloat(R.styleable.SkeletonLayout_pulseMaxAlpha, pulseMaxAlpha)
             val maskLayout = typedArray.getResourceId(R.styleable.SkeletonLayout_maskLayout, 0)
             if (maskLayout != 0) {
                 this.maskLayout = maskLayout
@@ -170,5 +174,9 @@ open class SkeletonLayout @JvmOverloads constructor(
         const val DEFAULT_SHIMMER_DURATION_IN_MILLIS = 2000L
         val DEFAULT_SHIMMER_DIRECTION = SkeletonShimmerDirection.LEFT_TO_RIGHT
         const val DEFAULT_SHIMMER_ANGLE = 0
+        const val DEFAULT_PULSE_SHOW = false
+        const val DEFAULT_PULSE_DURATION_IN_MILLIS = 1000L
+        const val DEFAULT_PULSE_MIN_ALPHA = 0.3f
+        const val DEFAULT_PULSE_MAX_ALPHA = 1.0f
     }
 }

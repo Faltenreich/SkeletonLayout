@@ -17,6 +17,10 @@ class SkeletonConfig(
     shimmerDurationInMillis: Long,
     shimmerDirection: SkeletonShimmerDirection,
     shimmerAngle: Int,
+    showPulse: Boolean = false,
+    pulseDurationInMillis: Long = SkeletonLayout.DEFAULT_PULSE_DURATION_IN_MILLIS,
+    pulseMinAlpha: Float = SkeletonLayout.DEFAULT_PULSE_MIN_ALPHA,
+    pulseMaxAlpha: Float = SkeletonLayout.DEFAULT_PULSE_MAX_ALPHA
 ) : SkeletonStyle {
 
     @get:LayoutRes override var maskLayout: Int? by observable(maskLayout)
@@ -27,6 +31,10 @@ class SkeletonConfig(
     override var shimmerDurationInMillis: Long by observable(shimmerDurationInMillis)
     override var shimmerDirection: SkeletonShimmerDirection by observable(shimmerDirection)
     override var shimmerAngle: Int by observable(shimmerAngle)
+    override var showPulse: Boolean by observable(showPulse)
+    override var pulseDurationInMillis: Long by observable(pulseDurationInMillis)
+    override var pulseMinAlpha: Float by observable(pulseMinAlpha)
+    override var pulseMaxAlpha: Float by observable(pulseMaxAlpha)
 
     private val valueObservers = mutableListOf<(() -> Unit)>()
     
@@ -62,6 +70,10 @@ class SkeletonConfig(
                 shimmerDurationInMillis = SkeletonLayout.DEFAULT_SHIMMER_DURATION_IN_MILLIS,
                 shimmerDirection = SkeletonLayout.DEFAULT_SHIMMER_DIRECTION,
                 shimmerAngle = SkeletonLayout.DEFAULT_SHIMMER_ANGLE,
+                showPulse = SkeletonLayout.DEFAULT_PULSE_SHOW,
+                pulseDurationInMillis = SkeletonLayout.DEFAULT_PULSE_DURATION_IN_MILLIS,
+                pulseMinAlpha = SkeletonLayout.DEFAULT_PULSE_MIN_ALPHA,
+                pulseMaxAlpha = SkeletonLayout.DEFAULT_PULSE_MAX_ALPHA
             )
         }
     }

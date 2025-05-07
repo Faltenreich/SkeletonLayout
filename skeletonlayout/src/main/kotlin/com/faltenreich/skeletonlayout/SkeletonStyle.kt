@@ -48,4 +48,24 @@ interface SkeletonStyle {
      */
     @get:LayoutRes
     var maskLayout: Int?
+
+    /**
+     * Animate pulse if set to true
+     */
+    var showPulse: Boolean
+
+    /**
+     * Duration in milliseconds for one complete pulse animation cycle
+     */
+    var pulseDurationInMillis: Long
+
+    /**
+     * Minimum alpha value for pulse animation (0.0 to 1.0)
+     */
+    var pulseMinAlpha: Float
+
+    /**
+     * Maximum alpha value for pulse animation (0.0 to 1.0)
+     */
+    var pulseMaxAlpha: Float
 }
